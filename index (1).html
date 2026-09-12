@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>冰岛 13 天 · 行程手册</title>
+<style>
+  :root{
+    --bg:#F3F6F5; --panel:#FFFFFF; --ink:#132226; --ink-soft:#4C6066; --line:#D8E1E0;
+    --accent:#1F6F78; --accent-2:#B5533C; --chip:#EAF1F0;
+    --sea:#DCEAEA; --land:#EDE9DC; --coast:#8C6E54;
+  }
+  html.theme-night{
+    --bg:#0C1719; --panel:#122023; --ink:#E6EEEC; --ink-soft:#93A6A4; --line:#233437;
+    --accent:#6FD9C9; --accent-2:#E2A16B; --chip:#17282A;
+    --sea:#0A1517; --land:#182521; --coast:#4A3A2C;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:Charter,"Iowan Old Style","Georgia",serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background .4s ease,color .4s ease;
+  }
+  .num,.time,.mono,button,.pill,nav.tabs{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 0 64px;}
+  a{color:inherit;}
+  h1,h2,h3{font-weight:600;margin:0;}
+  section.section{padding:36px 20px 8px;border-top:1px solid var(--line);}
+  section.section:first-of-type{border-top:none;}
+  h2.section-title{font-size:1.05rem;letter-spacing:.02em;color:var(--ink);margin-bottom:18px;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-weight:600;}
+  h2.section-title small{display:block;font-family:Charter,Georgia,serif;font-weight:400;color:var(--ink-soft);font-size:.85rem;margin-top:2px;}
+
+  /* ---- Focus / countdown card ---- */
+  .focus{
+    background:linear-gradient(180deg,var(--accent) 0%, color-mix(in srgb, var(--accent) 78%, black) 100%);
+    color:#fff; padding:34px 22px 28px; position:relative; overflow:hidden;
+  }
+  .focus .eyebrow{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.78rem;color:rgba(255,255,255,.75);margin:0 0 8px;}
+  .focus h1{font-size:1.5rem;line-height:1.3;margin-bottom:4px;}
+  .focus .sub{font-size:.88rem;color:rgba(255,255,255,.82);margin-bottom:22px;}
+  .cd{display:flex;gap:14px;}
+  .cd div{text-align:center;min-width:56px;}
+  .cd span{display:block;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:1.9rem;font-weight:700;font-variant-numeric:tabular-nums;}
+  .cd label{font-size:.7rem;color:rgba(255,255,255,.7);}
+  .focus.done .sub{color:rgba(255,255,255,.9);}
+
+  /* ---- map ---- */
+  .map-wrap{margin-top:4px;}
+  svg.routemap{width:100%;height:auto;display:block;}
+  .stop-label{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:11px;}
+  .stop-date{font-size:9px;fill:var(--ink-soft);}
+
+  /* ---- bookings ---- */
+  .bgroup{margin-bottom:26px;}
+  .bgroup h3{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.8rem;color:var(--ink-soft);margin-bottom:10px;font-weight:600;}
+  .brow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.92rem;}
+  .brow:last-child{border-bottom:none;}
+  .brow .l{color:var(--ink-soft);font-size:.82rem;min-width:92px;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
+  .brow .r{flex:1;text-align:right;}
+  .brow .r a{text-decoration:none;border-bottom:1px solid var(--line);}
+  .note{font-size:.78rem;color:var(--ink-soft);margin-top:2px;}
+  .warn{color:var(--accent-2);}
+
+  /* ---- itinerary ---- */
+  .day{border-bottom:1px solid var(--line);}
+  .day:last-child{border-bottom:none;}
+  .day-head{display:flex;align-items:center;gap:14px;padding:16px 0;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .day-badge{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.68rem;color:var(--ink-soft);min-width:64px;}
+  .day-badge b{display:block;font-size:1.1rem;color:var(--ink);font-weight:700;}
+  .day-route{flex:1;font-size:.95rem;}
+  .day-route .grp{display:inline-block;margin-left:8px;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.66rem;padding:2px 7px;border-radius:20px;background:var(--chip);color:var(--ink-soft);}
+  .day-chev{font-size:.8rem;color:var(--ink-soft);transition:transform .25s ease;}
+  .day.open .day-chev{transform:rotate(90deg);}
+  .day-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;}
+  .day.open .day-body{grid-template-rows:1fr;}
+  .day-body-inner{overflow:hidden;}
+  .item{display:flex;gap:14px;padding:9px 0 9px 0;}
+  .item .time{min-width:64px;font-size:.78rem;color:var(--ink-soft);padding-top:2px;}
+  .item .content{flex:1;font-size:.92rem;}
+  .item .content a.place{text-decoration:none;border-bottom:1px solid var(--line);}
+  .tag{display:inline-block;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.66rem;padding:1px 7px;border-radius:20px;margin-left:6px;position:relative;top:-1px;}
+  .tag.book{background:color-mix(in srgb, var(--accent-2) 18%, transparent);color:var(--accent-2);}
+  .tag.ok{background:var(--chip);color:var(--accent);}
+  .stay{margin:10px 0 4px;padding:10px 12px;background:var(--chip);border-radius:6px;font-size:.85rem;}
+  .stay .l{color:var(--ink-soft);font-size:.72rem;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
+  .navbtn{display:inline-block;margin:12px 0 6px;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.78rem;padding:8px 14px;border:1px solid var(--accent);color:var(--accent);border-radius:20px;text-decoration:none;}
+
+  /* ---- todo ---- */
+  ul.todo{list-style:none;margin:0;padding:0;}
+  ul.todo li{padding:10px 0 10px 22px;border-bottom:1px dashed var(--line);font-size:.92rem;position:relative;}
+  ul.todo li:last-child{border-bottom:none;}
+  ul.todo li:before{content:"–";position:absolute;left:0;color:var(--accent-2);}
+
+  /* ---- tips ---- */
+  .tips p{font-size:.9rem;margin:0 0 12px;}
+  .tips p b{color:var(--accent);font-weight:600;}
+
+  footer{padding:28px 20px 0;text-align:center;font-size:.75rem;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="focus" id="focus">
+    <p class="eyebrow">此刻关注</p>
+    <h1 id="focusTitle">加载中…</h1>
+    <p class="sub" id="focusSub"></p>
+    <div class="cd" id="cd">
+      <div><span id="cdD">00</span><label>天</label></div>
+      <div><span id="cdH">00</span><label>时</label></div>
+      <div><span id="cdM">00</span><label>分</label></div>
+      <div><span id="cdS">00</span><label>秒</label></div>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2 class="section-title">行程总览<small>13 天 · 4 人 · 环岛顺时针</small></h2>
+    <div class="map-wrap" id="mapWrap"></div>
+  </section>
+
+  <section class="section" id="bookingsSection">
+    <h2 class="section-title">已确认预订</h2>
+    <div id="bookings"></div>
+  </section>
+
+  <section class="section" id="itinerarySection">
+    <h2 class="section-title">逐日行程</h2>
+    <div id="itinerary"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">待办<small>办完一项告诉我，我会更新这页</small></h2>
+    <ul class="todo">
+      <li>出发前 48 小时登录 my.adventures.is，确认/更新 Landmannalaugar 徒步团的接送地点</li>
+      <li>确认 Sky Lagoon（9/27 下午）的入场时段是否已预约，容易约满</li>
+      <li>出发前查 road.is，确认前往塞济斯菲厄尔要翻越的 Fjarðarheiði 山口是否通行，备好绕行/跳过方案</li>
+      <li>与 Zero Car 确认 10/7 17:00 还车流程和交接方式</li>
+    </ul>
+  </section>
+
+  <section class="section tips">
+    <h2 class="section-title">实用贴士</h2>
+    <p><b>靠右行驶。</b>环岛公路（1号公路）多数限速 90km/h，标 F 的砂石/山地道路未经许可的普通轿车不要驶入。</p>
+    <p><b>加油要趁早。</b>东部和北部路段加油站间距较大，油量低于一半就建议找站加满；无人值守加油站需要带 PIN 码的信用卡。</p>
+    <p><b>日照变短。</b>10 月初日出约 08:00、日落约 18:30，山口和砂石路尽量避免夜间通行。</p>
+    <p><b>出发前查两个网站：</b>road.is（路况封路信息）和 en.vedur.is（天气与极光预报）。</p>
+    <p><b>紧急情况拨打 112；</b>出发前可在 safetravel.is 登记行程，遇险更容易被搜救定位。</p>
+    <p><b>看极光的窗口已经打开。</b>9 月底到 10 月初是当季较早的极光季，选晴朗、月光弱的夜晚，尽量远离城镇灯光。</p>
+    <p><b>基本不用带现金，</b>几乎所有场所、加油站、路边停车缴费都能刷卡；部分停车场（如 Þingvellir）需现场缴纳停车费，留意路边缴费牌。</p>
+  </section>
+
+  <footer>信息如有变动，请随时告诉我更新这页。</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 主题：按设备本地时间自动切换 ---------- */
+  function applyTheme(){
+    var h = new Date().getHours();
+    var night = (h < 6 || h >= 19);
+    document.documentElement.classList.toggle('theme-night', night);
+  }
+  applyTheme();
+  setInterval(applyTheme, 60000);
+
+  /* ---------- 地图导航工具 ---------- */
+  function gmaps(q, mode){
+    return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(q) + '&travelmode=' + (mode||'driving');
+  }
+  function multiNav(queries, mode){
+    var qs = queries.filter(Boolean);
+    if(qs.length < 2) return null;
+    var origin = qs[0], destination = qs[qs.length-1], mids = qs.slice(1,-1);
+    var url = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) +
+              '&destination=' + encodeURIComponent(destination) + '&travelmode=' + (mode||'driving');
+    if(mids.length) url += '&waypoints=' + mids.map(encodeURIComponent).join('%7C');
+    return url;
+  }
+
+  /* ---------- 数据 ---------- */
+  /* 坐标为经纬度按等距投影换算到 500x350 视窗的近似位置，用来在真实冰岛轮廓上标出夜宿点，
+     不是测绘级精度，仅供总览示意；实际导航一律走 Google 地图链接 */
+  var STOPS = [
+    {name:'雷克雅未克', date:'9/25–27', color:'#1F6F78', q:'Reykjavik, Iceland', x:114.5,y:255.2, dx:-8,dy:-16, anchor:'end'},
+    {name:'塞尔福斯',   date:'9/28',    color:'#3D8361', q:'Selfoss, Iceland', x:154.7,y:277.3, dx:10,dy:6, anchor:'start'},
+    {name:'卡尔法费/维克', date:'9/29', color:'#C9A227', q:'Kálfafell, Iceland', x:283.8,y:286.0, dx:0,dy:22, anchor:'middle'},
+    {name:'赫本',       date:'9/30',    color:'#B5533C', q:'Höfn, Iceland', x:408.8,y:244.0, dx:10,dy:-8, anchor:'start'},
+    {name:'埃伊尔斯塔济', date:'10/1',  color:'#7C5CBF', q:'Egilsstaðir, Iceland', x:444.6,y:138.6, dx:-10,dy:-8, anchor:'end'},
+    {name:'米湖',       date:'10/2',    color:'#4FA8A0', q:'Mývatn, Iceland', x:333.9,y:99.8, dx:10,dy:-8, anchor:'start'},
+    {name:'胡萨维克',   date:'10/3',    color:'#D98E4A', q:'Húsavík, Iceland', x:315.1,y:57.7, dx:10,dy:6, anchor:'start'},
+    {name:'阿克雷里',   date:'10/4',    color:'#5B7DB1', q:'Akureyri, Iceland', x:280.4,y:94.8, dx:-10,dy:18, anchor:'end'},
+    {name:'斯蒂基斯霍尔米', date:'10/5', color:'#8C6E54', q:'Stykkishólmur, Iceland', x:84.5,y:170.0, dx:-10,dy:-8, anchor:'end'},
+    {name:'凯夫拉维克', date:'10/6',    color:'#4A5A6A', q:'Keflavík, Iceland', x:87.8,y:288.4, dx:8,dy:-14, anchor:'start'}
+  ];
+  var ICELAND_OUTLINE = "M 79.2 289.1 L 112.2 286.0 L 114.4 254.8 L 123.2 234.0 L 107.8 237.1 L 127.6 228.8 L 114.4 213.2 L 92.4 192.4 L 26.4 182.0 L 74.8 171.6 L 101.2 166.4 L 110.0 135.2 L 0.0 114.4 L 57.2 57.2 L 88.0 15.6 L 123.2 72.8 L 176.0 88.4 L 220.0 72.8 L 246.4 52.0 L 277.2 41.6 L 316.8 31.2 L 365.2 5.2 L 435.6 20.8 L 453.2 72.8 L 426.8 88.4 L 440.0 62.4 L 462.0 114.4 L 479.6 156.0 L 484.0 176.8 L 462.0 208.0 L 448.8 239.2 L 409.2 244.4 L 365.2 265.2 L 308.0 286.0 L 264.0 296.4 L 220.0 306.8 L 184.8 322.4 L 171.6 327.6 L 154.0 322.4 L 132.0 312.0 L 110.0 301.6 L 88.0 296.4 L 79.2 289.1 Z";
+
+  var FOCUS_EVENTS = [
+    {t:"2026-09-24T16:00:00+08:00", title:"起飞：上海 → 东京", sub:"JL086 日本航空 · 浦东机场 16:00 起飞"},
+    {t:"2026-09-24T21:50:00+09:00", title:"起飞：东京 → 赫尔辛基", sub:"AY062 芬兰航空 · 羽田机场 21:50 起飞"},
+    {t:"2026-09-25T07:10:00+03:00", title:"起飞：赫尔辛基 → 雷克雅未克", sub:"AY991 芬兰航空 · 07:50 抵达凯夫拉维克"},
+    {t:"2026-09-26T07:00:00+00:00", title:"Landmannalaugar 徒步团出发", sub:"8号站(Hallgrímskirkja)集合 · 全程约14小时"},
+    {t:"2026-09-27T17:00:00+00:00", title:"凯夫拉维克机场取车 · 全员会合", sub:"Zero Car · Toyota RAV4，正式开始自驾"},
+    {t:"2026-09-30T10:00:00+00:00", title:"冰川洞穴探索", sub:"Blue Iceland · 集合点：杰古沙龙冰河湖"},
+    {t:"2026-10-02T17:00:00+00:00", title:"米湖地热温泉", sub:"Earth Lagoon Mývatn"},
+    {t:"2026-10-07T08:35:00+00:00", title:"起飞：凯夫拉维克 → 赫尔辛基", sub:"AY992（芬兰航空实际承运）· 2人先返程"},
+    {t:"2026-10-07T17:05:00+03:00", title:"起飞：赫尔辛基 → 多哈", sub:"QR302（卡塔尔航空实际承运）"},
+    {t:"2026-10-07T17:00:00+00:00", title:"凯夫拉维克机场还车", sub:"Zero Car · 由留下的2人负责，随后自行安排返程"},
+    {t:"2026-10-08T02:50:00+03:00", title:"起飞：多哈 → 上海", sub:"AY6687（卡塔尔航空实际承运）· 16:20 抵达浦东 T2"}
+  ].sort(function(a,b){ return new Date(a.t) - new Date(b.t); });
+
+  var JOKULSARLON_Q = '64.0482,-16.1801';
+
+  var DAYS = [
+    {n:1, date:'9/24', grp:'早到2人', route:'上海 → 东京 → 赫尔辛基', transport:'飞行', overnight:null,
+      items:[
+        {time:'16:00', text:'起飞：上海浦东 → 东京羽田', note:'JL086 日本航空 · 2h55m'},
+        {time:'21:50', text:'起飞：东京羽田 → 赫尔辛基', note:'AY062 芬兰航空 · 12h50m，次日04:40抵达'}
+      ]},
+    {n:2, date:'9/25', grp:'早到2人', route:'赫尔辛基 → 雷克雅未克', transport:'飞行 + 步行', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
+      items:[
+        {time:'07:10', text:'起飞：赫尔辛基 → 凯夫拉维克', note:'AY991 芬兰航空 · 07:50 抵达'},
+        {time:'', text:'雷克雅未克市区漫步', q:'Reykjavik, Iceland'}
+      ]},
+    {n:3, date:'9/26', grp:'早到2人', route:'雷克雅未克', transport:'大巴（徒步团接送）', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
+      items:[
+        {time:'07:00', text:'Landmannalaugar 徒步 + 温泉一日游', note:'Arctic Adventures · 8号站(Hallgrímskirkja)接送 · 全程约14小时，约21:00返回 · 出发前48小时需在 my.adventures.is 确认接送点', tag:'ok', tagText:'已预订·2人', q:'Hallgrímskirkja, Reykjavik'},
+        {time:'', text:'另外2人尚未抵达雷克雅未克', note:''}
+      ]},
+    {n:4, date:'9/27', grp:'全员会合', route:'雷克雅未克', transport:'自驾（取车）', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
+      items:[
+        {time:'', text:'太阳航海者雕塑', note:'Sun Voyager', q:'Sólfar Sun Voyager, Reykjavik'},
+        {time:'', text:'哈尔格林姆教堂', note:'Hallgrímskirkja', q:'Hallgrímskirkja, Reykjavik'},
+        {time:'', text:'劳加维格购物街', note:'Laugavegur', q:'Laugavegur, Reykjavik'},
+        {time:'', text:'天空泻湖', note:'Sky Lagoon', tag:'book', tagText:'建议提前预约', q:'Sky Lagoon, Iceland'},
+        {time:'17:00', text:'凯夫拉维克机场取车', note:'Zero Car · Toyota RAV4 · 另外2人抵达，全员会合', q:'Keflavik International Airport'}
+      ]},
+    {n:5, date:'9/28', grp:'全员', route:'雷克雅未克 → 塞尔福斯', transport:'自驾', overnight:{name:'Gesthus Selfoss', addr:'Engjavegur 56, 800 Selfoss', phone:'+354-4823585'},
+      items:[
+        {time:'', text:'辛格维利尔国家公园', note:'Þingvellir', q:'Þingvellir National Park, Iceland'},
+        {time:'', text:'盖歇尔间歇泉', note:'Geysir', q:'Geysir Hot Spring Area, Iceland'},
+        {time:'', text:'黄金瀑布', note:'Gullfoss', q:'Gullfoss Waterfall, Iceland'}
+      ]},
+    {n:6, date:'9/29', grp:'全员', route:'塞尔福斯 → 卡尔法费', transport:'自驾', overnight:{name:'Fosshotel Núpar', addr:'Núpar, Kálfafell, Southern Region 880', phone:'+354-5173060'},
+      items:[
+        {time:'', text:'塞里雅兰瀑布', note:'Seljalandsfoss', q:'Seljalandsfoss, Iceland'},
+        {time:'', text:'斯科加瀑布', note:'Skógafoss', q:'Skógafoss, Iceland'},
+        {time:'', text:'雷尼斯黑沙滩', note:'Reynisfjara', q:'Reynisfjara Black Sand Beach, Iceland'}
+      ]},
+    {n:7, date:'9/30', grp:'全员', route:'卡尔法费 → 赫本', transport:'自驾', overnight:{name:'Skyjaborg Apartments', addr:'Víkurbraut 2, 780 Höfn', phone:'+354 647 1205'},
+      items:[
+        {time:'', text:'斯卡夫塔山冰川徒步', note:'Skaftafell', q:'Skaftafell, Vatnajökull National Park'},
+        {time:'10:00', text:'冰川洞穴探索', note:'Blue Iceland · 集合点：杰古沙龙冰河湖', tag:'ok', tagText:'已预订·4人', q:JOKULSARLON_Q},
+        {time:'', text:'钻石沙滩', note:'Diamond Beach', q:'Diamond Beach, Iceland'}
+      ]},
+    {n:8, date:'10/1', grp:'全员', route:'赫本 → 埃伊尔斯塔济', transport:'自驾', overnight:{name:'Lagarfell Studios', addr:'Lagarfell 3, 700 Egilsstaðir', phone:'+354-8934322'},
+      items:[
+        {time:'', text:'蝙蝠山', note:'Vestrahorn', q:'Vestrahorn, Iceland'},
+        {time:'', text:'彩色房子村', note:'Djúpivogur', q:'Djúpivogur, Iceland'},
+        {time:'', text:'塞济斯菲厄尔', note:'Seyðisfjörður', tag:'book', tagText:'⚠ 查山口路况', q:'Seyðisfjörður, Iceland'},
+        {time:'', text:'拉加尔湖', note:'Lagarfljót', q:'Lagarfljót, Iceland'}
+      ]},
+    {n:9, date:'10/2', grp:'全员', route:'埃伊尔斯塔济 → 米湖', transport:'自驾', overnight:{name:'Vogar Travel Service', addr:'Vogar, Reykjahlíð, Norðurland Eystra 660', phone:''},
+      items:[
+        {time:'', text:'黛提瀑布', note:'Dettifoss', q:'Dettifoss Waterfall, Iceland'},
+        {time:'', text:'克拉夫拉火山口', note:'Víti', q:'Víti Crater Krafla, Iceland'},
+        {time:'', text:'地热带', note:'Hverir', q:'Hverir Geothermal Area, Iceland'},
+        {time:'17:00', text:'米湖地热温泉', note:'Earth Lagoon Mývatn', tag:'ok', tagText:'已预订·4人', q:'Jarðböðin Nature Baths, Mývatn'}
+      ]},
+    {n:10, date:'10/3', grp:'全员', route:'米湖 → 胡萨维克', transport:'自驾', overnight:{name:'Bjarnabúð', addr:'Garðarsbraut 12, Húsavík City Center, Norðurland Eystra 640', phone:''},
+      items:[
+        {time:'', text:'众神瀑布', note:'Goðafoss', q:'Goðafoss Waterfall, Iceland'},
+        {time:'', text:'裂缝温泉', note:'Grjótagjá', q:'Grjótagjá Cave, Iceland'},
+        {time:'', text:'熔岩地貌', note:'Dimmuborgir', q:'Dimmuborgir, Iceland'}
+      ]},
+    {n:11, date:'10/4', grp:'全员', route:'胡萨维克 → 阿克雷里', transport:'自驾', overnight:{name:'Acco Luxury Apartments', addr:'Skipagata 12, Akureyri City Center, Norðurland Eystra 600', phone:'+354 547 2226'},
+      items:[
+        {time:'', text:'植物园', note:'Lystigarðurinn', q:'Akureyri Botanical Garden'},
+        {time:'', text:'阿克雷里市区漫步', q:'Akureyri, Iceland'}
+      ]},
+    {n:12, date:'10/5', grp:'全员', route:'阿克雷里 → 斯蒂基斯霍尔米', transport:'自驾', overnight:{name:'Hotel Karólína', addr:'Aðalgata 7, Stykkishólmur, Vesturland 340', phone:''},
+      items:[
+        {time:'', text:'屋牛石', note:'Hvítserkur', q:'Hvítserkur Rock, Iceland'},
+        {time:'', text:'斯蒂基斯霍尔米市区漫步', q:'Stykkishólmur, Iceland'}
+      ]},
+    {n:13, date:'10/6', grp:'全员', route:'斯蒂基斯霍尔米 → 凯夫拉维克', transport:'自驾（还车前一晚）', overnight:{name:'Keflavík Micro Suites', addr:'65 Hafnargata, Njarðarbraut, Suðurnes, 230 Keflavík', phone:''},
+      items:[
+        {time:'', text:'草帽山', note:'Kirkjufell', q:'Kirkjufell Mountain, Iceland'},
+        {time:'', text:'阿尔纳斯塔皮', note:'Arnarstapi', q:'Arnarstapi, Iceland'},
+        {time:'', text:'红教堂', note:'Ingjaldshólskirkja', q:'Ingjaldshólskirkja, Iceland'},
+        {time:'', text:'老人崖', note:'Músagjá', q:'Snæfellsnes, Iceland'},
+        {time:'', text:'黑教堂', note:'Búðakirkja', q:'Búðakirkja Black Church, Iceland'},
+        {time:'', text:'海豹沙滩', note:'Ytri Tunga', q:'Ytri Tunga Seal Beach, Iceland'},
+        {time:'', text:'玄武岩壁垒', note:'Gerðuberg', q:'Gerðuberg Cliffs, Iceland'}
+      ]},
+    {n:14, date:'10/7', grp:'分开返程', route:'凯夫拉维克 → 赫尔辛基 → 多哈', transport:'飞行', overnight:null,
+      items:[
+        {time:'08:35', text:'起飞：凯夫拉维克 → 赫尔辛基', note:'AY992（芬兰航空实际承运）· 2人先行返程'},
+        {time:'17:00', text:'凯夫拉维克机场还车', note:'Zero Car · 留下的2人负责，随后自行安排返程', q:'Keflavik International Airport'},
+        {time:'17:05', text:'起飞：赫尔辛基 → 多哈', note:'QR302（卡塔尔航空实际承运）'}
+      ]},
+    {n:15, date:'10/8', grp:'早到2人', route:'多哈 → 上海', transport:'飞行', overnight:null,
+      items:[
+        {time:'02:50', text:'起飞：多哈 → 上海', note:'AY6687（卡塔尔航空实际承运）· 16:20 抵达浦东 T2，行程结束'}
+      ]}
+  ];
+
+  /* ---------- 渲染：地图 ---------- */
+  function renderMap(){
+    var W = 500, H = 350;
+    var segs = '';
+    for(var i=0;i<STOPS.length-1;i++){
+      var a = STOPS[i], b = STOPS[i+1];
+      var mx = (a.x+b.x)/2 + ((i%2)?14:-14);
+      var my = (a.y+b.y)/2 + ((i%2)?-10:10);
+      segs += '<path d="M'+a.x+' '+a.y+' Q '+mx+' '+my+' '+b.x+' '+b.y+'" fill="none" stroke="'+b.color+'" stroke-width="3.5" stroke-linecap="round" filter="url(#wob2)"/>';
+    }
+    var dots = '';
+    STOPS.forEach(function(s){
+      dots += '<a href="'+gmaps(s.q,'driving')+'" target="_blank" rel="noopener">'+
+              '<circle cx="'+s.x+'" cy="'+s.y+'" r="5.5" fill="'+s.color+'" stroke="var(--panel)" stroke-width="1.7"/>'+
+              '<text class="stop-label" x="'+(s.x+s.dx)+'" y="'+(s.y+s.dy)+'" text-anchor="'+s.anchor+'" fill="var(--ink)">'+s.name+'</text>'+
+              '<text class="stop-date stop-label" x="'+(s.x+s.dx)+'" y="'+(s.y+s.dy+13)+'" text-anchor="'+s.anchor+'">'+s.date+'</text>'+
+              '</a>';
+    });
+    var svg = '<svg class="routemap" viewBox="-14 -14 '+(W+28)+' '+(H+28)+'" xmlns="http://www.w3.org/2000/svg">'+
+      '<defs>'+
+      '<filter id="wob" x="-20%" y="-20%" width="140%" height="140%">'+
+      '<feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="4" result="n"/>'+
+      '<feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>'+
+      '<filter id="wob2" x="-30%" y="-30%" width="160%" height="160%">'+
+      '<feTurbulence type="fractalNoise" baseFrequency="0.02 0.05" numOctaves="2" seed="9" result="n2"/>'+
+      '<feDisplacementMap in="SourceGraphic" in2="n2" scale="5"/></filter>'+
+      '</defs>'+
+      '<rect x="-14" y="-14" width="'+(W+28)+'" height="'+(H+28)+'" fill="var(--sea)"/>'+
+      '<path d="'+ICELAND_OUTLINE+'" fill="var(--land)" stroke="var(--coast)" stroke-width="2" stroke-linejoin="round" filter="url(#wob)"/>'+
+      segs + dots + '</svg>';
+    document.getElementById('mapWrap').innerHTML = svg;
+  }
+
+  /* ---------- 渲染：预订 ---------- */
+  function renderBookings(){
+    var html = '';
+    html += '<div class="bgroup"><h3>机票</h3>'+
+      brow('9/24 16:00','上海 PVG → 东京 HND','JL086 日本航空 · 2h55m')+
+      brow('9/24 21:50','东京 HND → 赫尔辛基 HEL','AY062 芬兰航空 · 12h50m，次日04:40抵达')+
+      brow('9/25 07:10','赫尔辛基 HEL → 凯夫拉维克 KEF','AY991 芬兰航空 · 3h40m')+
+      brow('10/7 08:35','凯夫拉维克 KEF → 赫尔辛基 HEL','AY992 芬兰航空 · 2人先返程')+
+      brow('10/7 17:05','赫尔辛基 HEL → 多哈 DOH','QR302 卡塔尔航空实际承运')+
+      brow('10/8 02:50','多哈 DOH → 上海 PVG','AY6687 卡塔尔航空实际承运')+
+      '</div>';
+    html += '<div class="bgroup"><h3>租车</h3>'+
+      brow('取车','9/27 17:00 · '+link('凯夫拉维克国际机场','Keflavik International Airport'),'Zero Car · Toyota RAV4 或同级')+
+      brow('还车','10/7 17:00 · '+link('凯夫拉维克国际机场','Keflavik International Airport'),'含盗抢险/砂石险/碰撞险/零免赔险，含道路救援')+
+      '</div>';
+    html += '<div class="bgroup"><h3>门票与活动</h3>'+
+      brow('9/26 07:00','Landmannalaugar 徒步 + 温泉','Arctic Adventures · 仅2人 · 全程约14小时')+
+      brow('9/30 10:00',link('冰川洞穴探索（杰古沙龙集合）',JOKULSARLON_Q),'Blue Iceland · 4人 · 已付款')+
+      brow('10/2 17:00','米湖地热温泉','Earth Lagoon Mývatn · 4人')+
+      '</div>';
+    document.getElementById('bookings').innerHTML = html;
+    function brow(l,r,note){
+      return '<div class="brow"><div class="l">'+l+'</div><div class="r">'+r+(note?'<div class="note">'+note+'</div>':'')+'</div></div>';
+    }
+    function link(text,q){ return '<a href="'+gmaps(q)+'" target="_blank" rel="noopener">'+text+'</a>'; }
+  }
+
+  /* ---------- 渲染：逐日行程 ---------- */
+  function renderItinerary(){
+    var el = document.getElementById('itinerary');
+    el.innerHTML = DAYS.map(function(d){
+      var items = d.items.map(function(it){
+        var tag = it.tag ? '<span class="tag '+it.tag+'">'+it.tagText+'</span>' : '';
+        var text = it.q ? '<a class="place" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">'+it.text+'</a>' : it.text;
+        return '<div class="item"><div class="time">'+(it.time||'')+'</div><div class="content">'+text+tag+
+               (it.note?'<div class="note">'+it.note+'</div>':'')+'</div></div>';
+      }).join('');
+      var stay = d.overnight ? '<div class="stay"><div class="l">住宿</div>'+
+        '<a href="'+gmaps(d.overnight.addr)+'" target="_blank" rel="noopener">'+d.overnight.name+' · '+d.overnight.addr+'</a>'+
+        (d.overnight.phone?'<div class="note"><a href="tel:'+d.overnight.phone.replace(/\s/g,'')+'">'+d.overnight.phone+'</a></div>':'')+
+        '</div>' : '';
+      var navQueries = [];
+      d.items.forEach(function(it){ if(it.q) navQueries.push(it.q); });
+      if(d.overnight) navQueries.push(d.overnight.addr);
+      var navUrl = multiNav(navQueries, d.transport.indexOf('步行')>-1 && d.transport.indexOf('自驾')<0 ? 'walking' : 'driving');
+      var navBtn = navUrl ? '<a class="navbtn" href="'+navUrl+'" target="_blank" rel="noopener">在地图中打开全天导航</a>' : '';
+      return '<div class="day" data-day="'+d.n+'">'+
+        '<div class="day-head" onclick="this.parentNode.classList.toggle(\'open\')">'+
+          '<div class="day-badge">Day '+d.n+'<b>'+d.date+'</b></div>'+
+          '<div class="day-route">'+d.route+'<span class="grp">'+d.grp+'</span></div>'+
+          '<div class="day-chev">›</div>'+
+        '</div>'+
+        '<div class="day-body"><div class="day-body-inner" style="padding:0 0 16px 78px;">'+
+          items + stay + navBtn +
+        '</div></div>'+
+      '</div>';
+    }).join('');
+  }
+
+  /* ---------- 渲染：此刻关注 ---------- */
+  function updateFocus(){
+    var now = new Date();
+    var next = null;
+    for(var i=0;i<FOCUS_EVENTS.length;i++){
+      if(new Date(FOCUS_EVENTS[i].t) > now){ next = FOCUS_EVENTS[i]; break; }
+    }
+    var titleEl = document.getElementById('focusTitle');
+    var subEl = document.getElementById('focusSub');
+    if(!next){
+      titleEl.textContent = '行程已全部结束';
+      subEl.textContent = '欢迎回家';
+      document.getElementById('cd').style.display = 'none';
+      return;
+    }
+    titleEl.textContent = next.title;
+    subEl.textContent = next.sub;
+    var diff = new Date(next.t) - now;
+    if(diff < 0) diff = 0;
+    var s = Math.floor(diff/1000);
+    var d = Math.floor(s/86400); s -= d*86400;
+    var h = Math.floor(s/3600); s -= h*3600;
+    var m = Math.floor(s/60); s -= m*60;
+    document.getElementById('cdD').textContent = String(d).padStart(2,'0');
+    document.getElementById('cdH').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdM').textContent = String(m).padStart(2,'0');
+    document.getElementById('cdS').textContent = String(s).padStart(2,'0');
+  }
+
+  renderMap();
+  renderBookings();
+  renderItinerary();
+  updateFocus();
+  setInterval(updateFocus, 1000);
+})();
+</script>
+</body>
+</html>
