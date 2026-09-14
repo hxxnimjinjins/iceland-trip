@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>冰岛 13 天 · 行程手册</title>
+<style>
+  :root{
+    --bg:#FFF8F1; --panel:#FFFFFF; --ink:#5A4438; --ink-soft:#B08D77; --line:#F3E2D2;
+    --accent:#E8927C; --accent-2:#7FB8A0; --chip:#FDECE1;
+    --sea:#CFEAE2; --land:#FCF1E1; --coast:#D9A679;
+  }
+  html.theme-night{
+    --bg:#2A2033; --panel:#352A40; --ink:#F6E9E4; --ink-soft:#B79FB0; --line:#493B54;
+    --accent:#F0A99C; --accent-2:#9BD9C2; --chip:#3E3049;
+    --sea:#1C1526; --land:#332740; --coast:#6E5674;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:Charter,"Iowan Old Style","Georgia",serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background .4s ease,color .4s ease;
+  }
+  .num,.time,.mono,button,.pill,nav.tabs{font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 0 64px;}
+  a{color:inherit;}
+  h1,h2,h3{font-weight:600;margin:0;}
+  section.section{padding:36px 20px 8px;border-top:1px solid var(--line);}
+  section.section:first-of-type{border-top:none;}
+  h2.section-title{font-size:1.05rem;letter-spacing:.02em;color:var(--ink);margin-bottom:18px;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-weight:600;}
+  h2.section-title small{display:block;font-family:Charter,Georgia,serif;font-weight:400;color:var(--ink-soft);font-size:.85rem;margin-top:2px;}
+
+  /* ---- Focus / countdown card ---- */
+  .focus{
+    background:linear-gradient(180deg,var(--accent) 0%, color-mix(in srgb, var(--accent) 78%, black) 100%);
+    color:#fff; padding:34px 22px 28px; position:relative; overflow:hidden;
+  }
+  .focus .eyebrow{font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.78rem;color:rgba(255,255,255,.75);margin:0 0 8px;}
+  .focus h1{font-size:1.5rem;line-height:1.3;margin-bottom:4px;}
+  .focus .sub{font-size:.88rem;color:rgba(255,255,255,.82);margin-bottom:22px;}
+  .cd{display:flex;gap:14px;}
+  .cd div{text-align:center;min-width:56px;}
+  .cd span{display:block;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:1.9rem;font-weight:700;font-variant-numeric:tabular-nums;}
+  .cd label{font-size:.7rem;color:rgba(255,255,255,.7);}
+  .focus.done .sub{color:rgba(255,255,255,.9);}
+
+  /* ---- map ---- */
+  .map-wrap{margin-top:4px;}
+  svg.routemap{width:100%;height:auto;display:block;}
+  .stop-label{font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:11px;}
+  .stop-date{font-size:9px;fill:var(--ink-soft);}
+
+  /* ---- bookings ---- */
+  .bgroup{margin-bottom:26px;}
+  .bgroup h3{font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.8rem;color:var(--ink-soft);margin-bottom:10px;font-weight:600;}
+  .brow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.92rem;}
+  .brow:last-child{border-bottom:none;}
+  .brow .l{color:var(--ink-soft);font-size:.82rem;min-width:92px;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;}
+  .brow .r{flex:1;text-align:right;}
+  .brow .r a{text-decoration:none;border-bottom:1px solid var(--line);}
+  .note{font-size:.78rem;color:var(--ink-soft);margin-top:2px;}
+  .warn{color:var(--accent-2);}
+
+  /* ---- itinerary ---- */
+  .day{border-bottom:1px solid var(--line);}
+  .day:last-child{border-bottom:none;}
+  .day-head{display:flex;align-items:center;gap:14px;padding:16px 0;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .day-badge{font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.68rem;color:var(--ink-soft);min-width:64px;}
+  .day-badge b{display:block;font-size:1.1rem;color:var(--ink);font-weight:700;}
+  .day-route{flex:1;font-size:.95rem;}
+  .day-route .grp{display:inline-block;margin-left:8px;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.66rem;padding:2px 7px;border-radius:20px;background:var(--chip);color:var(--ink-soft);}
+  .day-chev{font-size:.8rem;color:var(--ink-soft);transition:transform .25s ease;}
+  .day.open .day-chev{transform:rotate(90deg);}
+  .day-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;}
+  .day.open .day-body{grid-template-rows:1fr;}
+  .day-body-inner{overflow:hidden;}
+  .item{display:flex;gap:14px;padding:9px 0 9px 0;}
+  .item .time{min-width:64px;font-size:.78rem;color:var(--ink-soft);padding-top:2px;}
+  .item .content{flex:1;font-size:.92rem;}
+  .item .content a.place{text-decoration:none;border-bottom:1px solid var(--line);}
+  .item-details{border:none;}
+  .item-details summary{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .item-details summary::-webkit-details-marker{display:none;}
+  .item-summary{display:flex;gap:14px;padding:9px 0;}
+  .item-summary .time{min-width:64px;font-size:.78rem;color:var(--ink-soft);padding-top:2px;}
+  .item-summary .content{flex:1;font-size:.92rem;}
+  .item-chev{font-size:.78rem;color:var(--ink-soft);padding-top:2px;transition:transform .2s ease;}
+  .item-details[open] .item-chev{transform:rotate(90deg);}
+  .item-desc{padding:0 22px 14px 78px;font-size:.85rem;color:var(--ink-soft);line-height:1.65;}
+  .desc-map{display:inline-block;margin-top:6px;color:var(--accent);font-size:.8rem;text-decoration:none;}
+  .tag{display:inline-block;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.66rem;padding:1px 7px;border-radius:20px;margin-left:6px;position:relative;top:-1px;}
+  .tag.book{background:color-mix(in srgb, var(--accent-2) 18%, transparent);color:var(--accent-2);}
+  .tag.ok{background:var(--chip);color:var(--accent);}
+  .tag.optional{background:transparent;border:1px dashed var(--ink-soft);color:var(--ink-soft);}
+  .stay{margin:10px 0 4px;padding:12px 14px;background:var(--chip);border-radius:16px;font-size:.85rem;}
+  .stay .l{color:var(--ink-soft);font-size:.72rem;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;}
+  .navbtn{display:inline-block;margin:12px 0 6px;font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:.78rem;padding:8px 14px;border:1px solid var(--accent);color:var(--accent);border-radius:20px;text-decoration:none;}
+
+  /* ---- todo ---- */
+  ul.todo{list-style:none;margin:0;padding:0;}
+  ul.todo li{padding:10px 0 10px 22px;border-bottom:1px dashed var(--line);font-size:.92rem;position:relative;}
+  ul.todo li:last-child{border-bottom:none;}
+  ul.todo li:before{content:"–";position:absolute;left:0;color:var(--accent-2);}
+
+  /* ---- tips ---- */
+  .tips p{font-size:.9rem;margin:0 0 12px;}
+  .tips p b{color:var(--accent);font-weight:600;}
+
+  footer{padding:28px 20px 0;text-align:center;font-size:.75rem;color:var(--ink-soft);}
+
+  /* ---- quick nav ---- */
+  html{scroll-behavior:smooth;}
+  nav.quicknav{
+    position:sticky; top:0; z-index:10;
+    display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    padding:12px 16px; background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); scrollbar-width:none;
+  }
+  nav.quicknav::-webkit-scrollbar{display:none;}
+  nav.quicknav a{
+    flex:0 0 auto; font-family:"ui-rounded","Avenir Next","Helvetica Neue",Arial,sans-serif;
+    font-size:.78rem; padding:7px 14px; border-radius:20px;
+    background:var(--chip); color:var(--ink); text-decoration:none; white-space:nowrap;
+  }
+  section.section{scroll-margin-top:56px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="focus" id="focus">
+    <p class="eyebrow">此刻关注</p>
+    <h1 id="focusTitle">加载中…</h1>
+    <p class="sub" id="focusSub"></p>
+    <div class="cd" id="cd">
+      <div><span id="cdD">00</span><label>天</label></div>
+      <div><span id="cdH">00</span><label>时</label></div>
+      <div><span id="cdM">00</span><label>分</label></div>
+      <div><span id="cdS">00</span><label>秒</label></div>
+    </div>
+  </header>
+
+  <nav class="quicknav">
+    <a href="#mapSection">总览</a>
+    <a href="#bookingsSection">预订</a>
+    <a href="#itinerarySection">行程</a>
+    <a href="#todoSection">待办</a>
+    <a href="#tipsSection">贴士</a>
+  </nav>
+
+  <section class="section" id="mapSection">
+    <h2 class="section-title">行程总览<small>13 天 · 4 人 · 环岛顺时针</small></h2>
+    <div class="map-wrap" id="mapWrap"></div>
+  </section>
+
+  <section class="section" id="bookingsSection">
+    <h2 class="section-title">已确认预订</h2>
+    <div id="bookings"></div>
+  </section>
+
+  <section class="section" id="itinerarySection">
+    <h2 class="section-title">逐日行程</h2>
+    <div id="itinerary"></div>
+  </section>
+
+  <section class="section" id="todoSection">
+    <h2 class="section-title">待办<small>办完一项告诉我，我会更新这页</small></h2>
+    <ul class="todo">
+      <li>出发前 48 小时登录 my.adventures.is，确认/更新 Landmannalaugar 徒步团的接送地点</li>
+      <li>出发前查 road.is，确认前往塞济斯菲厄尔要翻越的 Fjarðarheiði 山口是否通行，备好绕行/跳过方案</li>
+      <li>与 Zero Car 确认 10/7 17:00 还车流程和交接方式</li>
+      <li>10/6 提前在 re.is/tour/flybus 订好雷克雅未克→凯夫拉维克的 Flybus 车票（我们2人）</li>
+    </ul>
+  </section>
+
+  <section class="section tips" id="tipsSection">
+    <h2 class="section-title">实用贴士</h2>
+    <p><b>靠右行驶。</b>环岛公路（1号公路）多数限速 90km/h，标 F 的砂石/山地道路未经许可的普通轿车不要驶入。</p>
+    <p><b>加油要趁早。</b>东部和北部路段加油站间距较大，油量低于一半就建议找站加满；无人值守加油站需要带 PIN 码的信用卡。</p>
+    <p><b>日照变短。</b>10 月初日出约 08:00、日落约 18:30，山口和砂石路尽量避免夜间通行。</p>
+    <p><b>出发前查两个网站：</b>road.is（路况封路信息）和 en.vedur.is（天气与极光预报）。</p>
+    <p><b>紧急情况拨打 112；</b>出发前可在 safetravel.is 登记行程，遇险更容易被搜救定位。</p>
+    <p><b>看极光的窗口已经打开。</b>9 月底到 10 月初是当季较早的极光季，选晴朗、月光弱的夜晚，尽量远离城镇灯光。</p>
+    <p><b>基本不用带现金，</b>几乎所有场所、加油站、路边停车缴费都能刷卡；部分停车场（如 Þingvellir）需现场缴纳停车费，留意路边缴费牌。</p>
+    <p><b>买点当地特产：</b>66°North 是冰岛国民户外品牌（今年正好100周年），毛线帽、冲锋衣都不错；BIOEFFECT（蓓欧菲）是本土护肤品牌，主打冰川水成分，市区店和机场免税店都能买到。</p>
+    <p><b>省钱靠 Bónus 超市（粉色小猪logo，外号"小猪超市"）：</b>三明治、卷饼、杯面都便宜又不踩雷，晚上小镇餐厅都关门时能救急；乡镇分店营业时间较短，最好趁在雷克雅未克或大城镇时多囤一点。Netto超市有些分店开到较晚，韩国超市能买到泡面和速食咖喱饭，想吃亚洲口味时很救命。Bónus还能买到 Salling Princip 罗勒青酱（Basilikumspesto），喜欢罗勒的话很推荐带一瓶，也适合当伴手礼。</p>
+    <p><b>超市里值得试试：</b>Skyr（冰岛国民高蛋白酸奶，比普通酸奶更厚，Ísey 牌子口味很多，蓝莓覆盆子/焦糖布蕾都不踩雷）；Nýmjólk 3.9% 牛奶口感清淡；当地可乐口感格外顺；COLLAB 是冰岛特色的胶原蛋白+咖啡因功能饮料，莓果/桃子/柠檬口味都适合随手买一瓶；小猪自有品牌的洋葱圈零食很多人推荐，十几块钱一大包很适合自驾路上当搭子。</p>
+    <p><b>几个好用的App：</b>Google Maps 导航；Parka 用来交冰岛的停车缴费（比如 Þingvellir 停车场）；Maps.me 提前下载目的地离线地图，信号不好时保底；Veður 看冰岛本地天气预报，比通用天气App更准；冰岛没有Uber，打车用 Hopp（类Uber体验，主要覆盖雷市+机场）或 Flott（支持提前预约、覆盖小镇、价格透明）。</p>
+    <p><b>纪念品可以看看：</b>Sirius 出的"Traditional Icelandic Chocolate"，1933年就有了，包装是海鹦/极光/火山这些冰岛元素，很多人夸牛奶巧克力浓郁好吃；Lakkris（甘草夹心巧克力）也是本地特色口味，喜欢甘草味的可以试试；泡完温泉头发发干的话，本地人常用一种叫 Miracle Shine 的护发精油，超市里能买到，挤一点就顺滑很多。机场或 Bónus 超市还能买到本地唇膏和鱼油，唇膏方便携带、滋润不油腻，也适合当伴手礼。</p>
+    <p><b>路过加油站小店，</b>可以留意一下叫 Sirkus 的推推糖（一种香草冰淇淋雪糕，棍子上还能吹口哨），是本地小朋友很爱的怀旧零食，自驾路上买一支当小惊喜。</p>
+  </section>
+
+  <footer>信息如有变动，请随时告诉我更新这页。</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 主题：按设备本地时间自动切换 ---------- */
+  function applyTheme(){
+    var h = new Date().getHours();
+    var night = (h < 6 || h >= 19);
+    document.documentElement.classList.toggle('theme-night', night);
+  }
+  applyTheme();
+  setInterval(applyTheme, 60000);
+
+  /* ---------- 地图导航工具 ---------- */
+  function gmaps(q, mode){
+    return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(q) + '&travelmode=' + (mode||'driving');
+  }
+  function multiNav(queries, mode){
+    var qs = queries.filter(Boolean);
+    if(qs.length < 2) return null;
+    var origin = qs[0], destination = qs[qs.length-1], mids = qs.slice(1,-1);
+    var url = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) +
+              '&destination=' + encodeURIComponent(destination) + '&travelmode=' + (mode||'driving');
+    if(mids.length) url += '&waypoints=' + mids.map(encodeURIComponent).join('%7C');
+    return url;
+  }
+
+  /* ---------- 数据 ---------- */
+  /* 坐标为经纬度按等距投影换算到 500x350 视窗的近似位置，用来在真实冰岛轮廓上标出夜宿点，
+     不是测绘级精度，仅供总览示意；实际导航一律走 Google 地图链接 */
+  var STOPS = [
+    {name:'雷克雅未克', date:'9/25–27', color:'#E8927C', q:'Reykjavik, Iceland', x:114.5,y:255.2, dx:-8,dy:-16, anchor:'end'},
+    {name:'塞尔福斯',   date:'9/28',    color:'#F2B279', q:'Selfoss, Iceland', x:154.7,y:277.3, dx:10,dy:6, anchor:'start'},
+    {name:'卡尔法费/维克', date:'9/29', color:'#E8C468', q:'Kálfafell, Iceland', x:283.8,y:286.0, dx:0,dy:22, anchor:'middle'},
+    {name:'赫本',       date:'9/30',    color:'#E88BA0', q:'Höfn, Iceland', x:408.8,y:244.0, dx:10,dy:-8, anchor:'start'},
+    {name:'埃伊尔斯塔济', date:'10/1',  color:'#B592D6', q:'Egilsstaðir, Iceland', x:444.6,y:138.6, dx:-10,dy:-8, anchor:'end'},
+    {name:'米湖',       date:'10/2',    color:'#7FB8A4', q:'Mývatn, Iceland', x:333.9,y:99.8, dx:10,dy:-8, anchor:'start'},
+    {name:'胡萨维克',   date:'10/3',    color:'#6FA8C9', q:'Húsavík, Iceland', x:315.1,y:57.7, dx:10,dy:6, anchor:'start'},
+    {name:'阿克雷里',   date:'10/4',    color:'#8C9FD6', q:'Akureyri, Iceland', x:280.4,y:94.8, dx:-10,dy:18, anchor:'end'},
+    {name:'斯蒂基斯霍尔米', date:'10/5', color:'#C98F6B', q:'Stykkishólmur, Iceland', x:84.5,y:170.0, dx:-10,dy:-8, anchor:'end'},
+    {name:'凯夫拉维克', date:'10/6',    color:'#A67C8E', q:'Keflavík, Iceland', x:87.8,y:288.4, dx:8,dy:-14, anchor:'start'}
+  ];
+  var ICELAND_OUTLINE = "M 79.2 289.1 L 112.2 286.0 L 114.4 254.8 L 123.2 234.0 L 107.8 237.1 L 127.6 228.8 L 114.4 213.2 L 92.4 192.4 L 26.4 182.0 L 74.8 171.6 L 101.2 166.4 L 110.0 135.2 L 0.0 114.4 L 57.2 57.2 L 88.0 15.6 L 123.2 72.8 L 176.0 88.4 L 220.0 72.8 L 246.4 52.0 L 277.2 41.6 L 316.8 31.2 L 365.2 5.2 L 435.6 20.8 L 453.2 72.8 L 426.8 88.4 L 440.0 62.4 L 462.0 114.4 L 479.6 156.0 L 484.0 176.8 L 462.0 208.0 L 448.8 239.2 L 409.2 244.4 L 365.2 265.2 L 308.0 286.0 L 264.0 296.4 L 220.0 306.8 L 184.8 322.4 L 171.6 327.6 L 154.0 322.4 L 132.0 312.0 L 110.0 301.6 L 88.0 296.4 L 79.2 289.1 Z";
+
+  var FOCUS_EVENTS = [
+    {t:"2026-09-24T16:00:00+08:00", title:"起飞：上海 → 东京", sub:"JL086 日本航空 · 浦东机场 16:00 起飞"},
+    {t:"2026-09-24T21:50:00+09:00", title:"起飞：东京 → 赫尔辛基", sub:"AY062 芬兰航空 · 羽田机场 21:50 起飞"},
+    {t:"2026-09-25T07:10:00+03:00", title:"起飞：赫尔辛基 → 雷克雅未克", sub:"AY991 芬兰航空 · 07:50 抵达凯夫拉维克"},
+    {t:"2026-09-26T07:00:00+00:00", title:"Landmannalaugar 徒步团出发", sub:"8号站(Hallgrímskirkja)集合 · 全程约14小时"},
+    {t:"2026-09-27T17:00:00+00:00", title:"凯夫拉维克机场取车 · 全员会合", sub:"Zero Car · Toyota RAV4，正式开始自驾"},
+    {t:"2026-09-30T10:00:00+00:00", title:"冰川洞穴探索", sub:"Blue Iceland · 集合点：杰古沙龙冰河湖"},
+    {t:"2026-10-02T17:00:00+00:00", title:"米湖地热温泉", sub:"Earth Lagoon Mývatn"},
+    {t:"2026-10-07T08:35:00+00:00", title:"起飞：凯夫拉维克 → 赫尔辛基", sub:"AY992（芬兰航空实际承运）· 2人先返程"},
+    {t:"2026-10-07T17:05:00+03:00", title:"起飞：赫尔辛基 → 多哈", sub:"QR302（卡塔尔航空实际承运）"},
+    {t:"2026-10-07T17:00:00+00:00", title:"凯夫拉维克机场还车", sub:"Zero Car · 由留下的2人负责，随后自行安排返程"},
+    {t:"2026-10-08T02:50:00+03:00", title:"起飞：多哈 → 上海", sub:"AY6687（卡塔尔航空实际承运）· 16:20 抵达浦东 T2"}
+  ].sort(function(a,b){ return new Date(a.t) - new Date(b.t); });
+
+  var JOKULSARLON_Q = '64.0482,-16.1801';
+
+  var DAYS = [
+    {n:1, date:'9/24', grp:'早到2人', route:'上海 → 东京 → 赫尔辛基', transport:'飞行', overnight:null,
+      items:[
+        {time:'16:00', text:'起飞：上海浦东 → 东京羽田', note:'JL086 日本航空 · 2h55m'},
+        {time:'21:50', text:'起飞：东京羽田 → 赫尔辛基', note:'AY062 芬兰航空 · 12h50m，次日04:40抵达（机上过夜）'}
+      ]},
+    {n:2, date:'9/25', grp:'早到2人', route:'赫尔辛基 → 雷克雅未克', transport:'飞行 + 步行', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
+      items:[
+        {time:'07:10', text:'起飞：赫尔辛基 → 凯夫拉维克', note:'AY991 芬兰航空 · 07:50 抵达'},
+        {time:'09:00', text:'打车/巴士进城', note:'约45分钟车程，到公寓休整 · Flybus可官网(re.is/tour/flybus)提前订，大概每30分钟一班，凭票上对应颜色的车'},
+        {time:'可选', text:'Reykjavík Roasters（Brautarholt 2店）', note:'离公寓（Raudararstigur）很近，10点左右光线很美 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Reykjavík Roasters, Brautarholt 2, Reykjavik', desc:'本地口碑咖啡馆在Hlemmur附近的分店，离公寓走几步就到，据说上午10点左右店里的光影特别好看，适合悠闲坐一会儿，落地第一天倒时差正合适。'},
+        {time:'下午', text:'太阳航海者雕塑', note:'Sun Voyager · 约20分钟，从公寓沿海边步道一路走过去，单向不用绕路', q:'Sólfar Sun Voyager, Reykjavik', desc:'海边的一座钢制雕塑，形似维京长船的骨架，象征探索与自由，是雷克雅未克最经典的地标之一。天气好的时候能看到雕塑背后隔海的雪山，很适合拍照。'},
+        {time:'下午', text:'雷克雅未克市区漫步', note:'沿海边继续走走即可，倒时差第一天不用赶路', q:'Reykjavik, Iceland', desc:'冰岛首都，全国近三分之二人口住在这一带。彩色屋顶、海边步道和小咖啡馆是主要基调，第一天用来倒时差、熟悉环境正合适，不用赶行程。'}
+      ]},
+    {n:3, date:'9/26', grp:'早到2人', route:'雷克雅未克', transport:'大巴（徒步团接送）', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
+      items:[
+        {time:'07:00', text:'Landmannalaugar 徒步 + 温泉一日游', note:'Arctic Adventures · 8号站(Hallgrímskirkja)接送 · 全程约14小时，约21:00返回 · 出发前48小时需在 my.adventures.is 确认接送点', tag:'ok', tagText:'已预订·2人', q:'Hallgrímskirkja, Reykjavik', desc:'冰岛高地最著名的徒步区域，以七彩流纹岩山脉、黑色熔岩地和天然温泉溪流出名。可以一边走一边看山体颜色随光线变化，累了就直接跳进溪水温泉里泡一泡，是冰岛内陆最独特的体验之一。'},
+        {time:'', text:'另外2人尚未抵达雷克雅未克', note:''}
+      ]},
+    {n:4, date:'9/27', grp:'全员会合', route:'雷克雅未克', transport:'自驾（取车）', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
+      items:[
+        {time:'09:00', text:'哈尔格林姆教堂', note:'Hallgrímskirkja · 约20分钟，今天从这里由高处往海边一路走，不走回头路', q:'Hallgrímskirkja, Reykjavik', desc:'冰岛最高的教堂，外形取材自玄武岩柱状节理，是全城最显眼的地标。可以买票登塔俯瞰整个雷克雅未克的彩色屋顶，内部则很简洁肃穆。'},
+        {time:'可选', text:'托宁湖', note:'Tjörnin · 教堂步行约10分钟 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Tjörnin, Reykjavik', desc:'雷克雅未克市中心的一片湖，周围环绕着议会大厦、市政厅等主要建筑，湖边常年栖息着二十多种水鸟，适合坐下来静静看鸟、看湖景，头顶偶尔还能看到降落进雷克雅未克机场的小飞机。'},
+        {time:'可选', text:'冰岛阴茎博物馆（俗称"丁丁博物馆"）', note:'Icelandic Phallological Museum · 托宁湖去旧港口的路上会经过，门票约250元，猎奇向 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Icelandic Phallological Museum, Reykjavik', desc:'世界上颇为独特的一家博物馆，展出上百种哺乳动物的生殖器标本，也有不少冰岛精灵传说主题的展品，风格猎奇又带点冷幽默，感兴趣的可以买票进去看看，不感兴趣路过打卡外观也行。'},
+        {time:'可选', text:'Turf House Iceland', note:'教堂旁餐车，只卖三种食物，强推羊肉汉堡+海鲜汤 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Turf House Iceland, Reykjavik', desc:'教堂附近一辆只卖三种食物的小餐车，羊肉饼煎得很有水平，配的黑色面包坯是葱香味的，海鲜汤评价也很高，虽然是快餐规格但可以当一顿正餐吃。'},
+        {time:'可选', text:'大教堂旁鱼汤', note:'就在哈尔格林姆教堂附近，评价中等 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'fish soup restaurant near Hallgrímskirkja, Reykjavik', desc:'哈尔格林姆教堂附近的一家鱼汤店，汤味道不错、配的煎面包片也香，顺路逛完教堂可以就近解决一餐。'},
+        {time:'可选', text:'Black Crust Pizzeria', note:'教堂附近，招牌黑松露墨鱼汁黑披萨，约¥260/张 · 评价不一 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Black Crust Pizzeria, Reykjavik', desc:'教堂附近一家黑色饼底的披萨店，招牌Nr.1黑披萨是墨鱼汁+黑松露口味，浓郁惊艳，上面撒的芝麻菜略带辣度；也有马卡龙礼盒和炸鸡翅小食，人均约180元。是网上很火的一家店，但人多常要排队约20分钟，也有博主觉得饼底偏硬、龙虾和芝士给得不算多，评价不算稳定，仅供参考。'},
+        {time:'可选', text:'Baboo Tea', note:'沿彩虹街(Skólavörðustígur)往下走会经过，咸芝士口味推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Baboo Tea, Reykjavik', desc:'彩虹街(Skólavörðustígur)上的一家奶茶店，从教堂往劳加维格方向走正好顺路，有博主形容浓郁醇香，喜欢咸芝士口味的会很对味，珍珠也很Q。'},
+        {time:'可选', text:'Sandholt', note:'彩虹街走到底就是劳加维格54号，招牌北非蛋+开心果丹麦酥+巧克力 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Sandholt, Laugavegur 54, Reykjavik', desc:'雷克雅未克老牌烘焙咖啡店，招牌北非蛋(Shakshuka)配面包很受中国胃欢迎，开心果丹麦酥也酥脆香甜。店里的巧克力也很受好评，放嘴里能留香十秒，羊肉/牛肉三明治评价也不错，是不少博主全程最喜欢的一餐。'},
+        {time:'可选', text:'The Story of Icelanders', note:'Laugavegur 56，紧挨着Sandholt · 11分钟沉浸式历史体验，目前免费开放 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'The Story of Icelanders, Laugavegur 56, Reykjavik', desc:'紧挨着Sandholt新开的免费历史体验馆，只要11分钟就把冰岛1150年历史浓缩进5个主题空间，从最早的维京定居者一路讲到现代冰岛，中间还有维京头盔、斧头可以拍照互动。目前免费开放（每天8:00-20:00），既然顺路不占用额外时间，值得进去看看，不过免费政策以后可能会变，去之前可以留意一下。'},
+        {time:'09:30', text:'劳加维格购物街', note:'Laugavegur · 从54号往低门牌号方向一路走，约60分钟', q:'Laugavegur, Reykjavik', desc:'雷克雅未克最热闹的步行商业街，两侧是设计师小店、咖啡馆和纪念品店，适合买羊毛衫、手工艺品，顺便感受首都的日常生活气息。'},
+        {time:'可选', text:'BIOEFFECT 精品店', note:'Laugavegur 33 · 冰岛本土护肤品牌，主打冰川水/大麦EGF成分 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'BIOEFFECT, Laugavegur 33, Reykjavik', desc:'BIOEFFECT 在劳加维格上的精品店，跟旗舰店（Hafnarstræti 19）离得很近，主打精华和面霜，也提供皮肤咨询服务。'},
+        {time:'可选', text:'66°North 旗舰店', note:'Laugavegur 17-19，继续往下走 · 冰岛国民户外品牌 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'66°North, Laugavegur 17-19, Reykjavik', desc:'66°North 在劳加维格上的旗舰店，款式最全，毛线帽、冲锋衣、羊毛外套都有，今年正好是品牌100周年。'},
+        {time:'可选', text:'Spuutnik 中古店', note:'劳加维格主干道上，皮草外套约¥1000 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Spuutnik Vintage, Reykjavik', desc:'雷克雅未克一家休闲风格的中古服装店，有几件不同风格的皮草外套（价格约1000元左右，容易被秒），也有不少简约百搭的薄款羊皮衣。'},
+        {time:'可选', text:'verzlanaholl 中古店', note:'小配件、手工感包和帽子好淘 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'verzlanaholl, Reykjavik', desc:'另一家中古店，比起衣服更适合淘小配件，有博主在这里花60元淘到一顶又保暖又轻的大头围帽子，评价性价比很高。'},
+        {time:'可选', text:'B12 朋克买手店', note:'价格偏贵但选品精美，摇滚风格 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'B12, Reykjavik', desc:'一家摇滚朋克风格的买手店，价格小贵但选品精美，毛靴很好看，适合喜欢辣妹/摇滚风的人逛逛。'},
+        {time:'可选', text:'Kronkron 二手店', note:'有不少西太后(Vivienne Westwood)款式，家具陈列也精彩 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kronkron, Reykjavik', desc:'一家二手时装店，有很多没见过的西太后(Vivienne Westwood)款式，店内陈列的家具撞色设计也很有意思，值得进去开开眼界。'},
+        {time:'可选', text:'280bakery', note:'从劳加维格拐进Klapparstígur 37，顺路 · 起酥类面包很推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'280 Bakery, Klapparstígur 37, Reykjavik', desc:'雷克雅未克本地的小面包店，起酥类面包被很多博主评为"雷市断层第一"，牛角、杏仁牛角都很受欢迎，出炉时间不固定，早去更容易碰到刚出炉的。'},
+        {time:'可选', text:'Caruso 西餐厅', note:'走到市中心核心区，烤三文鱼/牛排评价不错，龙虾烩饭评价一般 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Caruso Reykjavik', desc:'市区主街上一家需要预约的西餐厅，评价不算稳定：有博主说烤三文鱼和牛排都很好吃，送的餐前面包也不错，visitorsguide.is上领券还能有15%折扣；也有博主觉得龙虾烩饭是冷冻虾、性价比不高、服务态度一般。仅供参考，去之前可以先查一下当时的优惠券。'},
+        {time:'可选', text:'Íslenski Barinn', note:'市中心核心区，冰岛猎奇美食一次吃全，非常火需排队 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Íslenski Barinn, Reykjavik', desc:'很受欢迎的一家酒吧餐厅，晚上9点半到还要排队。可以一次性尝到冰岛特色/猎奇食物：鲨鱼肉、鲸鱼肉、驯鹿汉堡、龙虾taco、龙虾热狗、海鹦(puffin)、羊头。鲨鱼肉入口是强烈的刺激感，牙龈会有点疼；鲸鱼肉吃着像牛肉；驯鹿汉堡香但没那么多汁；龙虾热狗外壳酥脆虾肉Q弹评价很高。鲸鱼肉和海鹦涉及争议性的物种猎食，是否尝试因人而异。'},
+        {time:'可选', text:'Svarta Kaffið', note:'市中心核心区，跟Íslenski Barinn离得很近 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Svarta Kaffið, Reykjavik', desc:'雷克雅未克老牌小店，招牌是羊肉汤装在挖空的黑面包碗里端上桌，可以免费续汤一次。有博主实测评价一般：肉汤里羊肉偏少、蔬菜汤偏咸，不过态度好、羊肉没膻味，性价比中等。'},
+        {time:'可选', text:'Sjávargrillið', note:'市中心核心区，海鲜烧烤，免费餐前面包评价爆棚 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Sjávargrillið, Reykjavik', desc:'看菜单觉得偏贵，但端上来量大又好吃，是少有配主食的店。龙虾taco比龙虾热狗还好吃，海鲜pasta里给了很多大虾仁，两种鱼的做法都不错，羊肉切片配土豆泥也很有记忆点。有博主特别夸赠送的餐前面包和黄油(抹在石头上端上桌)，说是全程惊艳的免费小吃。'},
+        {time:'可选', text:'Braud & Co 面包店', note:'Frakkastígur 16，教堂附近 · 招牌肉桂卷，彩色涂鸦门面很好拍 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Braud & Co, Frakkastígur 16, Reykjavik', desc:'雷克雅未克超火的面包店，招牌肉桂卷(Cinnamon Roll)外酥内软、甜度是北欧式的克制甜，不腻，每天现烤出炉常常被抢光。店面是彩色涂鸦小屋，拍照也很出片，跟Black Crust Pizzeria在同一条街上，可以一起逛。'},
+        {time:'可选', text:'Messinn', note:'市中心核心区，需预约 · 红点鲑评价很高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Messinn, Reykjavik', desc:'需要预约的海鲜餐厅，红点鲑(Arctic char)评价很高——鱼肉细腻、配菜丰富；招牌鱼炖(plokkfiskur)是把鱼肉和土豆一起炖煮，加了白葡萄酒和芝士，偏西式口味，不一定合中国胃口。'},
+        {time:'可选', text:'雷市"克林顿"热狗摊', note:'继续往老港口方向走，Bæjarins Beztu Pylsur · 便宜快捷 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Bæjarins Beztu Pylsur, Reykjavik', desc:'雷克雅未克最有名的热狗摊，克林顿访冰岛时来吃过而出名，价格便宜适合当快餐，口味跟便利店热狗差别不算大，图个打卡。'},
+        {time:'可选', text:'Old Wharf Noodle House 老码头面', note:'老港口附近，中式炸酱面，评价很高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Old Wharf Noodle House, Reykjavik', desc:'雷克雅未克一家中餐面馆，主打炸酱面，有博主称是吃过最好吃的炸酱面，店里挂着"外面是冰岛，里面是热面"的标语，很受在外思乡胃欢迎。'},
+        {time:'可选', text:'Biang 中餐面馆', note:'biangbiang面+慢炖牛肉，约¥100-200/人 · 好评很多 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Biang Reykjavik', desc:'雷克雅未克一家中餐面馆，老板是波兰人，但店里有中文菜单、镇江陈醋和辣子，出品被不少博主评价超出大多数国人开的店。慢炖牛肉biangbiang面牛肉软烂入味，整体调味地道，放国内卖也不会违和。'},
+        {time:'可选', text:'Reykjavik Bistro', note:'彩虹街，冰岛特色羊肉汤/羊肉汉堡，价格偏高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Reykjavik Bistro, Reykjavik', desc:'彩虹街上一家餐厅，主打冰岛特色的羊肉汤和羊肉汉堡，味道不错，价格在冰岛属于中等偏上，可以当午餐或晚餐的一个选项。'},
+        {time:'可选', text:'12 Tónar 黑胶店', note:'彩虹街15号，顺路 · 两层小楼，有咖啡有酒，可以坐下歇会 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'12 Tónar, Skólavörðustígur 15, Reykjavik', desc:'彩虹街上一家两层的独立黑胶唱片店，主打冰岛及北欧音乐（独立摇滚、古典、实验），有咖啡有酒可以坐下来听听音乐，有时候还有乐队现场演出，喜欢音乐的可以顺路逛逛。'},
+        {time:'可选', text:'Reykjavik Record Shop', note:'Klapparstígur 35，紧挨280bakery · 小而精，欧美流行/Hip-hop/Jazz · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Reykjavik Record Shop, Klapparstígur 35, Reykjavik', desc:'跟280bakery在同一条街上的小唱片店，规模不大但选品精，也有少量二手唱片可以淘，喜欢音乐的可以顺路进去看看。'},
+        {time:'可选', text:'"最美WC"打卡', note:'哈帕音乐厅(Harpa)地下一层，免费厕所+爬上二楼拍照很出片 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Harpa Concert Hall, Reykjavik', desc:'走到老港口附近的哈帕音乐厅，地下一层有免费厕所，建筑本身是蜂窝状玻璃幕墙，爬到二楼拍照效果很好，被称为"冰岛最美WC"，顺路可以进去逛一圈、上个厕所。'},
+        {time:'17:00', text:'凯夫拉维克机场取车', note:'Zero Car · Toyota RAV4 · 另外2人抵达，全员会合', q:'Keflavik International Airport'},
+        {time:'可选', text:'珍珠楼 Perlan', note:'⚠️ 不在步行路线上，在市区南边小山上，需要打车/开车前往 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Perlan, Reykjavik', desc:'雷克雅未克的地标建筑之一，玻璃穹顶造型很好认。里面有人造冰洞展览、天文馆和360度观景台，能俯瞰全城和远处的雪山，有博主形容"百分之两百推荐"。取到车之后如果时间还够，可以顺路开车去一趟，别指望走路能到。'},
+        {time:'可选', text:'Kaffibrugghúsið 咖啡豆店', note:'⚠️ 在市区外的商业园区，不在步行路线上，需要打车 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kaffibrugghúsið, Reykjavik', desc:'雷克雅未克郊区一家咖啡豆烘焙店，满屋飘香，有博主称是在冰岛最喜欢的咖啡豆店；适合买豆带走，能不能堂食建议到店问一下，但离市中心步行范围较远。'},
+        {time:'可选', text:'本地肉铺（自己开火可选）', note:'⚠️ KJÖTHÖLLIN / Kjötkompaní 都不在市中心，需要开车前往 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'KJÖTHÖLLIN, Reykjavik', desc:'如果住处能开火，这两家是本地口碑很好的牛羊肉铺：KJÖTHÖLLIN性价比高，是本地常客的"外婆家"；Kjötkompaní被称为冰岛最好的肉铺，在海港城(Hafnarfirði)和Bíldshöfða各有一家店，都需要开车过去，取到车之后再考虑。'},
+        {time:'晚上', text:'Hús máls og menningar 书屋酒吧', note:'取车、吃晚饭后如果还想出门，书店改造的酒吧晚上常有live band · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Hús máls og menningar, Reykjavik', desc:'一家开在书店里的酒吧，晚上常有乐队现场演出，气氛热闹，是感受雷克雅未克夜生活的一个选择，今晚还在雷市过夜，晚上出门也来得及。'}
+      ]},
+    {n:5, date:'9/28', grp:'全员', route:'雷克雅未克 → 塞尔福斯', transport:'自驾', overnight:{name:'Gesthus Selfoss', addr:'Engjavegur 56, 800 Selfoss', phone:'+354-4823585'},
+      items:[
+        {time:'08:30', text:'从雷克雅未克出发', note:''},
+        {time:'09:15', text:'辛格维利尔国家公园', note:'Þingvellir · 约45分钟', q:'Þingvellir National Park, Iceland', desc:'世界遗产，欧亚板块与北美板块正在此处裂开，能亲眼走进两大板块之间的巨型裂谷。这里也是冰岛议会（世界最古老议会之一）的发源地，地质意义和历史意义都很重。'},
+        {time:'可选', text:'Old Iceland', note:'Silfra浮潜附近，很多博主心头好，海鲜浓汤/鳕鱼配花生酱评价很好 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Old Iceland restaurant, Þingvellir, Iceland', desc:'Þingvellir浮潜(Silfra)附近的一家家庭风格小馆，海鲜浓汤很暖胃、海鲜沙拉调味丰富，鳕鱼配花生酱的搭配意外好吃，牛脸颊肉炖得用叉子就能扒开，是很多博主意料之外的惊喜一餐，也有人评为这趟旅行最喜欢的一家。'},
+        {time:'10:50', text:'盖歇尔间歇泉', note:'Geysir · 约30分钟', q:'Geysir Hot Spring Area, Iceland', desc:'地热喷泉密集区，园区里的 Strokkur 每隔几分钟就会喷发一次，水柱瞬间能冲到20多米高，是近距离感受地热能量最直接的地方，站近了会被水汽扑到脸。'},
+        {time:'可选', text:'Friðheimar 番茄农场', note:'地热温室番茄餐厅，招牌番茄汤 · 务必官网提前订位，否则现场要等40分钟+ · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Friðheimar, Iceland', desc:'利用地热能供暖的温室农场，在冰岛种出了番茄，餐厅就开在温室里。招牌番茄浓汤味道浓郁、酸香开胃，配面包蘸着吃是绝配；番茄烤吐司、草莓burrata都是自家农场的味道；海鲜墨鱼汁意面扇贝给得很多；盆栽蛋糕层次丰富、不甜。是条路上很热门的网红打卡点，人多时现场排队很久，想去一定要提前上官网免费预约（附近还有一家分店 Vínstofa Friðheimar，一家营业到下午4点，另一家晚上也开）。'},
+        {time:'11:35', text:'黄金瀑布', note:'Gullfoss · 约40分钟', q:'Gullfoss Waterfall, Iceland', desc:'冰岛最壮观的瀑布之一，河水分两级跌入深邃峡谷，水量巨大、气势十足，晴天时常能看到彩虹，是"黄金圈"路线的收尾高潮。'},
+        {time:'13:10', text:'抵达塞尔福斯，入住', note:''}
+      ]},
+    {n:6, date:'9/29', grp:'全员', route:'塞尔福斯 → 卡尔法费', transport:'自驾', overnight:{name:'Fosshotel Núpar', addr:'Núpar, Kálfafell, Southern Region 880', phone:'+354-5173060'},
+      items:[
+        {time:'08:30', text:'从塞尔福斯出发', note:''},
+        {time:'09:45', text:'塞里雅兰瀑布', note:'Seljalandsfoss · 约30分钟，可走到瀑布后方', q:'Seljalandsfoss, Iceland', desc:'南岸最特别的瀑布，可以沿小路走到水帘后面，从瀑布内侧看水花落下的样子。建议带防水外套，鞋子基本免不了打湿。'},
+        {time:'10:40', text:'斯科加瀑布', note:'Skógafoss · 约30分钟', q:'Skógafoss, Iceland', desc:'宽阔笔直落下的瀑布，气势很足，近处常会被水雾溅到；旁边有台阶可以爬到瀑布顶部，从高处俯瞰整条河谷。'},
+        {time:'可选', text:'斯科加瀑布旁汉堡', note:'肉饼分量大、酱汁好吃，评价很高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'burger restaurant near Skógafoss, Iceland', desc:'就在斯科加瀑布旁边的汉堡店，肉饼分量足、配很多薯条，酱汁很受好评，缺点是吃多了会有点腻。'},
+        {time:'可选', text:'索尔黑马冰川', note:'Sólheimajökull · 免费停车，下车走10分钟即达，不用报团不用冰爪 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Sólheimajökull, Iceland', desc:'不用跟徒步团、不用穿冰爪就能近距离接触的冰川舌头，是电影《星际穿越》冰冻星球取景地。穿防滑运动鞋可以自己走上冰川表面的浮土层做轻度徒步，湖边常能看到很大块的浮冰，天晴时还能看到山巅冰川，性价比很高，停车免费。'},
+        {time:'11:45', text:'雷尼斯黑沙滩', note:'Reynisfjara · 约40分钟', q:'Reynisfjara Black Sand Beach, Iceland', desc:'著名的黑色沙滩，有成排玄武岩石柱和海蚀洞，海面上还能看到三根海蚀柱，附近的Yoda Cave一带还是电影《奥德赛》冥界场景的取景地。这里的浪很危险，一定不要背对大海拍照，留意"杀人浪"警示牌。'},
+        {time:'可选', text:'Wok In Vík', note:'维克小镇的炒面馆（乌冬面/炒河粉）· 仅供参考', tag:'optional', tagText:'仅供参考', q:'Wok In Vík, Iceland', desc:'维克小镇里少见的亚洲炒面馆，乌冬面和炒河粉口碑不错，在这一路吃惯三明治泡面之后，是个换换口味的好选择。'},
+        {time:'可选', text:'Restaurant Suður-Vík', note:'维克镇百年餐厅，羊里脊+烤布蕾评价都很高，错峰去不用排队 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Restaurant Suður-Vík, Iceland', desc:'维克镇一家百年老餐厅，招牌羊里脊评价很高，建议点五分熟；有博主专门夸这家的羊排和烤布蕾，形容是"美食荒漠冰岛的一缕光"；Meet the Meat披萨饼底薄、芝士拉丝；泰式咖喱偏甜口，在冰岛吃到这一口很惊喜。稍微错开饭点（比如提前或推后半小时）基本不用排队。'},
+        {time:'13:45', text:'抵达 Fosshotel Núpar，入住', note:''}
+      ]},
+    {n:7, date:'9/30', grp:'全员', route:'卡尔法费 → 赫本', transport:'自驾', overnight:{name:'Skyjaborg Apartments', addr:'Víkurbraut 2, 780 Höfn', phone:'+354 647 1205'},
+      items:[
+        {time:'08:00', text:'出发（今天10点冰洞团固定时段，别拖）', note:''},
+        {time:'08:15', text:'斯卡夫塔山冰川区域', note:'Skaftafell · 简单走走约30分钟，不深入徒步', q:'Skaftafell, Vatnajökull National Park', desc:'瓦特纳冰川国家公园的一部分，有多条难度不同的徒步路线，远远就能看到冰川舌头垂挂在山谷间的壮观景象。'},
+        {time:'10:00', text:'冰川洞穴探索', note:'Blue Iceland · 集合点：杰古沙龙冰河湖 · 固定时段约3小时', tag:'ok', tagText:'已预订·4人', q:JOKULSARLON_Q, desc:'集合点杰古沙龙是冰岛最有名的冰河湖，浮冰从冰川断裂后漂在湖面缓缓入海，蓝白相间的景象非常震撼。今天参加的团会带大家走进真正的蓝冰洞内部，近距离触摸千年冰层。'},
+        {time:'13:00', text:'钻石沙滩', note:'Diamond Beach · 约30分钟，就在旁边', q:'Diamond Beach, Iceland', desc:'紧挨着杰古沙龙，浮冰被海浪冲上黑沙滩，在阳光下像撒了一地的钻石，是全程拍照效果最好的地方之一。'},
+        {time:'可选', text:'Kjarr Restaurant & Bar', note:'羽毛大峡谷附近，谷歌4.9分/1000+评价，多位博主称是全程最好吃的一餐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kjarr Restaurant & Bar, Iceland', desc:'藏在维克和冰河湖之间一个只有120人的小镇上，离羽毛大峡谷(Fjaðrárgljúfur)很近。开放式厨房，招牌北极红点鲑鱼肉鲜嫩、鱼皮焦香，烤冰岛羊肉又嫩又入味，海鲜墨鱼汁意面虾给得很多，甜点配着窗外瀑布景观喝咖啡体验很好，是不少博主全程排名第一的一餐。'},
+        {time:'可选', text:'杰古沙龙旁快餐', note:'羊肉汉堡/热狗/龙虾汤，周边选择不多 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Jökulsárlón, Iceland', desc:'冰河湖旁边的小餐厅，卖羊肉汉堡、热狗和龙虾汤，这一片周边基本没什么别的选择，玩完顺路吃一口很方便。'},
+        {time:'14:45', text:'抵达赫本，入住', note:''},
+        {time:'可选', text:'Pakkhús Restaurant', note:'港口边龙虾餐厅，好几个博主都强推，人均约¥300+ · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Pakkhús Restaurant, Krosseyjarvegi 3, Höfn', desc:'藏在赫本海港边的一家餐厅，白色仓库外观，进门却是木质桌面、暖黄灯光的温馨氛围，好几位博主都独立推荐，称"来冰岛只能推荐一家海鲜餐厅就选它"。招牌龙虾尾蒜蓉黄油烤制，肉质紧实鲜甜爆汁；奶油白葡萄酒烤海螯虾奶香浓郁；开场送的春卷外皮酥脆馅料足。营业12:00-21:00，不接受预约，建议错峰前往。'}
+      ]},
+    {n:8, date:'10/1', grp:'全员', route:'赫本 → 埃伊尔斯塔济', transport:'自驾', overnight:{name:'Lagarfell Studios', addr:'Lagarfell 3, 700 Egilsstaðir', phone:'+354-8934322'},
+      items:[
+        {time:'08:00', text:'从赫本出发', note:'⚠️ 今天驾驶+山口路况都要留意，别压太紧'},
+        {time:'08:15', text:'蝙蝠山', note:'Vestrahorn · 约30分钟', q:'Vestrahorn, Iceland', desc:'尖锐的黑色山峰倒映在海边潮汐滩涂里，是冰岛摄影圈最有名的取景地之一，退潮或清晨光线下倒影效果最好。'},
+        {time:'10:05', text:'彩色房子村', note:'Djúpivogur · 约30分钟', q:'Djúpivogur, Iceland', desc:'安静的东部小渔村，几栋色彩鲜艳的老房子沿港口排开，适合下车走走、喝杯咖啡，感受峡湾小镇的慢生活。'},
+        {time:'11:45', text:'抵达埃伊尔斯塔济，午餐', note:''},
+        {time:'13:00', text:'塞济斯菲厄尔', note:'Seyðisfjörður · 约45分钟 · 需翻越 Fjarðarheiði 山口，出发前务必查 road.is', tag:'book', tagText:'⚠ 查山口路况', q:'Seyðisfjörður, Iceland', desc:'藏在山谷尽头的彩虹小镇，蓝色教堂门前那条彩虹街道是最出片的地方，四周被陡峭山壁和瀑布环绕，翻山进来的路本身也是一段风景。'},
+        {time:'14:45', text:'拉加尔湖', note:'Lagarfljót · 湖边走走', q:'Lagarfljót, Iceland', desc:'冰岛第三长的湖，传说湖底住着类似"尼斯湖水怪"的巨型生物，湖边的成片森林在冰岛也算难得一见的景观。'},
+        {time:'可选', text:'Bónus买三文鱼自制刺身', note:'东部三文鱼比这边鸡胸肉还便宜，带皮冷藏款去皮切片当刺身 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Bónus, Egilsstaðir, Iceland', desc:'埃伊尔斯塔济是冰岛东部最大城市，附近峡湾三文鱼养殖很多，Bónus超市能买到铝盒装的带皮冷藏三文鱼，价格比这边鸡胸肉还便宜。有博主回住处去皮切片当刺身吃，评价比挪威、新西兰、国内买到的都新鲜好吃，没有腥味，鱼皮去鳞煎着吃也不错——前提是住处能简单处理食材。'}
+      ]},
+    {n:9, date:'10/2', grp:'全员', route:'埃伊尔斯塔济 → 米湖', transport:'自驾', overnight:{name:'Vogar Travel Service', addr:'Vogar, Reykjahlíð, Norðurland Eystra 660', phone:''},
+      items:[
+        {time:'08:00', text:'从埃伊尔斯塔济出发', note:'走862西侧路况好，别走864砂石路'},
+        {time:'10:00', text:'黛提瀑布', note:'Dettifoss · 约30分钟', q:'Dettifoss Waterfall, Iceland', desc:'欧洲流量最大的瀑布，水花和轰鸣声非常有冲击力，站在观景台能感觉到脚下都在震动。'},
+        {time:'11:15', text:'克拉夫拉火山口', note:'Víti · 约30分钟', q:'Víti Crater Krafla, Iceland', desc:'一个圆形火山口湖，湖水呈蓝绿色，周边是火山灰地貌，是克拉夫拉火山区最直观的一处景观。'},
+        {time:'11:55', text:'地热带', note:'Hverir · 约25分钟', q:'Hverir Geothermal Area, Iceland', desc:'遍地冒着蒸汽的泥浆池和喷气孔，空气里有硫磺味，地表五颜六色，走在其中像置身另一个星球。'},
+        {time:'12:30', text:'抵达米湖住宿，午休', note:''},
+        {time:'17:00', text:'米湖地热温泉', note:'Earth Lagoon Mývatn · 已订，约2小时', tag:'ok', tagText:'已预订·4人', q:'Jarðböðin Nature Baths, Mývatn', desc:'米湖版的"蓝湖"，游客更少、更平价。泡在乳蓝色温泉水里，四周就是火山地貌，晚上运气好还能顺便等极光出现。'}
+      ]},
+    {n:10, date:'10/3', grp:'全员', route:'米湖 → 胡萨维克', transport:'自驾', overnight:{name:'Bjarnabúð', addr:'Garðarsbraut 12, Húsavík City Center, Norðurland Eystra 640', phone:''},
+      items:[
+        {time:'09:00', text:'裂缝温泉', note:'Grjótagjá · 约20分钟，只能看不能泡', q:'Grjótagjá Cave, Iceland', desc:'藏在熔岩裂缝里的地热洞穴温泉，水温太高已经不能下水，但从裂缝往下看那片蓝色水面很有电影感，是《权力的游戏》的取景地之一。'},
+        {time:'09:40', text:'熔岩地貌', note:'Dimmuborgir · 约40分钟徒步', q:'Dimmuborgir, Iceland', desc:'大片形状诡异的熔岩柱和天然拱门，传说是精灵和巨魔的家，有几条不同长度的步道可以穿行其中，很适合慢慢走。'},
+        {time:'11:05', text:'众神瀑布', note:'Goðafoss · 约30分钟', q:'Goðafoss Waterfall, Iceland', desc:'半圆形的瀑布，传说是冰岛改信基督教时酋长把北欧诸神雕像扔进瀑布而得名，规模适中但角度非常好拍。'},
+        {time:'12:20', text:'抵达胡萨维克，入住+午餐', note:'下午自由活动（可加订观鲸，目前未订）'},
+        {time:'可选', text:'Húsavík Viewing Point', note:'胡萨湾观景台，雪山配峡湾，不参加观鲸团也值得站一会 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Húsavík Viewing Point, Iceland', desc:'胡萨维克港口附近的观景台，能看到雪山和辽阔峡湾铺展在眼前，风比较大，就算不参加观鲸团，站在这里看看山海也很治愈。'},
+        {time:'可选', text:'留意 Safnasafnið 民间艺术博物馆', note:'⚠️ 门口雕塑可以免费拍照，但推门进去就要买票（约¥90/人），不感兴趣别冲动入场', tag:'optional', tagText:'仅供参考', q:'Safnasafnið, Iceland', desc:'返程路边一座民间艺术博物馆，门口有几座造型独特的雕塑很适合拍照，但那是免费的室外区域——一旦推门走进室内就会被要求买票，有博主因为面子问题硬着头皮买了两张票（3900克朗）结果全程看得一脸茫然。不感兴趣艺术的可以只拍门口雕塑，不用进去。'}
+      ]},
+    {n:11, date:'10/4', grp:'全员', route:'胡萨维克 → 阿克雷里', transport:'自驾', overnight:{name:'Acco Luxury Apartments', addr:'Skipagata 12, Akureyri City Center, Norðurland Eystra 600', phone:'+354 547 2226'},
+      items:[
+        {time:'09:30', text:'从胡萨维克出发', note:''},
+        {time:'10:40', text:'植物园', note:'Lystigarðurinn · 约45分钟', q:'Akureyri Botanical Garden', desc:'世界最北的植物园之一，收集了不少冰岛本地和北极圈植物，节奏很慢，适合饭后散步放松。'},
+        {time:'11:30', text:'阿克雷里市区漫步', note:'含午餐，约90分钟', q:'Akureyri, Iceland', desc:'冰岛北部最大的城市，有教堂、港口和一些餐厅咖啡馆，节奏比雷克雅未克更慢，适合借这半天好好休整、补给。'},
+        {time:'可选', text:'Cafe Berlin', note:'走进式早餐店，厚切吐司评价"本次北欧之行早餐第一" · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Cafe Berlin, Akureyri', desc:'阿克雷里一家不用预约、直接走进去点的早餐店，招牌厚切吐司烤得外脆内软，麦香配一点焦糖香但不齁甜，有博主评为整趟北欧之行的早餐第一名。'},
+        {time:'可选', text:'Centrum Kitchen & Bar', note:'奶油意面评价不错，有博主二刷 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Centrum Kitchen & Bar, Akureyri', desc:'阿克雷里市区一家小众餐厅，奶油意面评价不错，有博主在阿克雷里专门二刷这家，值得一试。'},
+        {time:'可选', text:'Kristjáns Bakarí 百年面包房', note:'主街Hafnarstræti，1912年开业，招牌Kleina甜甜圈 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kristjáns Bakarí, Hafnarstræti, Akureyri', desc:'阿克雷里人的百年早餐食堂，1912年开业至今没换过配方。招牌是Kleina——一种扭成圈的油炸甜甜圈，外脆内软，豆蔻香气若隐若现，配一杯咖啡很有当地生活感，物价在冰岛来说还算合理。'},
+        {time:'可选', text:'66°North 奥莱店', note:'Skipagata 9 · 跟住宿同一条街，卖往季款更便宜 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'66°North Outlet, Skipagata 9, Akureyri', desc:'66°North 在阿克雷里的奥莱店，跟今晚住宿就在同一条街上，走两步就到，价格比市区旗舰店便宜，主要是往季款式。'}
+      ]},
+    {n:12, date:'10/5', grp:'全员', route:'阿克雷里 → 斯蒂基斯霍尔米', transport:'自驾', overnight:{name:'Hotel Karólína', addr:'Aðalgata 7, Stykkishólmur, Vesturland 340', phone:''},
+      items:[
+        {time:'07:30', text:'出发（比平时早1-2小时）', note:'⚠️ 全程最长驾驶日，单程接近4.5-5小时，务必吃饱、加满油、轮流开车'},
+        {time:'09:50', text:'犀牛石', note:'Hvítserkur · 约30分钟，经典机位', q:'Hvítserkur Rock, Iceland', desc:'立在海边的一块奇特玄武岩柱，形状像一只探头喝水的犀牛或大象，退潮时可以走到沙滩近处细看。'},
+        {time:'12:40', text:'抵达斯蒂基斯霍尔米，午餐+入住', note:''},
+        {time:'下午', text:'斯蒂基斯霍尔米市区漫步', note:'约60分钟', q:'Stykkishólmur, Iceland', desc:'斯奈山半岛北岸的小渔港，彩色小屋和红顶教堂很上镜，也是电影《白日梦想家》的取景地之一。'},
+        {time:'可选', text:'Narfeyrarstofa', note:'海鲜+羊肉标准搭配，鳕鱼评价不错，羊肉酱汁偏咸 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Narfeyrarstofa, Stykkishólmur', desc:'白日梦想家小镇一家餐厅，海鲜(鳕鱼)带皮油煎调味，新鲜好吃；羊肉酱汁比较厚重、偏咸，评价不如海鲜。'},
+        {time:'可选', text:'Fish & Chips 餐车', note:'评分超高的炸鱼薯条餐车，热狗也推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'fish and chips truck, Stykkishólmur, Iceland', desc:'白日梦想家小镇里一辆评分超高的炸鱼薯条餐车，有博主形容比在英国吃到的还香，热狗也很推荐，价格不贵。'}
+      ]},
+    {n:13, date:'10/6', grp:'行程分岔', route:'斯蒂基斯霍尔米 → 雷克雅未克 → 凯夫拉维克(2人)', transport:'自驾 + Flybus（雷市→凯夫拉维克段）', overnight:{name:'Keflavík Micro Suites（我们2人）', addr:'65 Hafnargata, Njarðarbraut, Suðurnes, 230 Keflavík', phone:''},
+      items:[
+        {time:'08:00', text:'从斯蒂基斯霍尔米出发', note:''},
+        {time:'08:50', text:'草帽山', note:'Kirkjufell · 约30分钟，经典机位', q:'Kirkjufell Mountain, Iceland', desc:'冰岛被拍得最多的山之一，尖锥形山体配上前面的小瀑布 Kirkjufellsfoss，是明信片级别的经典机位。'},
+        {time:'10:05', text:'阿尔纳斯塔皮', note:'Arnarstapi · 约30分钟', q:'Arnarstapi, Iceland', desc:'海岸边的玄武岩海蚀地貌，有天然拱门和沿崖步道，走在海边常能看到成群的海鸟。'},
+        {time:'10:35', text:'红教堂', note:'Ingjaldshólskirkja · 约15分钟', q:'Ingjaldshólskirkja, Iceland', desc:'外观鲜红的小教堂，据说是冰岛最古老的石造教堂之一，周围视野开阔，能远眺斯奈菲尔冰川。'},
+        {time:'', text:'老人崖', note:'Músagjá · 约15分钟', q:'Músagjá, Arnarstapi, Iceland', desc:'斯奈山半岛上的一处嶙峋熔岩崖壁，游客不多，适合作为沿途一个安静的小停靠点。'},
+        {time:'', text:'黑教堂', note:'Búðakirkja · 约15分钟', q:'Búðakirkja Black Church, Iceland', desc:'一座孤零零立在熔岩原上的黑色小教堂，极简的黑白配色在阴天里格外有氛围感，很受摄影师喜欢。'},
+        {time:'', text:'海豹沙滩', note:'Ytri Tunga · 约20分钟', q:'Ytri Tunga Seal Beach, Iceland', desc:'冰岛少数能稳定看到野生海豹的沙滩，退潮时海豹会爬上岸边礁石晒太阳，不过能不能遇到全看运气。'},
+        {time:'', text:'玄武岩壁垒', note:'Gerðuberg · 约15分钟', q:'Gerðuberg Cliffs, Iceland', desc:'一整排排列整齐的六角形玄武岩柱，像天然的石头城墙，规模比冰岛其他玄武岩景点更壮观完整。'},
+        {time:'可选', text:'Bjarnarhöfn Bistro', note:'斯奈山半岛鲨鱼博物馆旁，鱼翅粗如铁钉，约5000kr · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Bjarnarhöfn Bistro, Iceland', desc:'斯奈山半岛上鲨鱼博物馆(Hákarlasafn)旁的小餐厅，招牌是当地特色鱼翅，据说粗得跟铁钉一样，5000冰岛克朗一份，按冰岛物价来说不算贵，猎奇又管饱，路过正好顺路。'},
+        {time:'13:00', text:'从斯奈山半岛出发返回雷克雅未克', note:'全员一起，约2小时车程'},
+        {time:'15:00', text:'抵达雷克雅未克，交接车辆', note:'另外2人留车过夜，今晚住雷克雅未克（住宿及后续行程自理，不在本手册安排范围内）'},
+        {time:'可选', text:'Flybus：雷克雅未克 → 凯夫拉维克', note:'提前在 re.is/tour/flybus 订票，车程约45分钟，班次密集 · ⚠ 建议提前订票', tag:'book', tagText:'⚠ 建议提前订票', q:'BSÍ Bus Terminal, Reykjavik', desc:'从雷克雅未克市区（BSÍ巴士总站或部分酒店可接驳）直达凯夫拉维克机场附近的巴士，是市区往返机场最常用的公共交通方式，旺季建议提前在官网订好班次和座位。'},
+        {time:'16:00', text:'抵达 Keflavík Micro Suites，入住', note:'只有我们2人，明天要早起，早点休息'},
+        {time:'可选', text:'机场附近炸鱼薯条店', note:'鳕鱼外酥里嫩、很入味，本地人推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'fish and chips near Keflavik Airport, Iceland', desc:'凯夫拉维克机场附近一家炸鱼薯条小店，鳕鱼炸得外酥里嫩、很入味，薯条也酥脆，价格不贵，据说是当地人公认附近最好吃的一家。'},
+        {time:'可选', text:'机场附近泰餐', note:'Stir-Fried Spicy Curry+Noodle soup 一共约¥290 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Thai restaurant near Keflavik Airport, Iceland', desc:'机场附近的一家泰餐厅，有博主推荐炒咖喱和汤面，两份加起来才5780冰岛克朗（约¥290），是全程吃到最香的一顿，适合当离开前最后一餐。'}
+      ]},
+    {n:14, date:'10/7', grp:'分开返程', route:'凯夫拉维克 → 赫尔辛基 → 多哈', transport:'飞行', overnight:null,
+      items:[
+        {time:'前一晚', text:'预约次日早班出租车', note:'冰岛没有Uber，可用本地打车App：Hopp（类Uber体验，主要覆盖雷市+机场）或 Flott（支持提前预约、覆盖凯夫拉维克等小镇、价格透明）；凯夫拉维克镇上凌晨App未必随叫随到，建议App预约的同时也请 Micro Suites 前台帮忙确认当地出租车公司 · ⚠ 需提前预约', tag:'book', tagText:'⚠ 需提前预约'},
+        {time:'06:00', text:'打车前往机场', note:'距KEF实际约6-8分钟车程，打表费用约2500-3500 ISK/趟（约¥130-180，2人共摊）；我们已无自驾车辆（车留在雷市）；KEF→HEL为申根内部航班，无需过边检，提前2小时到机场足够从容'},
+        {time:'可选', text:'凯夫拉维克机场免税店', note:'BIOEFFECT 到达/出境两个店都有，价格常比市区还划算 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Keflavik Airport Duty Free'},
+        {time:'08:35', text:'起飞：凯夫拉维克 → 赫尔辛基', note:'AY992（芬兰航空实际承运）· 2人先行返程'},
+        {time:'17:00', text:'凯夫拉维克机场还车', note:'Zero Car · 留下的2人负责，随后自行安排返程', q:'Keflavik International Airport'},
+        {time:'17:05', text:'起飞：赫尔辛基 → 多哈', note:'QR302（卡塔尔航空实际承运）'}
+      ]},
+    {n:15, date:'10/8', grp:'早到2人', route:'多哈 → 上海', transport:'飞行', overnight:null,
+      items:[
+        {time:'02:50', text:'起飞：多哈 → 上海', note:'AY6687（卡塔尔航空实际承运）· 16:20 抵达浦东 T2，行程结束'}
+      ]}
+  ];
+
+  /* ---------- 渲染：地图 ---------- */
+  function renderMap(){
+    var W = 500, H = 350;
+    var segs = '';
+    for(var i=0;i<STOPS.length-1;i++){
+      var a = STOPS[i], b = STOPS[i+1];
+      var mx = (a.x+b.x)/2 + ((i%2)?14:-14);
+      var my = (a.y+b.y)/2 + ((i%2)?-10:10);
+      segs += '<path d="M'+a.x+' '+a.y+' Q '+mx+' '+my+' '+b.x+' '+b.y+'" fill="none" stroke="'+b.color+'" stroke-width="3.5" stroke-linecap="round" filter="url(#wob2)"/>';
+    }
+    var dots = '';
+    STOPS.forEach(function(s){
+      dots += '<a href="'+gmaps(s.q,'driving')+'" target="_blank" rel="noopener">'+
+              '<circle cx="'+s.x+'" cy="'+s.y+'" r="5.5" fill="'+s.color+'" stroke="var(--panel)" stroke-width="1.7"/>'+
+              '<text class="stop-label" x="'+(s.x+s.dx)+'" y="'+(s.y+s.dy)+'" text-anchor="'+s.anchor+'" fill="var(--ink)">'+s.name+'</text>'+
+              '<text class="stop-date stop-label" x="'+(s.x+s.dx)+'" y="'+(s.y+s.dy+13)+'" text-anchor="'+s.anchor+'">'+s.date+'</text>'+
+              '</a>';
+    });
+    var svg = '<svg class="routemap" viewBox="-14 -14 '+(W+28)+' '+(H+28)+'" xmlns="http://www.w3.org/2000/svg">'+
+      '<defs>'+
+      '<filter id="wob" x="-20%" y="-20%" width="140%" height="140%">'+
+      '<feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="4" result="n"/>'+
+      '<feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>'+
+      '<filter id="wob2" x="-30%" y="-30%" width="160%" height="160%">'+
+      '<feTurbulence type="fractalNoise" baseFrequency="0.02 0.05" numOctaves="2" seed="9" result="n2"/>'+
+      '<feDisplacementMap in="SourceGraphic" in2="n2" scale="5"/></filter>'+
+      '</defs>'+
+      '<rect x="-14" y="-14" width="'+(W+28)+'" height="'+(H+28)+'" fill="var(--sea)"/>'+
+      '<path d="'+ICELAND_OUTLINE+'" fill="var(--land)" stroke="var(--coast)" stroke-width="2" stroke-linejoin="round" filter="url(#wob)"/>'+
+      segs + dots + '</svg>';
+    document.getElementById('mapWrap').innerHTML = svg;
+  }
+
+  /* ---------- 渲染：预订 ---------- */
+  function renderBookings(){
+    var html = '';
+    html += '<div class="bgroup"><h3>机票</h3>'+
+      brow('9/24 16:00','上海 PVG → 东京 HND','JL086 日本航空 · 2h55m')+
+      brow('9/24 21:50','东京 HND → 赫尔辛基 HEL','AY062 芬兰航空 · 12h50m，次日04:40抵达')+
+      brow('9/25 07:10','赫尔辛基 HEL → 凯夫拉维克 KEF','AY991 芬兰航空 · 3h40m')+
+      brow('10/7 08:35','凯夫拉维克 KEF → 赫尔辛基 HEL','AY992 芬兰航空 · 2人先返程')+
+      brow('10/7 17:05','赫尔辛基 HEL → 多哈 DOH','QR302 卡塔尔航空实际承运')+
+      brow('10/8 02:50','多哈 DOH → 上海 PVG','AY6687 卡塔尔航空实际承运')+
+      '</div>';
+    html += '<div class="bgroup"><h3>租车</h3>'+
+      brow('取车','9/27 17:00 · '+link('凯夫拉维克国际机场','Keflavik International Airport'),'Zero Car · Toyota RAV4 或同级')+
+      brow('还车','10/7 17:00 · '+link('凯夫拉维克国际机场','Keflavik International Airport'),'含盗抢险/砂石险/碰撞险/零免赔险，含道路救援')+
+      '</div>';
+    html += '<div class="bgroup"><h3>门票与活动</h3>'+
+      brow('9/26 07:00','Landmannalaugar 徒步 + 温泉','Arctic Adventures · 仅2人 · 全程约14小时')+
+      brow('9/30 10:00',link('冰川洞穴探索（杰古沙龙集合）',JOKULSARLON_Q),'Blue Iceland · 4人 · 已付款')+
+      brow('10/2 17:00','米湖地热温泉','Earth Lagoon Mývatn · 4人')+
+      '</div>';
+    document.getElementById('bookings').innerHTML = html;
+    function brow(l,r,note){
+      return '<div class="brow"><div class="l">'+l+'</div><div class="r">'+r+(note?'<div class="note">'+note+'</div>':'')+'</div></div>';
+    }
+    function link(text,q){ return '<a href="'+gmaps(q)+'" target="_blank" rel="noopener">'+text+'</a>'; }
+  }
+
+  /* ---------- 渲染：逐日行程 ---------- */
+  function renderItinerary(){
+    var el = document.getElementById('itinerary');
+    el.innerHTML = DAYS.map(function(d){
+      var items = d.items.map(function(it){
+        var tag = it.tag ? '<span class="tag '+it.tag+'">'+it.tagText+'</span>' : '';
+        if(it.desc){
+          var mapLink = it.q ? '<a class="desc-map" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">在地图中查看 →</a>' : '';
+          return '<details class="item-details"><summary class="item-summary">'+
+                   '<div class="time">'+(it.time||'')+'</div>'+
+                   '<div class="content">'+it.text+tag+(it.note?'<div class="note">'+it.note+'</div>':'')+'</div>'+
+                   '<div class="item-chev">›</div>'+
+                 '</summary>'+
+                 '<div class="item-desc">'+it.desc+mapLink+'</div>'+
+               '</details>';
+        }
+        var text = it.q ? '<a class="place" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">'+it.text+'</a>' : it.text;
+        return '<div class="item"><div class="time">'+(it.time||'')+'</div><div class="content">'+text+tag+
+               (it.note?'<div class="note">'+it.note+'</div>':'')+'</div></div>';
+      }).join('');
+      var stay = d.overnight ? '<div class="stay"><div class="l">住宿</div>'+
+        '<a href="'+gmaps(d.overnight.addr)+'" target="_blank" rel="noopener">'+d.overnight.name+' · '+d.overnight.addr+'</a>'+
+        (d.overnight.phone?'<div class="note"><a href="tel:'+d.overnight.phone.replace(/\s/g,'')+'">'+d.overnight.phone+'</a></div>':'')+
+        '</div>' : '';
+      var navQueries = [];
+      d.items.forEach(function(it){ if(it.q) navQueries.push(it.q); });
+      if(d.overnight) navQueries.push(d.overnight.addr);
+      var navUrl = multiNav(navQueries, d.transport.indexOf('步行')>-1 && d.transport.indexOf('自驾')<0 ? 'walking' : 'driving');
+      var navBtn = navUrl ? '<a class="navbtn" href="'+navUrl+'" target="_blank" rel="noopener">在地图中打开全天导航</a>' : '';
+      return '<div class="day" data-day="'+d.n+'">'+
+        '<div class="day-head" onclick="this.parentNode.classList.toggle(\'open\')">'+
+          '<div class="day-badge">Day '+d.n+'<b>'+d.date+'</b></div>'+
+          '<div class="day-route">'+d.route+'<span class="grp">'+d.grp+'</span></div>'+
+          '<div class="day-chev">›</div>'+
+        '</div>'+
+        '<div class="day-body"><div class="day-body-inner" style="padding:0 0 16px 78px;">'+
+          items + stay + navBtn +
+        '</div></div>'+
+      '</div>';
+    }).join('');
+  }
+
+  /* ---------- 渲染：此刻关注 ---------- */
+  function updateFocus(){
+    var now = new Date();
+    var next = null;
+    for(var i=0;i<FOCUS_EVENTS.length;i++){
+      if(new Date(FOCUS_EVENTS[i].t) > now){ next = FOCUS_EVENTS[i]; break; }
+    }
+    var titleEl = document.getElementById('focusTitle');
+    var subEl = document.getElementById('focusSub');
+    if(!next){
+      titleEl.textContent = '行程已全部结束';
+      subEl.textContent = '欢迎回家';
+      document.getElementById('cd').style.display = 'none';
+      return;
+    }
+    titleEl.textContent = next.title;
+    subEl.textContent = next.sub;
+    var diff = new Date(next.t) - now;
+    if(diff < 0) diff = 0;
+    var s = Math.floor(diff/1000);
+    var d = Math.floor(s/86400); s -= d*86400;
+    var h = Math.floor(s/3600); s -= h*3600;
+    var m = Math.floor(s/60); s -= m*60;
+    document.getElementById('cdD').textContent = String(d).padStart(2,'0');
+    document.getElementById('cdH').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdM').textContent = String(m).padStart(2,'0');
+    document.getElementById('cdS').textContent = String(s).padStart(2,'0');
+  }
+
+  renderMap();
+  renderBookings();
+  renderItinerary();
+  updateFocus();
+  setInterval(updateFocus, 1000);
+})();
+</script>
+</body>
+</html>
