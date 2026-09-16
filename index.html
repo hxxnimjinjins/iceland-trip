@@ -126,6 +126,7 @@
     background:var(--chip); color:var(--ink); text-decoration:none; white-space:nowrap;
   }
   section.section{scroll-margin-top:56px;}
+.review-card,.parking-card{margin:12px 0;padding:14px;background:var(--chip);border-radius:12px;font-size:.83rem;line-height:1.7;} .audit-intro{font-size:.85rem;line-height:1.7;} .review-card ol{padding-left:20px;} .audit-row{padding:12px 0;border-bottom:1px solid var(--line);font-size:.83rem;overflow-wrap:anywhere;} .audit-row small{display:block;color:var(--ink-soft);} .source-link{display:inline-block;margin:5px 10px 0 0;color:var(--accent);font-size:.78rem;} .day-body-inner{padding-left:0!important;} .item-desc{padding-left:78px;} .route-links{display:flex;flex-wrap:wrap;gap:8px;} @media(max-width:420px){.item-desc{padding-left:0;}.day-badge{min-width:52px;}.item-summary .time,.item .time{min-width:58px;}}
 </style>
 </head>
 <body>
@@ -147,12 +148,13 @@
     <a href="#mapSection">总览</a>
     <a href="#bookingsSection">预订</a>
     <a href="#itinerarySection">行程</a>
+    <a href="#auditSection">核对与停车</a>
     <a href="#todoSection">待办</a>
     <a href="#tipsSection">贴士</a>
   </nav>
 
   <section class="section" id="mapSection">
-    <h2 class="section-title">行程总览<small>13 天 · 4 人 · 环岛顺时针</small></h2>
+    <h2 class="section-title">行程总览<small>13 天 · 4 人 · 环岛逆时针</small></h2>
     <div class="map-wrap" id="mapWrap"></div>
   </section>
 
@@ -166,13 +168,23 @@
     <div id="itinerary"></div>
   </section>
 
+
+  <section class="section" id="auditSection">
+    <h2 class="section-title">核对与停车<small>核对日期 2026-09-16 · 行程调整建议稿</small></h2>
+    <p class="audit-intro">保留已有住宿及三项已订活动。逐日时间为规划估算，不是实时导航结果；报价、开放状态与订单集合要求需临行复核。每站展开可看停车入口、支付方法及来源。</p>
+    <div class="review-card"><b>优先处理的4件事</b><ol><li>9/30冰洞团前取消Skaftafell主线短停；核对Blue Iceland订单地图、提前签到要求及9月底团型。</li><li>10/6只走精简半岛主线。北岸红教堂是额外支线，不能保持原15:00回城的保证。</li><li>餐厅地址已纠正：Old Iceland在雷市、Black Crust在维克、Sandholt为36号、Kjarr移至9/29。</li><li>Flybus终点是KEF航站楼，还需转车去Keflavík镇酒店；提前预留末段接驳。</li></ol></div>
+    <p class="audit-intro">导航只含主线停车点，备选餐厅需单独选择。未能识别具体店名的鱼汤、汉堡、餐车及机场餐厅已停用导航；它们还不能算核对通过。景点大区域名称不等于已测绘的停车坐标。</p>
+    <details><summary>查看所有停车提示</summary><div id="parkingIndex"></div></details>
+    <details><summary>查看餐厅与地点核对状态</summary><div id="verificationIndex"></div></details>
+  </section>
+
   <section class="section" id="todoSection">
     <h2 class="section-title">待办<small>办完一项告诉我，我会更新这页</small></h2>
     <ul class="todo">
       <li>出发前 48 小时登录 my.adventures.is，确认/更新 Landmannalaugar 徒步团的接送地点</li>
-      <li>出发前查 road.is，确认前往塞济斯菲厄尔要翻越的 Fjarðarheiði 山口是否通行，备好绕行/跳过方案</li>
+      <li>出发前查 road.is / umferdin.is，确认93号路 Fjarðarheiði 山口是否通行；关闭或条件差时跳过塞济斯菲厄尔，不假定有便捷绕行</li>
       <li>与 Zero Car 确认 10/7 17:00 还车流程和交接方式</li>
-      <li>10/6 提前在 re.is/tour/flybus 订好雷克雅未克→凯夫拉维克的 Flybus 车票（我们2人）</li>
+      <li>10/6 确认BSÍ→KEF的Flybus班次，并另安排KEF→Hafnargata 65酒店的出租车（我们2人）</li>
     </ul>
   </section>
 
@@ -188,7 +200,7 @@
     <p><b>买点当地特产：</b>66°North 是冰岛国民户外品牌（今年正好100周年），毛线帽、冲锋衣都不错；BIOEFFECT（蓓欧菲）是本土护肤品牌，主打冰川水成分，市区店和机场免税店都能买到。</p>
     <p><b>省钱靠 Bónus 超市（粉色小猪logo，外号"小猪超市"）：</b>三明治、卷饼、杯面都便宜又不踩雷，晚上小镇餐厅都关门时能救急；乡镇分店营业时间较短，最好趁在雷克雅未克或大城镇时多囤一点。Netto超市有些分店开到较晚，韩国超市能买到泡面和速食咖喱饭，想吃亚洲口味时很救命。Bónus还能买到 Salling Princip 罗勒青酱（Basilikumspesto），喜欢罗勒的话很推荐带一瓶，也适合当伴手礼。</p>
     <p><b>超市里值得试试：</b>Skyr（冰岛国民高蛋白酸奶，比普通酸奶更厚，Ísey 牌子口味很多，蓝莓覆盆子/焦糖布蕾都不踩雷）；Nýmjólk 3.9% 牛奶口感清淡；当地可乐口感格外顺；COLLAB 是冰岛特色的胶原蛋白+咖啡因功能饮料，莓果/桃子/柠檬口味都适合随手买一瓶；小猪自有品牌的洋葱圈零食很多人推荐，十几块钱一大包很适合自驾路上当搭子。</p>
-    <p><b>几个好用的App：</b>Google Maps 导航；Parka 用来交冰岛的停车缴费（比如 Þingvellir 停车场）；Maps.me 提前下载目的地离线地图，信号不好时保底；Veður 看冰岛本地天气预报，比通用天气App更准；冰岛没有Uber，打车用 Hopp（类Uber体验，主要覆盖雷市+机场）或 Flott（支持提前预约、覆盖小镇、价格透明）。</p>
+    <p><b>几个好用的App：</b>Google Maps 导航；Parka 与 Checkit 按各停车场标识使用；Þingvellir 官方指定 Checkit / 现场机器；Maps.me 提前下载目的地离线地图，信号不好时保底；Veður 看冰岛本地天气预报，比通用天气App更准；冰岛没有Uber，打车用 Hopp（类Uber体验，主要覆盖雷市+机场）或 Flott（支持提前预约、覆盖小镇、价格透明）。</p>
     <p><b>纪念品可以看看：</b>Sirius 出的"Traditional Icelandic Chocolate"，1933年就有了，包装是海鹦/极光/火山这些冰岛元素，很多人夸牛奶巧克力浓郁好吃；Lakkris（甘草夹心巧克力）也是本地特色口味，喜欢甘草味的可以试试；泡完温泉头发发干的话，本地人常用一种叫 Miracle Shine 的护发精油，超市里能买到，挤一点就顺滑很多。机场或 Bónus 超市还能买到本地唇膏和鱼油，唇膏方便携带、滋润不油腻，也适合当伴手礼。</p>
     <p><b>路过加油站小店，</b>可以留意一下叫 Sirkus 的推推糖（一种香草冰淇淋雪糕，棍子上还能吹口哨），是本地小朋友很爱的怀旧零食，自驾路上买一支当小惊喜。</p>
   </section>
@@ -229,7 +241,7 @@
   var STOPS = [
     {name:'雷克雅未克', date:'9/25–27', color:'#E8927C', q:'Reykjavik, Iceland', x:114.5,y:255.2, dx:-8,dy:-16, anchor:'end'},
     {name:'塞尔福斯',   date:'9/28',    color:'#F2B279', q:'Selfoss, Iceland', x:154.7,y:277.3, dx:10,dy:6, anchor:'start'},
-    {name:'卡尔法费/维克', date:'9/29', color:'#E8C468', q:'Kálfafell, Iceland', x:283.8,y:286.0, dx:0,dy:22, anchor:'middle'},
+    {name:'卡尔法费', date:'9/29', color:'#E8C468', q:'Kálfafell, Iceland', x:283.8,y:286.0, dx:0,dy:22, anchor:'middle'},
     {name:'赫本',       date:'9/30',    color:'#E88BA0', q:'Höfn, Iceland', x:408.8,y:244.0, dx:10,dy:-8, anchor:'start'},
     {name:'埃伊尔斯塔济', date:'10/1',  color:'#B592D6', q:'Egilsstaðir, Iceland', x:444.6,y:138.6, dx:-10,dy:-8, anchor:'end'},
     {name:'米湖',       date:'10/2',    color:'#7FB8A4', q:'Mývatn, Iceland', x:333.9,y:99.8, dx:10,dy:-8, anchor:'start'},
@@ -257,174 +269,1514 @@
   var JOKULSARLON_Q = '64.0482,-16.1801';
 
   var DAYS = [
-    {n:1, date:'9/24', grp:'早到2人', route:'上海 → 东京 → 赫尔辛基', transport:'飞行', overnight:null,
-      items:[
-        {time:'16:00', text:'起飞：上海浦东 → 东京羽田', note:'JL086 日本航空 · 2h55m'},
-        {time:'21:50', text:'起飞：东京羽田 → 赫尔辛基', note:'AY062 芬兰航空 · 12h50m，次日04:40抵达（机上过夜）'}
-      ]},
-    {n:2, date:'9/25', grp:'早到2人', route:'赫尔辛基 → 雷克雅未克', transport:'飞行 + 步行', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
-      items:[
-        {time:'07:10', text:'起飞：赫尔辛基 → 凯夫拉维克', note:'AY991 芬兰航空 · 07:50 抵达'},
-        {time:'09:00', text:'打车/巴士进城', note:'约45分钟车程，到公寓休整 · Flybus可官网(re.is/tour/flybus)提前订，大概每30分钟一班，凭票上对应颜色的车'},
-        {time:'可选', text:'Reykjavík Roasters（Brautarholt 2店）', note:'离公寓（Raudararstigur）很近，10点左右光线很美 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Reykjavík Roasters, Brautarholt 2, Reykjavik', desc:'本地口碑咖啡馆在Hlemmur附近的分店，离公寓走几步就到，据说上午10点左右店里的光影特别好看，适合悠闲坐一会儿，落地第一天倒时差正合适。'},
-        {time:'下午', text:'太阳航海者雕塑', note:'Sun Voyager · 约20分钟，从公寓沿海边步道一路走过去，单向不用绕路', q:'Sólfar Sun Voyager, Reykjavik', desc:'海边的一座钢制雕塑，形似维京长船的骨架，象征探索与自由，是雷克雅未克最经典的地标之一。天气好的时候能看到雕塑背后隔海的雪山，很适合拍照。'},
-        {time:'下午', text:'雷克雅未克市区漫步', note:'沿海边继续走走即可，倒时差第一天不用赶路', q:'Reykjavik, Iceland', desc:'冰岛首都，全国近三分之二人口住在这一带。彩色屋顶、海边步道和小咖啡馆是主要基调，第一天用来倒时差、熟悉环境正合适，不用赶行程。'}
-      ]},
-    {n:3, date:'9/26', grp:'早到2人', route:'雷克雅未克', transport:'大巴（徒步团接送）', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
-      items:[
-        {time:'07:00', text:'Landmannalaugar 徒步 + 温泉一日游', note:'Arctic Adventures · 8号站(Hallgrímskirkja)接送 · 全程约14小时，约21:00返回 · 出发前48小时需在 my.adventures.is 确认接送点', tag:'ok', tagText:'已预订·2人', q:'Hallgrímskirkja, Reykjavik', desc:'冰岛高地最著名的徒步区域，以七彩流纹岩山脉、黑色熔岩地和天然温泉溪流出名。可以一边走一边看山体颜色随光线变化，累了就直接跳进溪水温泉里泡一泡，是冰岛内陆最独特的体验之一。'},
-        {time:'', text:'另外2人尚未抵达雷克雅未克', note:''}
-      ]},
-    {n:4, date:'9/27', grp:'全员会合', route:'雷克雅未克', transport:'自驾（取车）', overnight:{name:'Downtown Reykjavik Apartments', addr:'Raudararstigur 31, 105 Reykjavik', phone:'+354-4456777'},
-      items:[
-        {time:'09:00', text:'哈尔格林姆教堂', note:'Hallgrímskirkja · 约20分钟，今天从这里由高处往海边一路走，不走回头路', q:'Hallgrímskirkja, Reykjavik', desc:'冰岛最高的教堂，外形取材自玄武岩柱状节理，是全城最显眼的地标。可以买票登塔俯瞰整个雷克雅未克的彩色屋顶，内部则很简洁肃穆。'},
-        {time:'可选', text:'托宁湖', note:'Tjörnin · 教堂步行约10分钟 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Tjörnin, Reykjavik', desc:'雷克雅未克市中心的一片湖，周围环绕着议会大厦、市政厅等主要建筑，湖边常年栖息着二十多种水鸟，适合坐下来静静看鸟、看湖景，头顶偶尔还能看到降落进雷克雅未克机场的小飞机。'},
-        {time:'可选', text:'冰岛阴茎博物馆（俗称"丁丁博物馆"）', note:'Icelandic Phallological Museum · 托宁湖去旧港口的路上会经过，门票约250元，猎奇向 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Icelandic Phallological Museum, Reykjavik', desc:'世界上颇为独特的一家博物馆，展出上百种哺乳动物的生殖器标本，也有不少冰岛精灵传说主题的展品，风格猎奇又带点冷幽默，感兴趣的可以买票进去看看，不感兴趣路过打卡外观也行。'},
-        {time:'可选', text:'Turf House Iceland', note:'教堂旁餐车，只卖三种食物，强推羊肉汉堡+海鲜汤 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Turf House Iceland, Reykjavik', desc:'教堂附近一辆只卖三种食物的小餐车，羊肉饼煎得很有水平，配的黑色面包坯是葱香味的，海鲜汤评价也很高，虽然是快餐规格但可以当一顿正餐吃。'},
-        {time:'可选', text:'大教堂旁鱼汤', note:'就在哈尔格林姆教堂附近，评价中等 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'fish soup restaurant near Hallgrímskirkja, Reykjavik', desc:'哈尔格林姆教堂附近的一家鱼汤店，汤味道不错、配的煎面包片也香，顺路逛完教堂可以就近解决一餐。'},
-        {time:'可选', text:'Black Crust Pizzeria', note:'教堂附近，招牌黑松露墨鱼汁黑披萨，约¥260/张 · 评价不一 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Black Crust Pizzeria, Reykjavik', desc:'教堂附近一家黑色饼底的披萨店，招牌Nr.1黑披萨是墨鱼汁+黑松露口味，浓郁惊艳，上面撒的芝麻菜略带辣度；也有马卡龙礼盒和炸鸡翅小食，人均约180元。是网上很火的一家店，但人多常要排队约20分钟，也有博主觉得饼底偏硬、龙虾和芝士给得不算多，评价不算稳定，仅供参考。'},
-        {time:'可选', text:'Baboo Tea', note:'沿彩虹街(Skólavörðustígur)往下走会经过，咸芝士口味推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Baboo Tea, Reykjavik', desc:'彩虹街(Skólavörðustígur)上的一家奶茶店，从教堂往劳加维格方向走正好顺路，有博主形容浓郁醇香，喜欢咸芝士口味的会很对味，珍珠也很Q。'},
-        {time:'可选', text:'Sandholt', note:'彩虹街走到底就是劳加维格54号，招牌北非蛋+开心果丹麦酥+巧克力 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Sandholt, Laugavegur 54, Reykjavik', desc:'雷克雅未克老牌烘焙咖啡店，招牌北非蛋(Shakshuka)配面包很受中国胃欢迎，开心果丹麦酥也酥脆香甜。店里的巧克力也很受好评，放嘴里能留香十秒，羊肉/牛肉三明治评价也不错，是不少博主全程最喜欢的一餐。'},
-        {time:'可选', text:'The Story of Icelanders', note:'Laugavegur 56，紧挨着Sandholt · 11分钟沉浸式历史体验，目前免费开放 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'The Story of Icelanders, Laugavegur 56, Reykjavik', desc:'紧挨着Sandholt新开的免费历史体验馆，只要11分钟就把冰岛1150年历史浓缩进5个主题空间，从最早的维京定居者一路讲到现代冰岛，中间还有维京头盔、斧头可以拍照互动。目前免费开放（每天8:00-20:00），既然顺路不占用额外时间，值得进去看看，不过免费政策以后可能会变，去之前可以留意一下。'},
-        {time:'09:30', text:'劳加维格购物街', note:'Laugavegur · 从54号往低门牌号方向一路走，约60分钟', q:'Laugavegur, Reykjavik', desc:'雷克雅未克最热闹的步行商业街，两侧是设计师小店、咖啡馆和纪念品店，适合买羊毛衫、手工艺品，顺便感受首都的日常生活气息。'},
-        {time:'可选', text:'BIOEFFECT 精品店', note:'Laugavegur 33 · 冰岛本土护肤品牌，主打冰川水/大麦EGF成分 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'BIOEFFECT, Laugavegur 33, Reykjavik', desc:'BIOEFFECT 在劳加维格上的精品店，跟旗舰店（Hafnarstræti 19）离得很近，主打精华和面霜，也提供皮肤咨询服务。'},
-        {time:'可选', text:'66°North 旗舰店', note:'Laugavegur 17-19，继续往下走 · 冰岛国民户外品牌 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'66°North, Laugavegur 17-19, Reykjavik', desc:'66°North 在劳加维格上的旗舰店，款式最全，毛线帽、冲锋衣、羊毛外套都有，今年正好是品牌100周年。'},
-        {time:'可选', text:'Spuutnik 中古店', note:'劳加维格主干道上，皮草外套约¥1000 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Spuutnik Vintage, Reykjavik', desc:'雷克雅未克一家休闲风格的中古服装店，有几件不同风格的皮草外套（价格约1000元左右，容易被秒），也有不少简约百搭的薄款羊皮衣。'},
-        {time:'可选', text:'verzlanaholl 中古店', note:'小配件、手工感包和帽子好淘 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'verzlanaholl, Reykjavik', desc:'另一家中古店，比起衣服更适合淘小配件，有博主在这里花60元淘到一顶又保暖又轻的大头围帽子，评价性价比很高。'},
-        {time:'可选', text:'B12 朋克买手店', note:'价格偏贵但选品精美，摇滚风格 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'B12, Reykjavik', desc:'一家摇滚朋克风格的买手店，价格小贵但选品精美，毛靴很好看，适合喜欢辣妹/摇滚风的人逛逛。'},
-        {time:'可选', text:'Kronkron 二手店', note:'有不少西太后(Vivienne Westwood)款式，家具陈列也精彩 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kronkron, Reykjavik', desc:'一家二手时装店，有很多没见过的西太后(Vivienne Westwood)款式，店内陈列的家具撞色设计也很有意思，值得进去开开眼界。'},
-        {time:'可选', text:'280bakery', note:'从劳加维格拐进Klapparstígur 37，顺路 · 起酥类面包很推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'280 Bakery, Klapparstígur 37, Reykjavik', desc:'雷克雅未克本地的小面包店，起酥类面包被很多博主评为"雷市断层第一"，牛角、杏仁牛角都很受欢迎，出炉时间不固定，早去更容易碰到刚出炉的。'},
-        {time:'可选', text:'Caruso 西餐厅', note:'走到市中心核心区，烤三文鱼/牛排评价不错，龙虾烩饭评价一般 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Caruso Reykjavik', desc:'市区主街上一家需要预约的西餐厅，评价不算稳定：有博主说烤三文鱼和牛排都很好吃，送的餐前面包也不错，visitorsguide.is上领券还能有15%折扣；也有博主觉得龙虾烩饭是冷冻虾、性价比不高、服务态度一般。仅供参考，去之前可以先查一下当时的优惠券。'},
-        {time:'可选', text:'Íslenski Barinn', note:'市中心核心区，冰岛猎奇美食一次吃全，非常火需排队 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Íslenski Barinn, Reykjavik', desc:'很受欢迎的一家酒吧餐厅，晚上9点半到还要排队。可以一次性尝到冰岛特色/猎奇食物：鲨鱼肉、鲸鱼肉、驯鹿汉堡、龙虾taco、龙虾热狗、海鹦(puffin)、羊头。鲨鱼肉入口是强烈的刺激感，牙龈会有点疼；鲸鱼肉吃着像牛肉；驯鹿汉堡香但没那么多汁；龙虾热狗外壳酥脆虾肉Q弹评价很高。鲸鱼肉和海鹦涉及争议性的物种猎食，是否尝试因人而异。'},
-        {time:'可选', text:'Svarta Kaffið', note:'市中心核心区，跟Íslenski Barinn离得很近 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Svarta Kaffið, Reykjavik', desc:'雷克雅未克老牌小店，招牌是羊肉汤装在挖空的黑面包碗里端上桌，可以免费续汤一次。有博主实测评价一般：肉汤里羊肉偏少、蔬菜汤偏咸，不过态度好、羊肉没膻味，性价比中等。'},
-        {time:'可选', text:'Sjávargrillið', note:'市中心核心区，海鲜烧烤，免费餐前面包评价爆棚 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Sjávargrillið, Reykjavik', desc:'看菜单觉得偏贵，但端上来量大又好吃，是少有配主食的店。龙虾taco比龙虾热狗还好吃，海鲜pasta里给了很多大虾仁，两种鱼的做法都不错，羊肉切片配土豆泥也很有记忆点。有博主特别夸赠送的餐前面包和黄油(抹在石头上端上桌)，说是全程惊艳的免费小吃。'},
-        {time:'可选', text:'Braud & Co 面包店', note:'Frakkastígur 16，教堂附近 · 招牌肉桂卷，彩色涂鸦门面很好拍 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Braud & Co, Frakkastígur 16, Reykjavik', desc:'雷克雅未克超火的面包店，招牌肉桂卷(Cinnamon Roll)外酥内软、甜度是北欧式的克制甜，不腻，每天现烤出炉常常被抢光。店面是彩色涂鸦小屋，拍照也很出片，跟Black Crust Pizzeria在同一条街上，可以一起逛。'},
-        {time:'可选', text:'Messinn', note:'市中心核心区，需预约 · 红点鲑评价很高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Messinn, Reykjavik', desc:'需要预约的海鲜餐厅，红点鲑(Arctic char)评价很高——鱼肉细腻、配菜丰富；招牌鱼炖(plokkfiskur)是把鱼肉和土豆一起炖煮，加了白葡萄酒和芝士，偏西式口味，不一定合中国胃口。'},
-        {time:'可选', text:'雷市"克林顿"热狗摊', note:'继续往老港口方向走，Bæjarins Beztu Pylsur · 便宜快捷 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Bæjarins Beztu Pylsur, Reykjavik', desc:'雷克雅未克最有名的热狗摊，克林顿访冰岛时来吃过而出名，价格便宜适合当快餐，口味跟便利店热狗差别不算大，图个打卡。'},
-        {time:'可选', text:'Old Wharf Noodle House 老码头面', note:'老港口附近，中式炸酱面，评价很高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Old Wharf Noodle House, Reykjavik', desc:'雷克雅未克一家中餐面馆，主打炸酱面，有博主称是吃过最好吃的炸酱面，店里挂着"外面是冰岛，里面是热面"的标语，很受在外思乡胃欢迎。'},
-        {time:'可选', text:'Biang 中餐面馆', note:'biangbiang面+慢炖牛肉，约¥100-200/人 · 好评很多 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Biang Reykjavik', desc:'雷克雅未克一家中餐面馆，老板是波兰人，但店里有中文菜单、镇江陈醋和辣子，出品被不少博主评价超出大多数国人开的店。慢炖牛肉biangbiang面牛肉软烂入味，整体调味地道，放国内卖也不会违和。'},
-        {time:'可选', text:'Reykjavik Bistro', note:'彩虹街，冰岛特色羊肉汤/羊肉汉堡，价格偏高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Reykjavik Bistro, Reykjavik', desc:'彩虹街上一家餐厅，主打冰岛特色的羊肉汤和羊肉汉堡，味道不错，价格在冰岛属于中等偏上，可以当午餐或晚餐的一个选项。'},
-        {time:'可选', text:'12 Tónar 黑胶店', note:'彩虹街15号，顺路 · 两层小楼，有咖啡有酒，可以坐下歇会 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'12 Tónar, Skólavörðustígur 15, Reykjavik', desc:'彩虹街上一家两层的独立黑胶唱片店，主打冰岛及北欧音乐（独立摇滚、古典、实验），有咖啡有酒可以坐下来听听音乐，有时候还有乐队现场演出，喜欢音乐的可以顺路逛逛。'},
-        {time:'可选', text:'Reykjavik Record Shop', note:'Klapparstígur 35，紧挨280bakery · 小而精，欧美流行/Hip-hop/Jazz · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Reykjavik Record Shop, Klapparstígur 35, Reykjavik', desc:'跟280bakery在同一条街上的小唱片店，规模不大但选品精，也有少量二手唱片可以淘，喜欢音乐的可以顺路进去看看。'},
-        {time:'可选', text:'"最美WC"打卡', note:'哈帕音乐厅(Harpa)地下一层，免费厕所+爬上二楼拍照很出片 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Harpa Concert Hall, Reykjavik', desc:'走到老港口附近的哈帕音乐厅，地下一层有免费厕所，建筑本身是蜂窝状玻璃幕墙，爬到二楼拍照效果很好，被称为"冰岛最美WC"，顺路可以进去逛一圈、上个厕所。'},
-        {time:'17:00', text:'凯夫拉维克机场取车', note:'Zero Car · Toyota RAV4 · 另外2人抵达，全员会合', q:'Keflavik International Airport'},
-        {time:'可选', text:'珍珠楼 Perlan', note:'⚠️ 不在步行路线上，在市区南边小山上，需要打车/开车前往 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Perlan, Reykjavik', desc:'雷克雅未克的地标建筑之一，玻璃穹顶造型很好认。里面有人造冰洞展览、天文馆和360度观景台，能俯瞰全城和远处的雪山，有博主形容"百分之两百推荐"。取到车之后如果时间还够，可以顺路开车去一趟，别指望走路能到。'},
-        {time:'可选', text:'Kaffibrugghúsið 咖啡豆店', note:'⚠️ 在市区外的商业园区，不在步行路线上，需要打车 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kaffibrugghúsið, Reykjavik', desc:'雷克雅未克郊区一家咖啡豆烘焙店，满屋飘香，有博主称是在冰岛最喜欢的咖啡豆店；适合买豆带走，能不能堂食建议到店问一下，但离市中心步行范围较远。'},
-        {time:'可选', text:'本地肉铺（自己开火可选）', note:'⚠️ KJÖTHÖLLIN / Kjötkompaní 都不在市中心，需要开车前往 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'KJÖTHÖLLIN, Reykjavik', desc:'如果住处能开火，这两家是本地口碑很好的牛羊肉铺：KJÖTHÖLLIN性价比高，是本地常客的"外婆家"；Kjötkompaní被称为冰岛最好的肉铺，在海港城(Hafnarfirði)和Bíldshöfða各有一家店，都需要开车过去，取到车之后再考虑。'},
-        {time:'晚上', text:'Hús máls og menningar 书屋酒吧', note:'取车、吃晚饭后如果还想出门，书店改造的酒吧晚上常有live band · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Hús máls og menningar, Reykjavik', desc:'一家开在书店里的酒吧，晚上常有乐队现场演出，气氛热闹，是感受雷克雅未克夜生活的一个选择，今晚还在雷市过夜，晚上出门也来得及。'}
-      ]},
-    {n:5, date:'9/28', grp:'全员', route:'雷克雅未克 → 塞尔福斯', transport:'自驾', overnight:{name:'Gesthus Selfoss', addr:'Engjavegur 56, 800 Selfoss', phone:'+354-4823585'},
-      items:[
-        {time:'08:30', text:'从雷克雅未克出发', note:''},
-        {time:'09:15', text:'辛格维利尔国家公园', note:'Þingvellir · 约45分钟', q:'Þingvellir National Park, Iceland', desc:'世界遗产，欧亚板块与北美板块正在此处裂开，能亲眼走进两大板块之间的巨型裂谷。这里也是冰岛议会（世界最古老议会之一）的发源地，地质意义和历史意义都很重。'},
-        {time:'可选', text:'Old Iceland', note:'Silfra浮潜附近，很多博主心头好，海鲜浓汤/鳕鱼配花生酱评价很好 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Old Iceland restaurant, Þingvellir, Iceland', desc:'Þingvellir浮潜(Silfra)附近的一家家庭风格小馆，海鲜浓汤很暖胃、海鲜沙拉调味丰富，鳕鱼配花生酱的搭配意外好吃，牛脸颊肉炖得用叉子就能扒开，是很多博主意料之外的惊喜一餐，也有人评为这趟旅行最喜欢的一家。'},
-        {time:'10:50', text:'盖歇尔间歇泉', note:'Geysir · 约30分钟', q:'Geysir Hot Spring Area, Iceland', desc:'地热喷泉密集区，园区里的 Strokkur 每隔几分钟就会喷发一次，水柱瞬间能冲到20多米高，是近距离感受地热能量最直接的地方，站近了会被水汽扑到脸。'},
-        {time:'可选', text:'Friðheimar 番茄农场', note:'地热温室番茄餐厅，招牌番茄汤 · 务必官网提前订位，否则现场要等40分钟+ · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Friðheimar, Iceland', desc:'利用地热能供暖的温室农场，在冰岛种出了番茄，餐厅就开在温室里。招牌番茄浓汤味道浓郁、酸香开胃，配面包蘸着吃是绝配；番茄烤吐司、草莓burrata都是自家农场的味道；海鲜墨鱼汁意面扇贝给得很多；盆栽蛋糕层次丰富、不甜。是条路上很热门的网红打卡点，人多时现场排队很久，想去一定要提前上官网免费预约（附近还有一家分店 Vínstofa Friðheimar，一家营业到下午4点，另一家晚上也开）。'},
-        {time:'11:35', text:'黄金瀑布', note:'Gullfoss · 约40分钟', q:'Gullfoss Waterfall, Iceland', desc:'冰岛最壮观的瀑布之一，河水分两级跌入深邃峡谷，水量巨大、气势十足，晴天时常能看到彩虹，是"黄金圈"路线的收尾高潮。'},
-        {time:'13:10', text:'抵达塞尔福斯，入住', note:''}
-      ]},
-    {n:6, date:'9/29', grp:'全员', route:'塞尔福斯 → 卡尔法费', transport:'自驾', overnight:{name:'Fosshotel Núpar', addr:'Núpar, Kálfafell, Southern Region 880', phone:'+354-5173060'},
-      items:[
-        {time:'08:30', text:'从塞尔福斯出发', note:''},
-        {time:'09:45', text:'塞里雅兰瀑布', note:'Seljalandsfoss · 约30分钟，可走到瀑布后方', q:'Seljalandsfoss, Iceland', desc:'南岸最特别的瀑布，可以沿小路走到水帘后面，从瀑布内侧看水花落下的样子。建议带防水外套，鞋子基本免不了打湿。'},
-        {time:'10:40', text:'斯科加瀑布', note:'Skógafoss · 约30分钟', q:'Skógafoss, Iceland', desc:'宽阔笔直落下的瀑布，气势很足，近处常会被水雾溅到；旁边有台阶可以爬到瀑布顶部，从高处俯瞰整条河谷。'},
-        {time:'可选', text:'斯科加瀑布旁汉堡', note:'肉饼分量大、酱汁好吃，评价很高 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'burger restaurant near Skógafoss, Iceland', desc:'就在斯科加瀑布旁边的汉堡店，肉饼分量足、配很多薯条，酱汁很受好评，缺点是吃多了会有点腻。'},
-        {time:'可选', text:'索尔黑马冰川', note:'Sólheimajökull · 免费停车，下车走10分钟即达，不用报团不用冰爪 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Sólheimajökull, Iceland', desc:'不用跟徒步团、不用穿冰爪就能近距离接触的冰川舌头，是电影《星际穿越》冰冻星球取景地。穿防滑运动鞋可以自己走上冰川表面的浮土层做轻度徒步，湖边常能看到很大块的浮冰，天晴时还能看到山巅冰川，性价比很高，停车免费。'},
-        {time:'11:45', text:'雷尼斯黑沙滩', note:'Reynisfjara · 约40分钟', q:'Reynisfjara Black Sand Beach, Iceland', desc:'著名的黑色沙滩，有成排玄武岩石柱和海蚀洞，海面上还能看到三根海蚀柱，附近的Yoda Cave一带还是电影《奥德赛》冥界场景的取景地。这里的浪很危险，一定不要背对大海拍照，留意"杀人浪"警示牌。'},
-        {time:'可选', text:'Wok In Vík', note:'维克小镇的炒面馆（乌冬面/炒河粉）· 仅供参考', tag:'optional', tagText:'仅供参考', q:'Wok In Vík, Iceland', desc:'维克小镇里少见的亚洲炒面馆，乌冬面和炒河粉口碑不错，在这一路吃惯三明治泡面之后，是个换换口味的好选择。'},
-        {time:'可选', text:'Restaurant Suður-Vík', note:'维克镇百年餐厅，羊里脊+烤布蕾评价都很高，错峰去不用排队 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Restaurant Suður-Vík, Iceland', desc:'维克镇一家百年老餐厅，招牌羊里脊评价很高，建议点五分熟；有博主专门夸这家的羊排和烤布蕾，形容是"美食荒漠冰岛的一缕光"；Meet the Meat披萨饼底薄、芝士拉丝；泰式咖喱偏甜口，在冰岛吃到这一口很惊喜。稍微错开饭点（比如提前或推后半小时）基本不用排队。'},
-        {time:'13:45', text:'抵达 Fosshotel Núpar，入住', note:''}
-      ]},
-    {n:7, date:'9/30', grp:'全员', route:'卡尔法费 → 赫本', transport:'自驾', overnight:{name:'Skyjaborg Apartments', addr:'Víkurbraut 2, 780 Höfn', phone:'+354 647 1205'},
-      items:[
-        {time:'08:00', text:'出发（今天10点冰洞团固定时段，别拖）', note:''},
-        {time:'08:15', text:'斯卡夫塔山冰川区域', note:'Skaftafell · 简单走走约30分钟，不深入徒步', q:'Skaftafell, Vatnajökull National Park', desc:'瓦特纳冰川国家公园的一部分，有多条难度不同的徒步路线，远远就能看到冰川舌头垂挂在山谷间的壮观景象。'},
-        {time:'10:00', text:'冰川洞穴探索', note:'Blue Iceland · 集合点：杰古沙龙冰河湖 · 固定时段约3小时', tag:'ok', tagText:'已预订·4人', q:JOKULSARLON_Q, desc:'集合点杰古沙龙是冰岛最有名的冰河湖，浮冰从冰川断裂后漂在湖面缓缓入海，蓝白相间的景象非常震撼。今天参加的团会带大家走进真正的蓝冰洞内部，近距离触摸千年冰层。'},
-        {time:'13:00', text:'钻石沙滩', note:'Diamond Beach · 约30分钟，就在旁边', q:'Diamond Beach, Iceland', desc:'紧挨着杰古沙龙，浮冰被海浪冲上黑沙滩，在阳光下像撒了一地的钻石，是全程拍照效果最好的地方之一。'},
-        {time:'可选', text:'Kjarr Restaurant & Bar', note:'羽毛大峡谷附近，谷歌4.9分/1000+评价，多位博主称是全程最好吃的一餐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kjarr Restaurant & Bar, Iceland', desc:'藏在维克和冰河湖之间一个只有120人的小镇上，离羽毛大峡谷(Fjaðrárgljúfur)很近。开放式厨房，招牌北极红点鲑鱼肉鲜嫩、鱼皮焦香，烤冰岛羊肉又嫩又入味，海鲜墨鱼汁意面虾给得很多，甜点配着窗外瀑布景观喝咖啡体验很好，是不少博主全程排名第一的一餐。'},
-        {time:'可选', text:'杰古沙龙旁快餐', note:'羊肉汉堡/热狗/龙虾汤，周边选择不多 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Jökulsárlón, Iceland', desc:'冰河湖旁边的小餐厅，卖羊肉汉堡、热狗和龙虾汤，这一片周边基本没什么别的选择，玩完顺路吃一口很方便。'},
-        {time:'14:45', text:'抵达赫本，入住', note:''},
-        {time:'可选', text:'Pakkhús Restaurant', note:'港口边龙虾餐厅，好几个博主都强推，人均约¥300+ · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Pakkhús Restaurant, Krosseyjarvegi 3, Höfn', desc:'藏在赫本海港边的一家餐厅，白色仓库外观，进门却是木质桌面、暖黄灯光的温馨氛围，好几位博主都独立推荐，称"来冰岛只能推荐一家海鲜餐厅就选它"。招牌龙虾尾蒜蓉黄油烤制，肉质紧实鲜甜爆汁；奶油白葡萄酒烤海螯虾奶香浓郁；开场送的春卷外皮酥脆馅料足。营业12:00-21:00，不接受预约，建议错峰前往。'}
-      ]},
-    {n:8, date:'10/1', grp:'全员', route:'赫本 → 埃伊尔斯塔济', transport:'自驾', overnight:{name:'Lagarfell Studios', addr:'Lagarfell 3, 700 Egilsstaðir', phone:'+354-8934322'},
-      items:[
-        {time:'08:00', text:'从赫本出发', note:'⚠️ 今天驾驶+山口路况都要留意，别压太紧'},
-        {time:'08:15', text:'蝙蝠山', note:'Vestrahorn · 约30分钟', q:'Vestrahorn, Iceland', desc:'尖锐的黑色山峰倒映在海边潮汐滩涂里，是冰岛摄影圈最有名的取景地之一，退潮或清晨光线下倒影效果最好。'},
-        {time:'10:05', text:'彩色房子村', note:'Djúpivogur · 约30分钟', q:'Djúpivogur, Iceland', desc:'安静的东部小渔村，几栋色彩鲜艳的老房子沿港口排开，适合下车走走、喝杯咖啡，感受峡湾小镇的慢生活。'},
-        {time:'11:45', text:'抵达埃伊尔斯塔济，午餐', note:''},
-        {time:'13:00', text:'塞济斯菲厄尔', note:'Seyðisfjörður · 约45分钟 · 需翻越 Fjarðarheiði 山口，出发前务必查 road.is', tag:'book', tagText:'⚠ 查山口路况', q:'Seyðisfjörður, Iceland', desc:'藏在山谷尽头的彩虹小镇，蓝色教堂门前那条彩虹街道是最出片的地方，四周被陡峭山壁和瀑布环绕，翻山进来的路本身也是一段风景。'},
-        {time:'14:45', text:'拉加尔湖', note:'Lagarfljót · 湖边走走', q:'Lagarfljót, Iceland', desc:'冰岛第三长的湖，传说湖底住着类似"尼斯湖水怪"的巨型生物，湖边的成片森林在冰岛也算难得一见的景观。'},
-        {time:'可选', text:'Bónus买三文鱼自制刺身', note:'东部三文鱼比这边鸡胸肉还便宜，带皮冷藏款去皮切片当刺身 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Bónus, Egilsstaðir, Iceland', desc:'埃伊尔斯塔济是冰岛东部最大城市，附近峡湾三文鱼养殖很多，Bónus超市能买到铝盒装的带皮冷藏三文鱼，价格比这边鸡胸肉还便宜。有博主回住处去皮切片当刺身吃，评价比挪威、新西兰、国内买到的都新鲜好吃，没有腥味，鱼皮去鳞煎着吃也不错——前提是住处能简单处理食材。'}
-      ]},
-    {n:9, date:'10/2', grp:'全员', route:'埃伊尔斯塔济 → 米湖', transport:'自驾', overnight:{name:'Vogar Travel Service', addr:'Vogar, Reykjahlíð, Norðurland Eystra 660', phone:''},
-      items:[
-        {time:'08:00', text:'从埃伊尔斯塔济出发', note:'走862西侧路况好，别走864砂石路'},
-        {time:'10:00', text:'黛提瀑布', note:'Dettifoss · 约30分钟', q:'Dettifoss Waterfall, Iceland', desc:'欧洲流量最大的瀑布，水花和轰鸣声非常有冲击力，站在观景台能感觉到脚下都在震动。'},
-        {time:'11:15', text:'克拉夫拉火山口', note:'Víti · 约30分钟', q:'Víti Crater Krafla, Iceland', desc:'一个圆形火山口湖，湖水呈蓝绿色，周边是火山灰地貌，是克拉夫拉火山区最直观的一处景观。'},
-        {time:'11:55', text:'地热带', note:'Hverir · 约25分钟', q:'Hverir Geothermal Area, Iceland', desc:'遍地冒着蒸汽的泥浆池和喷气孔，空气里有硫磺味，地表五颜六色，走在其中像置身另一个星球。'},
-        {time:'12:30', text:'抵达米湖住宿，午休', note:''},
-        {time:'17:00', text:'米湖地热温泉', note:'Earth Lagoon Mývatn · 已订，约2小时', tag:'ok', tagText:'已预订·4人', q:'Jarðböðin Nature Baths, Mývatn', desc:'米湖版的"蓝湖"，游客更少、更平价。泡在乳蓝色温泉水里，四周就是火山地貌，晚上运气好还能顺便等极光出现。'}
-      ]},
-    {n:10, date:'10/3', grp:'全员', route:'米湖 → 胡萨维克', transport:'自驾', overnight:{name:'Bjarnabúð', addr:'Garðarsbraut 12, Húsavík City Center, Norðurland Eystra 640', phone:''},
-      items:[
-        {time:'09:00', text:'裂缝温泉', note:'Grjótagjá · 约20分钟，只能看不能泡', q:'Grjótagjá Cave, Iceland', desc:'藏在熔岩裂缝里的地热洞穴温泉，水温太高已经不能下水，但从裂缝往下看那片蓝色水面很有电影感，是《权力的游戏》的取景地之一。'},
-        {time:'09:40', text:'熔岩地貌', note:'Dimmuborgir · 约40分钟徒步', q:'Dimmuborgir, Iceland', desc:'大片形状诡异的熔岩柱和天然拱门，传说是精灵和巨魔的家，有几条不同长度的步道可以穿行其中，很适合慢慢走。'},
-        {time:'11:05', text:'众神瀑布', note:'Goðafoss · 约30分钟', q:'Goðafoss Waterfall, Iceland', desc:'半圆形的瀑布，传说是冰岛改信基督教时酋长把北欧诸神雕像扔进瀑布而得名，规模适中但角度非常好拍。'},
-        {time:'12:20', text:'抵达胡萨维克，入住+午餐', note:'下午自由活动（可加订观鲸，目前未订）'},
-        {time:'可选', text:'Húsavík Viewing Point', note:'胡萨湾观景台，雪山配峡湾，不参加观鲸团也值得站一会 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Húsavík Viewing Point, Iceland', desc:'胡萨维克港口附近的观景台，能看到雪山和辽阔峡湾铺展在眼前，风比较大，就算不参加观鲸团，站在这里看看山海也很治愈。'},
-        {time:'可选', text:'留意 Safnasafnið 民间艺术博物馆', note:'⚠️ 门口雕塑可以免费拍照，但推门进去就要买票（约¥90/人），不感兴趣别冲动入场', tag:'optional', tagText:'仅供参考', q:'Safnasafnið, Iceland', desc:'返程路边一座民间艺术博物馆，门口有几座造型独特的雕塑很适合拍照，但那是免费的室外区域——一旦推门走进室内就会被要求买票，有博主因为面子问题硬着头皮买了两张票（3900克朗）结果全程看得一脸茫然。不感兴趣艺术的可以只拍门口雕塑，不用进去。'}
-      ]},
-    {n:11, date:'10/4', grp:'全员', route:'胡萨维克 → 阿克雷里', transport:'自驾', overnight:{name:'Acco Luxury Apartments', addr:'Skipagata 12, Akureyri City Center, Norðurland Eystra 600', phone:'+354 547 2226'},
-      items:[
-        {time:'09:30', text:'从胡萨维克出发', note:''},
-        {time:'10:40', text:'植物园', note:'Lystigarðurinn · 约45分钟', q:'Akureyri Botanical Garden', desc:'世界最北的植物园之一，收集了不少冰岛本地和北极圈植物，节奏很慢，适合饭后散步放松。'},
-        {time:'11:30', text:'阿克雷里市区漫步', note:'含午餐，约90分钟', q:'Akureyri, Iceland', desc:'冰岛北部最大的城市，有教堂、港口和一些餐厅咖啡馆，节奏比雷克雅未克更慢，适合借这半天好好休整、补给。'},
-        {time:'可选', text:'Cafe Berlin', note:'走进式早餐店，厚切吐司评价"本次北欧之行早餐第一" · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Cafe Berlin, Akureyri', desc:'阿克雷里一家不用预约、直接走进去点的早餐店，招牌厚切吐司烤得外脆内软，麦香配一点焦糖香但不齁甜，有博主评为整趟北欧之行的早餐第一名。'},
-        {time:'可选', text:'Centrum Kitchen & Bar', note:'奶油意面评价不错，有博主二刷 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Centrum Kitchen & Bar, Akureyri', desc:'阿克雷里市区一家小众餐厅，奶油意面评价不错，有博主在阿克雷里专门二刷这家，值得一试。'},
-        {time:'可选', text:'Kristjáns Bakarí 百年面包房', note:'主街Hafnarstræti，1912年开业，招牌Kleina甜甜圈 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Kristjáns Bakarí, Hafnarstræti, Akureyri', desc:'阿克雷里人的百年早餐食堂，1912年开业至今没换过配方。招牌是Kleina——一种扭成圈的油炸甜甜圈，外脆内软，豆蔻香气若隐若现，配一杯咖啡很有当地生活感，物价在冰岛来说还算合理。'},
-        {time:'可选', text:'66°North 奥莱店', note:'Skipagata 9 · 跟住宿同一条街，卖往季款更便宜 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'66°North Outlet, Skipagata 9, Akureyri', desc:'66°North 在阿克雷里的奥莱店，跟今晚住宿就在同一条街上，走两步就到，价格比市区旗舰店便宜，主要是往季款式。'}
-      ]},
-    {n:12, date:'10/5', grp:'全员', route:'阿克雷里 → 斯蒂基斯霍尔米', transport:'自驾', overnight:{name:'Hotel Karólína', addr:'Aðalgata 7, Stykkishólmur, Vesturland 340', phone:''},
-      items:[
-        {time:'07:30', text:'出发（比平时早1-2小时）', note:'⚠️ 全程最长驾驶日，单程接近4.5-5小时，务必吃饱、加满油、轮流开车'},
-        {time:'09:50', text:'犀牛石', note:'Hvítserkur · 约30分钟，经典机位', q:'Hvítserkur Rock, Iceland', desc:'立在海边的一块奇特玄武岩柱，形状像一只探头喝水的犀牛或大象，退潮时可以走到沙滩近处细看。'},
-        {time:'12:40', text:'抵达斯蒂基斯霍尔米，午餐+入住', note:''},
-        {time:'下午', text:'斯蒂基斯霍尔米市区漫步', note:'约60分钟', q:'Stykkishólmur, Iceland', desc:'斯奈山半岛北岸的小渔港，彩色小屋和红顶教堂很上镜，也是电影《白日梦想家》的取景地之一。'},
-        {time:'可选', text:'Narfeyrarstofa', note:'海鲜+羊肉标准搭配，鳕鱼评价不错，羊肉酱汁偏咸 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Narfeyrarstofa, Stykkishólmur', desc:'白日梦想家小镇一家餐厅，海鲜(鳕鱼)带皮油煎调味，新鲜好吃；羊肉酱汁比较厚重、偏咸，评价不如海鲜。'},
-        {time:'可选', text:'Fish & Chips 餐车', note:'评分超高的炸鱼薯条餐车，热狗也推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'fish and chips truck, Stykkishólmur, Iceland', desc:'白日梦想家小镇里一辆评分超高的炸鱼薯条餐车，有博主形容比在英国吃到的还香，热狗也很推荐，价格不贵。'}
-      ]},
-    {n:13, date:'10/6', grp:'行程分岔', route:'斯蒂基斯霍尔米 → 雷克雅未克 → 凯夫拉维克(2人)', transport:'自驾 + Flybus（雷市→凯夫拉维克段）', overnight:{name:'Keflavík Micro Suites（我们2人）', addr:'65 Hafnargata, Njarðarbraut, Suðurnes, 230 Keflavík', phone:''},
-      items:[
-        {time:'08:00', text:'从斯蒂基斯霍尔米出发', note:''},
-        {time:'08:50', text:'草帽山', note:'Kirkjufell · 约30分钟，经典机位', q:'Kirkjufell Mountain, Iceland', desc:'冰岛被拍得最多的山之一，尖锥形山体配上前面的小瀑布 Kirkjufellsfoss，是明信片级别的经典机位。'},
-        {time:'10:05', text:'阿尔纳斯塔皮', note:'Arnarstapi · 约30分钟', q:'Arnarstapi, Iceland', desc:'海岸边的玄武岩海蚀地貌，有天然拱门和沿崖步道，走在海边常能看到成群的海鸟。'},
-        {time:'10:35', text:'红教堂', note:'Ingjaldshólskirkja · 约15分钟', q:'Ingjaldshólskirkja, Iceland', desc:'外观鲜红的小教堂，据说是冰岛最古老的石造教堂之一，周围视野开阔，能远眺斯奈菲尔冰川。'},
-        {time:'', text:'老人崖', note:'Músagjá · 约15分钟', q:'Músagjá, Arnarstapi, Iceland', desc:'斯奈山半岛上的一处嶙峋熔岩崖壁，游客不多，适合作为沿途一个安静的小停靠点。'},
-        {time:'', text:'黑教堂', note:'Búðakirkja · 约15分钟', q:'Búðakirkja Black Church, Iceland', desc:'一座孤零零立在熔岩原上的黑色小教堂，极简的黑白配色在阴天里格外有氛围感，很受摄影师喜欢。'},
-        {time:'', text:'海豹沙滩', note:'Ytri Tunga · 约20分钟', q:'Ytri Tunga Seal Beach, Iceland', desc:'冰岛少数能稳定看到野生海豹的沙滩，退潮时海豹会爬上岸边礁石晒太阳，不过能不能遇到全看运气。'},
-        {time:'', text:'玄武岩壁垒', note:'Gerðuberg · 约15分钟', q:'Gerðuberg Cliffs, Iceland', desc:'一整排排列整齐的六角形玄武岩柱，像天然的石头城墙，规模比冰岛其他玄武岩景点更壮观完整。'},
-        {time:'可选', text:'Bjarnarhöfn Bistro', note:'斯奈山半岛鲨鱼博物馆旁，鱼翅粗如铁钉，约5000kr · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Bjarnarhöfn Bistro, Iceland', desc:'斯奈山半岛上鲨鱼博物馆(Hákarlasafn)旁的小餐厅，招牌是当地特色鱼翅，据说粗得跟铁钉一样，5000冰岛克朗一份，按冰岛物价来说不算贵，猎奇又管饱，路过正好顺路。'},
-        {time:'13:00', text:'从斯奈山半岛出发返回雷克雅未克', note:'全员一起，约2小时车程'},
-        {time:'15:00', text:'抵达雷克雅未克，交接车辆', note:'另外2人留车过夜，今晚住雷克雅未克（住宿及后续行程自理，不在本手册安排范围内）'},
-        {time:'可选', text:'Flybus：雷克雅未克 → 凯夫拉维克', note:'提前在 re.is/tour/flybus 订票，车程约45分钟，班次密集 · ⚠ 建议提前订票', tag:'book', tagText:'⚠ 建议提前订票', q:'BSÍ Bus Terminal, Reykjavik', desc:'从雷克雅未克市区（BSÍ巴士总站或部分酒店可接驳）直达凯夫拉维克机场附近的巴士，是市区往返机场最常用的公共交通方式，旺季建议提前在官网订好班次和座位。'},
-        {time:'16:00', text:'抵达 Keflavík Micro Suites，入住', note:'只有我们2人，明天要早起，早点休息'},
-        {time:'可选', text:'机场附近炸鱼薯条店', note:'鳕鱼外酥里嫩、很入味，本地人推荐 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'fish and chips near Keflavik Airport, Iceland', desc:'凯夫拉维克机场附近一家炸鱼薯条小店，鳕鱼炸得外酥里嫩、很入味，薯条也酥脆，价格不贵，据说是当地人公认附近最好吃的一家。'},
-        {time:'可选', text:'机场附近泰餐', note:'Stir-Fried Spicy Curry+Noodle soup 一共约¥290 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Thai restaurant near Keflavik Airport, Iceland', desc:'机场附近的一家泰餐厅，有博主推荐炒咖喱和汤面，两份加起来才5780冰岛克朗（约¥290），是全程吃到最香的一顿，适合当离开前最后一餐。'}
-      ]},
-    {n:14, date:'10/7', grp:'分开返程', route:'凯夫拉维克 → 赫尔辛基 → 多哈', transport:'飞行', overnight:null,
-      items:[
-        {time:'前一晚', text:'预约次日早班出租车', note:'冰岛没有Uber，可用本地打车App：Hopp（类Uber体验，主要覆盖雷市+机场）或 Flott（支持提前预约、覆盖凯夫拉维克等小镇、价格透明）；凯夫拉维克镇上凌晨App未必随叫随到，建议App预约的同时也请 Micro Suites 前台帮忙确认当地出租车公司 · ⚠ 需提前预约', tag:'book', tagText:'⚠ 需提前预约'},
-        {time:'06:00', text:'打车前往机场', note:'距KEF实际约6-8分钟车程，打表费用约2500-3500 ISK/趟（约¥130-180，2人共摊）；我们已无自驾车辆（车留在雷市）；KEF→HEL为申根内部航班，无需过边检，提前2小时到机场足够从容'},
-        {time:'可选', text:'凯夫拉维克机场免税店', note:'BIOEFFECT 到达/出境两个店都有，价格常比市区还划算 · 仅供参考', tag:'optional', tagText:'仅供参考', q:'Keflavik Airport Duty Free'},
-        {time:'08:35', text:'起飞：凯夫拉维克 → 赫尔辛基', note:'AY992（芬兰航空实际承运）· 2人先行返程'},
-        {time:'17:00', text:'凯夫拉维克机场还车', note:'Zero Car · 留下的2人负责，随后自行安排返程', q:'Keflavik International Airport'},
-        {time:'17:05', text:'起飞：赫尔辛基 → 多哈', note:'QR302（卡塔尔航空实际承运）'}
-      ]},
-    {n:15, date:'10/8', grp:'早到2人', route:'多哈 → 上海', transport:'飞行', overnight:null,
-      items:[
-        {time:'02:50', text:'起飞：多哈 → 上海', note:'AY6687（卡塔尔航空实际承运）· 16:20 抵达浦东 T2，行程结束'}
-      ]}
-  ];
+  {
+    "n": 1,
+    "date": "9/24",
+    "grp": "早到2人",
+    "route": "上海 → 东京 → 赫尔辛基",
+    "transport": "飞行",
+    "overnight": null,
+    "items": [
+      {
+        "time": "16:00",
+        "text": "起飞：上海浦东 → 东京羽田",
+        "note": "JL086 日本航空 · 2h55m",
+        "navMain": false
+      },
+      {
+        "time": "21:50",
+        "text": "起飞：东京羽田 → 赫尔辛基",
+        "note": "AY062 芬兰航空 · 12h50m，次日04:40抵达（机上过夜）",
+        "navMain": false
+      }
+    ],
+    "review": ""
+  },
+  {
+    "n": 2,
+    "date": "9/25",
+    "grp": "早到2人",
+    "route": "赫尔辛基 → 雷克雅未克",
+    "transport": "飞行 + 步行",
+    "overnight": {
+      "name": "Downtown Reykjavik Apartments",
+      "addr": "Raudararstigur 31, 105 Reykjavik",
+      "phone": "+354-4456777"
+    },
+    "items": [
+      {
+        "time": "07:10",
+        "text": "起飞：赫尔辛基 → 凯夫拉维克",
+        "note": "AY991 芬兰航空 · 07:50 抵达",
+        "navMain": false
+      },
+      {
+        "time": "09:00",
+        "text": "打车/巴士进城",
+        "note": "约45分钟车程，到公寓休整 · Flybus可官网(re.is/tour/flybus)提前订，大概每30分钟一班，凭票上对应颜色的车",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Reykjavík Roasters（Brautarholt 2店）",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Reykjavík Roasters, Brautarholt 2, 105 Reykjavík",
+        "desc": "本地口碑咖啡馆在Hlemmur附近的分店，离公寓走几步就到，据说上午10点左右店里的光影特别好看，适合悠闲坐一会儿，落地第一天倒时差正合适。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://reykjavikroasters.is/en/",
+        "navMain": false
+      },
+      {
+        "time": "下午",
+        "text": "太阳航海者雕塑",
+        "note": "Sun Voyager · 约20分钟，从公寓沿海边步道一路走过去，单向不用绕路",
+        "q": "Sólfar Sun Voyager, Reykjavik",
+        "desc": "海边的一座钢制雕塑，形似维京长船的骨架，象征探索与自由，是雷克雅未克最经典的地标之一。天气好的时候能看到雕塑背后隔海的雪山，很适合拍照。",
+        "navMain": false
+      },
+      {
+        "time": "下午",
+        "text": "雷克雅未克市区漫步",
+        "note": "沿海边继续走走即可，倒时差第一天不用赶路",
+        "q": "Reykjavik, Iceland",
+        "desc": "冰岛首都，全国近三分之二人口住在这一带。彩色屋顶、海边步道和小咖啡馆是主要基调，第一天用来倒时差、熟悉环境正合适，不用赶行程。",
+        "navMain": false
+      }
+    ],
+    "review": "落地日安排轻松合理。09:00进城后通常还不能直接进房，先确认行李寄存；巴士不保证送到公寓门口。"
+  },
+  {
+    "n": 3,
+    "date": "9/26",
+    "grp": "早到2人",
+    "route": "雷克雅未克",
+    "transport": "大巴（徒步团接送）",
+    "overnight": {
+      "name": "Downtown Reykjavik Apartments",
+      "addr": "Raudararstigur 31, 105 Reykjavik",
+      "phone": "+354-4456777"
+    },
+    "items": [
+      {
+        "time": "07:00",
+        "text": "Landmannalaugar 徒步 + 温泉一日游",
+        "note": "Arctic Adventures · 8号站(Hallgrímskirkja)接送 · 全程约14小时，约21:00返回 · 出发前48小时需在 my.adventures.is 确认接送点",
+        "tag": "ok",
+        "tagText": "已预订·2人",
+        "q": "Hallgrímskirkja, Reykjavik",
+        "desc": "冰岛高地最著名的徒步区域，以七彩流纹岩山脉、黑色熔岩地和天然温泉溪流出名。可以一边走一边看山体颜色随光线变化，累了就直接跳进溪水温泉里泡一泡，是冰岛内陆最独特的体验之一。",
+        "navMain": false
+      },
+      {
+        "time": "",
+        "text": "另外2人尚未抵达雷克雅未克",
+        "note": "",
+        "navMain": false
+      }
+    ],
+    "review": "长途飞行次日即14小时高地团，体力负担大。保留已订活动，但出发前核对运营方是否如期开团、接送点和装备，不安排晚间加项。"
+  },
+  {
+    "n": 4,
+    "date": "9/27",
+    "grp": "全员会合",
+    "route": "雷克雅未克",
+    "transport": "步行 + 巴士赴机场取车",
+    "overnight": {
+      "name": "Downtown Reykjavik Apartments",
+      "addr": "Raudararstigur 31, 105 Reykjavik",
+      "phone": "+354-4456777"
+    },
+    "items": [
+      {
+        "time": "09:00",
+        "text": "哈尔格林姆教堂",
+        "note": "Hallgrímskirkja · 约20分钟，今天从这里由高处往海边一路走，不走回头路",
+        "q": "Hallgrímskirkja, Reykjavik",
+        "desc": "冰岛最高的教堂，外形取材自玄武岩柱状节理，是全城最显眼的地标。可以买票登塔俯瞰整个雷克雅未克的彩色屋顶，内部则很简洁肃穆。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "托宁湖",
+        "note": "Tjörnin · 教堂步行约10分钟 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Tjörnin, Reykjavik",
+        "desc": "雷克雅未克市中心的一片湖，周围环绕着议会大厦、市政厅等主要建筑，湖边常年栖息着二十多种水鸟，适合坐下来静静看鸟、看湖景，头顶偶尔还能看到降落进雷克雅未克机场的小飞机。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "冰岛阴茎博物馆（俗称\"丁丁博物馆\"）",
+        "note": "Icelandic Phallological Museum · 托宁湖去旧港口的路上会经过，门票约250元，猎奇向 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Icelandic Phallological Museum, Reykjavik",
+        "desc": "世界上颇为独特的一家博物馆，展出上百种哺乳动物的生殖器标本，也有不少冰岛精灵传说主题的展品，风格猎奇又带点冷幽默，感兴趣的可以买票进去看看，不感兴趣路过打卡外观也行。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Turf House Iceland",
+        "note": "旅游目录列 Þórsplan、教堂附近；餐车当天位置与营业待确认。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Turf House Iceland, Þórsplan, 101 Reykjavík",
+        "desc": "教堂附近一辆只卖三种食物的小餐车，羊肉饼煎得很有水平，配的黑色面包坯是葱香味的，海鲜汤评价也很高，虽然是快餐规格但可以当一顿正餐吃。",
+        "verified": "目录位置已核对；餐车营业待确认",
+        "source": "https://www.goicetravel.is/en/restaurants/turf-house-iceland",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "大教堂旁鱼汤",
+        "note": "原资料不足以识别具体商家。保留线索，不提供可能指错店的导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "fish soup restaurant near Hallgrímskirkja, Reykjavik",
+        "desc": "请补充原攻略截图、店名或商家地图链接后再核对。现有口味、价格、评分描述无法对应到唯一商家。",
+        "verified": "待确认：缺少唯一店名/商家地图",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Baboo Tea",
+        "note": "彩虹街分店可核对到 6 号一带（部分列表写 6b）；按具体商家地图入口，午后再考虑。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Baboo Tea, Skólavörðustígur 6, 101 Reykjavík",
+        "desc": "彩虹街(Skólavörðustígur)上的一家奶茶店，从教堂往劳加维格方向走正好顺路，有博主形容浓郁醇香，喜欢咸芝士口味的会很对味，珍珠也很Q。",
+        "verified": "街道已核对；门牌 6/6b 有差异",
+        "source": "https://www.happycow.net/reviews/baboo-tea-reykjavik-466839",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Sandholt",
+        "note": "更正：Laugavegur 36，原文 54 号错误。官网每日 07:30–18:00。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Sandholt, Laugavegur 36, 101 Reykjavík",
+        "desc": "雷克雅未克老牌烘焙咖啡店，招牌北非蛋(Shakshuka)配面包很受中国胃欢迎，开心果丹麦酥也酥脆香甜。店里的巧克力也很受好评，放嘴里能留香十秒，羊肉/牛肉三明治评价也不错，是不少博主全程最喜欢的一餐。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://sandholt.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "The Story of Icelanders",
+        "note": "地址/开放政策待确认。Sandholt 实际在 36 号，“紧挨 Sandholt”的原描述不成立。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "The Story of Icelanders, Laugavegur 56, Reykjavik",
+        "desc": "紧挨着Sandholt新开的免费历史体验馆，只要11分钟就把冰岛1150年历史浓缩进5个主题空间，从最早的维京定居者一路讲到现代冰岛，中间还有维京头盔、斧头可以拍照互动。目前免费开放（每天8:00-20:00），既然顺路不占用额外时间，值得进去看看，不过免费政策以后可能会变，去之前可以留意一下。",
+        "verified": "待确认",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Old Iceland",
+        "note": "原位置错误：在雷市，不在 Silfra 附近。官网营业 11:30–15:00 / 17:00–22:00。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Old Iceland, Laugavegur 72, 101 Reykjavík",
+        "desc": "雷克雅未克的冰岛菜餐厅。作为雷市用餐备选，不能从黄金圈为了这一餐开回首都。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.oldiceland.is/",
+        "navMain": false
+      },
+      {
+        "time": "上午",
+        "text": "劳加维格购物街",
+        "note": "从公寓向市中心步行，商业街、教堂、托宁湖和旧港按区域挑选；9/27 为周日，多数购物选项需核对开门时间。",
+        "q": "Laugavegur, Reykjavik",
+        "desc": "雷克雅未克最热闹的步行商业街，两侧是设计师小店、咖啡馆和纪念品店，适合买羊毛衫、手工艺品，顺便感受首都的日常生活气息。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "BIOEFFECT 精品店",
+        "note": "Laugavegur 33 · 冰岛本土护肤品牌，主打冰川水/大麦EGF成分 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "BIOEFFECT, Laugavegur 33, Reykjavik",
+        "desc": "BIOEFFECT 在劳加维格上的精品店，跟旗舰店（Hafnarstræti 19）离得很近，主打精华和面霜，也提供皮肤咨询服务。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "66°North 旗舰店",
+        "note": "Laugavegur 17-19，继续往下走 · 冰岛国民户外品牌 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "66°North, Laugavegur 17-19, Reykjavik",
+        "desc": "66°North 在劳加维格上的旗舰店，款式最全，毛线帽、冲锋衣、羊毛外套都有，今年正好是品牌100周年。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Spuutnik 中古店",
+        "note": "劳加维格主干道上，皮草外套约¥1000 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Spuutnik Vintage, Reykjavik",
+        "desc": "雷克雅未克一家休闲风格的中古服装店，有几件不同风格的皮草外套（价格约1000元左右，容易被秒），也有不少简约百搭的薄款羊皮衣。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "verzlanaholl 中古店",
+        "note": "小配件、手工感包和帽子好淘 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "verzlanaholl, Reykjavik",
+        "desc": "另一家中古店，比起衣服更适合淘小配件，有博主在这里花60元淘到一顶又保暖又轻的大头围帽子，评价性价比很高。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "B12 朋克买手店",
+        "note": "价格偏贵但选品精美，摇滚风格 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "B12, Reykjavik",
+        "desc": "一家摇滚朋克风格的买手店，价格小贵但选品精美，毛靴很好看，适合喜欢辣妹/摇滚风的人逛逛。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Kronkron 二手店",
+        "note": "有不少西太后(Vivienne Westwood)款式，家具陈列也精彩 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Kronkron, Reykjavik",
+        "desc": "一家二手时装店，有很多没见过的西太后(Vivienne Westwood)款式，店内陈列的家具撞色设计也很有意思，值得进去开开眼界。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "280bakery",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "280 Bakery, Klapparstígur 37, 101 Reykjavík",
+        "desc": "雷克雅未克本地的小面包店，起酥类面包被很多博主评为\"雷市断层第一\"，牛角、杏仁牛角都很受欢迎，出炉时间不固定，早去更容易碰到刚出炉的。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.280.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Caruso 西餐厅",
+        "note": "9/27 是周日，官网周日 17:00 才开门，不能当当天午餐。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Caruso, Austurstræti 22, 101 Reykjavík",
+        "desc": "市区主街上一家需要预约的西餐厅，评价不算稳定：有博主说烤三文鱼和牛排都很好吃，送的餐前面包也不错，visitorsguide.is上领券还能有15%折扣；也有博主觉得龙虾烩饭是冷冻虾、性价比不高、服务态度一般。仅供参考，去之前可以先查一下当时的优惠券。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.caruso.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Íslenski Barinn",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Íslenski Barinn, Ingólfsstræti 1a, 101 Reykjavík",
+        "desc": "很受欢迎的一家酒吧餐厅，晚上9点半到还要排队。可以一次性尝到冰岛特色/猎奇食物：鲨鱼肉、鲸鱼肉、驯鹿汉堡、龙虾taco、龙虾热狗、海鹦(puffin)、羊头。鲨鱼肉入口是强烈的刺激感，牙龈会有点疼；鲸鱼肉吃着像牛肉；驯鹿汉堡香但没那么多汁；龙虾热狗外壳酥脆虾肉Q弹评价很高。鲸鱼肉和海鹦涉及争议性的物种猎食，是否尝试因人而异。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://islenskibarinn.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Svarta Kaffið",
+        "note": "店家页面列 Laugavegur 54a；不是Sandholt（36号）的地址。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Svarta Kaffið, Laugavegur 54a, 101 Reykjavík",
+        "desc": "雷克雅未克老牌小店，招牌是羊肉汤装在挖空的黑面包碗里端上桌，可以免费续汤一次。有博主实测评价一般：肉汤里羊肉偏少、蔬菜汤偏咸，不过态度好、羊肉没膻味，性价比中等。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.facebook.com/svartakaffid/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Sjávargrillið",
+        "note": "9/27 是周日，官网周末 17:00 起营业，当天只作晚餐备选。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Sjávargrillið, Skólavörðustígur 14, 101 Reykjavík",
+        "desc": "看菜单觉得偏贵，但端上来量大又好吃，是少有配主食的店。龙虾taco比龙虾热狗还好吃，海鲜pasta里给了很多大虾仁，两种鱼的做法都不错，羊肉切片配土豆泥也很有记忆点。有博主特别夸赠送的餐前面包和黄油(抹在石头上端上桌)，说是全程惊艳的免费小吃。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://sjavargrillid.is/en/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Braud & Co 面包店",
+        "note": "地址正确；原文说与 Black Crust 同街不成立。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Brauð & Co, Frakkastígur 16, 101 Reykjavík",
+        "desc": "Frakkastígur 的面包店，可与教堂周边步行一起安排。Black Crust 位于维克，不能一起逛。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.braudogco.is/en-gb",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Messinn",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Messinn, Lækjargata 6b, 101 Reykjavík",
+        "desc": "需要预约的海鲜餐厅，红点鲑(Arctic char)评价很高——鱼肉细腻、配菜丰富；招牌鱼炖(plokkfiskur)是把鱼肉和土豆一起炖煮，加了白葡萄酒和芝士，偏西式口味，不一定合中国胃口。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.messinn.com/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "雷市\"克林顿\"热狗摊",
+        "note": "选择 Tryggvagata 老摊，避免导航到同品牌其他分店。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Bæjarins Beztu Pylsur, Tryggvagata 1, 101 Reykjavík",
+        "desc": "雷克雅未克最有名的热狗摊，克林顿访冰岛时来吃过而出名，价格便宜适合当快餐，口味跟便利店热狗差别不算大，图个打卡。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://bbp.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Old Wharf Noodle House 老码头面",
+        "note": "冰岛企业目录列出 Geirsgata 7b；当前营业仍需确认。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Old Wharf Noodle House, Geirsgata 7b, 101 Reykjavík",
+        "desc": "雷克雅未克一家中餐面馆，主打炸酱面，有博主称是吃过最好吃的炸酱面，店里挂着\"外面是冰岛，里面是热面\"的标语，很受在外思乡胃欢迎。",
+        "verified": "目录地址已核对；营业待确认",
+        "source": "https://ja.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Biang 中餐面馆",
+        "note": "公开商家列表核对到 Tryggvagata 13；不保留未经核实的店主国籍介绍。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Biang Reykjavik, Tryggvagata 13, 101 Reykjavík",
+        "desc": "旧港周边的面馆备选。具体菜品与营业时间以店家公布为准。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.tripadvisor.com/Restaurant_Review-g189970-d33321726-Reviews-Biang_Reykjavik-Reykjavik_Capital_Region.html",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Reykjavik Bistro",
+        "note": "更正：官网为 Laugavegur 22a，并非原文所称彩虹街。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Reykjavik Bistro, Laugavegur 22a, 101 Reykjavík",
+        "desc": "劳加维格街的餐厅，作为市中心用餐备选。官网当前列出每日 12:00–21:30。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.reykjavikbistro.com/en",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "12 Tónar 黑胶店",
+        "note": "彩虹街15号，顺路 · 两层小楼，有咖啡有酒，可以坐下歇会 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "12 Tónar, Skólavörðustígur 15, Reykjavik",
+        "desc": "彩虹街上一家两层的独立黑胶唱片店，主打冰岛及北欧音乐（独立摇滚、古典、实验），有咖啡有酒可以坐下来听听音乐，有时候还有乐队现场演出，喜欢音乐的可以顺路逛逛。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Reykjavik Record Shop",
+        "note": "Klapparstígur 35，紧挨280bakery · 小而精，欧美流行/Hip-hop/Jazz · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Reykjavik Record Shop, Klapparstígur 35, Reykjavik",
+        "desc": "跟280bakery在同一条街上的小唱片店，规模不大但选品精，也有少量二手唱片可以淘，喜欢音乐的可以顺路进去看看。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "\"最美WC\"打卡",
+        "note": "哈帕音乐厅(Harpa)地下一层，免费厕所+爬上二楼拍照很出片 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Harpa Concert Hall, Reykjavik",
+        "desc": "走到老港口附近的哈帕音乐厅，地下一层有免费厕所，建筑本身是蜂窝状玻璃幕墙，爬到二楼拍照效果很好，被称为\"冰岛最美WC\"，顺路可以进去逛一圈、上个厕所。",
+        "navMain": false
+      },
+      {
+        "time": "约15:00",
+        "text": "结束市区活动，前往 BSÍ / 机场",
+        "note": "建议预留 1.5–2 小时给行李、到站、候车和机场接车；17:00 取车，不等于 17:00 才离开雷市。",
+        "navMain": false
+      },
+      {
+        "time": "17:00",
+        "text": "凯夫拉维克机场取车",
+        "note": "Zero Car · Toyota RAV4 · 另外2人抵达，全员会合",
+        "q": "Keflavik International Airport",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "珍珠楼 Perlan",
+        "note": "⚠️ 不在步行路线上，在市区南边小山上，需要打车/开车前往 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Perlan, Reykjavik",
+        "desc": "雷克雅未克的地标建筑之一，玻璃穹顶造型很好认。里面有人造冰洞展览、天文馆和360度观景台，能俯瞰全城和远处的雪山，有博主形容\"百分之两百推荐\"。取到车之后如果时间还够，可以顺路开车去一趟，别指望走路能到。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Kaffibrugghúsið 咖啡豆店",
+        "note": "公开报道地址为 Grandi 港区 Fiskislóð 59；不属于核心步行线，零售营业需确认。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Kaffibrugghúsið, Fiskislóð 59, 101 Reykjavík",
+        "desc": "雷克雅未克郊区一家咖啡豆烘焙店，满屋飘香，有博主称是在冰岛最喜欢的咖啡豆店；适合买豆带走，能不能堂食建议到店问一下，但离市中心步行范围较远。",
+        "verified": "历史报道地址；零售营业待确认",
+        "source": "https://sprudge.com/the-sprudge-guide-to-coffee-in-reykjavik-253290.html",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "本地肉铺（自己开火可选）",
+        "note": "⚠️ KJÖTHÖLLIN / Kjötkompaní 都不在市中心，需要开车前往 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "KJÖTHÖLLIN, Reykjavik",
+        "desc": "如果住处能开火，这两家是本地口碑很好的牛羊肉铺：KJÖTHÖLLIN性价比高，是本地常客的\"外婆家\"；Kjötkompaní被称为冰岛最好的肉铺，在海港城(Hafnarfirði)和Bíldshöfða各有一家店，都需要开车过去，取到车之后再考虑。",
+        "navMain": false
+      },
+      {
+        "time": "晚上",
+        "text": "Hús máls og menningar 书屋酒吧",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Hús máls og menningar, Laugavegur 18, 101 Reykjavík",
+        "desc": "一家开在书店里的酒吧，晚上常有乐队现场演出，气氛热闹，是感受雷克雅未克夜生活的一个选择，今晚还在雷市过夜，晚上出门也来得及。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://husmalsogmenningar.is/",
+        "navMain": false
+      }
+    ],
+    "review": "上午步行与傍晚机场取车必须分段。可选餐厅不是必经点；周日17:00才开的店不能放午餐。"
+  },
+  {
+    "n": 5,
+    "date": "9/28",
+    "grp": "全员",
+    "route": "雷克雅未克 → 塞尔福斯",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Gesthus Selfoss",
+      "addr": "Engjavegur 56, 800 Selfoss",
+      "phone": "+354-4823585"
+    },
+    "items": [
+      {
+        "time": "08:30",
+        "text": "从雷克雅未克出发",
+        "note": "",
+        "navMain": false
+      },
+      {
+        "time": "约09:30",
+        "text": "辛格维利尔国家公园",
+        "note": "P1 出发游览建议 75–90 分钟；原 45 分钟只能做极短停留。",
+        "q": "Þingvellir P1 Hakið parking",
+        "desc": "世界遗产，欧亚板块与北美板块正在此处裂开，能亲眼走进两大板块之间的巨型裂谷。这里也是冰岛议会（世界最古老议会之一）的发源地，地质意义和历史意义都很重。",
+        "parking": {
+          "q": "Þingvellir P1 Hakið parking",
+          "detail": "5座及以下1,000 ISK；当日通用P1/P2/P5。现场机器或Checkit，不能假定Parka。P1适合从游客中心进裂谷；Silfra最近的是P5。",
+          "source": "https://www.thingvellir.is/en/service/parking-service/"
+        },
+        "navMain": true
+      },
+      {
+        "time": "约12:00",
+        "text": "盖歇尔间歇泉",
+        "note": "建议 40–50 分钟，含停车及步行。",
+        "q": "Geysir parking, Haukadalur, Iceland",
+        "desc": "地热喷泉密集区，园区里的 Strokkur 每隔几分钟就会喷发一次，水柱瞬间能冲到20多米高，是近距离感受地热能量最直接的地方，站近了会被水汽扑到脸。",
+        "parking": {
+          "q": "Geysir parking, Haukadalur, Iceland",
+          "detail": "选择景区标示的游客停车区，步行进地热区。本轮资料对费用有冲突，金额/支付平台待确认，不标免费。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "约13:00",
+        "text": "黄金瀑布",
+        "note": "建议 45–60 分钟，再向南用餐；如预约番茄农场需匹配厨房截止时间。",
+        "q": "Gullfoss Visitor Centre parking, Iceland",
+        "desc": "冰岛最壮观的瀑布之一，河水分两级跌入深邃峡谷，水量巨大、气势十足，晴天时常能看到彩虹，是\"黄金圈\"路线的收尾高潮。",
+        "parking": {
+          "q": "Gullfoss Visitor Centre parking, Iceland",
+          "detail": "建议上层游客中心停车区；上下观景台有步道/台阶。2026费用未获一致证据，现场确认。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "可选",
+        "text": "Friðheimar 番茄农场",
+        "note": "放在 Gullfoss 之后向 Selfoss 回程时用餐。温室餐厅 11:30–16:00，订位后再锁定时间。注意不是西部同名 Reykholt。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Friðheimar, Reykholt, Bláskógabyggð, 806 Iceland",
+        "desc": "利用地热能供暖的温室农场，在冰岛种出了番茄，餐厅就开在温室里。招牌番茄浓汤味道浓郁、酸香开胃，配面包蘸着吃是绝配；番茄烤吐司、草莓burrata都是自家农场的味道；海鲜墨鱼汁意面扇贝给得很多；盆栽蛋糕层次丰富、不甜。是条路上很热门的网红打卡点，人多时现场排队很久，想去一定要提前上官网免费预约（附近还有一家分店 Vínstofa Friðheimar，一家营业到下午4点，另一家晚上也开）。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://fridheimar.is/tourist-services/",
+        "navMain": false
+      },
+      {
+        "time": "约15–16点",
+        "text": "抵达塞尔福斯，入住",
+        "note": "规划估算，包含午餐；提前入住须另行确认。",
+        "navMain": false
+      }
+    ],
+    "review": "黄金圈方向合理。原时间表没有包含正餐与停车步行；番茄农场放在黄金瀑布之后更顺。"
+  },
+  {
+    "n": 6,
+    "date": "9/29",
+    "grp": "全员",
+    "route": "塞尔福斯 → 卡尔法费",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Fosshotel Núpar",
+      "addr": "Núpar, Kálfafell, Southern Region 880",
+      "phone": "+354-5173060"
+    },
+    "items": [
+      {
+        "time": "08:30",
+        "text": "从塞尔福斯出发",
+        "note": "",
+        "navMain": false
+      },
+      {
+        "time": "09:45",
+        "text": "塞里雅兰瀑布",
+        "note": "Seljalandsfoss · 约30分钟，可走到瀑布后方",
+        "q": "Seljalandsfoss parking, Iceland",
+        "desc": "南岸最特别的瀑布，可以沿小路走到水帘后面，从瀑布内侧看水花落下的样子。建议带防水外套，鞋子基本免不了打湿。",
+        "parking": {
+          "q": "Seljalandsfoss parking, Iceland",
+          "detail": "Checkit官网小车900 ISK，当日有效；现场/官网按车牌缴费。收费不等于允许露营。",
+          "source": "https://www.checkit.is/en-gb/seljalandsfoss"
+        },
+        "navMain": true
+      },
+      {
+        "time": "约11:00",
+        "text": "斯科加瀑布",
+        "note": "底部观景建议 45 分钟；登顶需额外时间。",
+        "q": "Skógafoss parking, Iceland",
+        "desc": "宽阔笔直落下的瀑布，气势很足，近处常会被水雾溅到；旁边有台阶可以爬到瀑布顶部，从高处俯瞰整条河谷。",
+        "parking": {
+          "q": "Skógafoss parking, Iceland",
+          "detail": "Parka官方缴费页：每次5小时，含厕所；离场后24小时内可在线补缴。车型金额看支付页，勿套用旧攻略8小时说法。",
+          "source": "https://parka.is/pay/skogafoss/"
+        },
+        "navMain": true
+      },
+      {
+        "time": "可选",
+        "text": "斯科加瀑布旁汉堡",
+        "note": "原资料不足以识别具体商家。保留线索，不提供可能指错店的导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "burger restaurant near Skógafoss, Iceland",
+        "desc": "请补充原攻略截图、店名或商家地图链接后再核对。现有口味、价格、评分描述无法对应到唯一商家。",
+        "verified": "待确认：缺少唯一店名/商家地图",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "索尔黑马冰川",
+        "note": "仅岸边观景，不自行踏上冰川。停车收费；从停车场往返观景建议留 45–60 分钟。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Sólheimajökull parking, Iceland",
+        "desc": "标记步道与冰川表面是两回事。自行参观止于允许开放的陆地观景区域；上冰川应参加有合格向导和冰爪等装备的活动。原文“运动鞋可上浮土冰层”删除。",
+        "source": "https://www.mountainguides.is/tour/glacier-hike-solheimajokull",
+        "parking": {
+          "q": "Sólheimajökull parking, Iceland",
+          "detail": "走221至正式停车区。已在Parka收费地点目录，不再免费；常见资料750 ISK，最终按当天牌示。不驶入步道、不踏上冰川。",
+          "source": "https://parka.app/pay-for-parking"
+        },
+        "navMain": false
+      },
+      {
+        "time": "约12:30",
+        "text": "雷尼斯黑沙滩",
+        "note": "未加冰川观景时的估算；加冰川后整体顺延。服从现场警示与封闭区，远离浪区。",
+        "q": "Reynisfjara parking, Iceland",
+        "desc": "著名的黑色沙滩，有成排玄武岩石柱和海蚀洞，海面上还能看到三根海蚀柱，附近的Yoda Cave一带还是电影《奥德赛》冥界场景的取景地。这里的浪很危险，一定不要背对大海拍照，留意\"杀人浪\"警示牌。",
+        "parking": {
+          "q": "Reynisfjara parking, Iceland",
+          "detail": "走215至Reynisfjara游客停车区，不是维克镇海滩。Parka页按3小时，含厕所；金额按实际停车分区/车型确认。现场先读浪况灯与封闭范围。",
+          "source": "https://parka.is/pay/reynisfjara/"
+        },
+        "navMain": true
+      },
+      {
+        "time": "可选",
+        "text": "Black Crust Pizzeria",
+        "note": "原城市错误：店在维克，移至 9/29 午餐备选。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Black Crust Pizzeria, Austurvegur 16, 870 Vík",
+        "desc": "维克的黑色饼底披萨店。官网说明黑色来自活性炭，并非原文所称墨鱼汁；按现场菜单点餐。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://blackcrustpizzeria.com/menu/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Wok In Vík",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Wok In Vík, Austurvegur 18, 870 Vík",
+        "desc": "维克小镇里少见的亚洲炒面馆，乌冬面和炒河粉口碑不错，在这一路吃惯三明治泡面之后，是个换换口味的好选择。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.wokinvik.is/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Restaurant Suður-Vík",
+        "note": "地址已核对，山坡上的餐厅；用餐至少留 45–60 分钟，不保证错峰无需排队。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Suður-Vík, Suðurvíkurvegur 1, 870 Vík",
+        "desc": "维克镇一家百年老餐厅，招牌羊里脊评价很高，建议点五分熟；有博主专门夸这家的羊排和烤布蕾，形容是\"美食荒漠冰岛的一缕光\"；Meet the Meat披萨饼底薄、芝士拉丝；泰式咖喱偏甜口，在冰岛吃到这一口很惊喜。稍微错开饭点（比如提前或推后半小时）基本不用排队。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://visitvik.is/sudur-vik/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Kjarr Restaurant & Bar",
+        "note": "移至 9/29 前往 Núpar 途中。9/30 从冰河湖回这家会向西折返，不建议。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Kjarr Restaurant, Klausturvegur 2, 880 Kirkjubæjarklaustur",
+        "desc": "藏在维克和冰河湖之间一个只有120人的小镇上，离羽毛大峡谷(Fjaðrárgljúfur)很近。开放式厨房，招牌北极红点鲑鱼肉鲜嫩、鱼皮焦香，烤冰岛羊肉又嫩又入味，海鲜墨鱼汁意面虾给得很多，甜点配着窗外瀑布景观喝咖啡体验很好，是不少博主全程排名第一的一餐。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://www.kjarrrestaurant.is/",
+        "navMain": false
+      },
+      {
+        "time": "约16–18点",
+        "text": "抵达 Fosshotel Núpar，入住",
+        "note": "规划估算，含午餐和停车步行；若加冰川观景或 Kjarr 正餐取后端。入住按订单，不能保证13:45进房。",
+        "navMain": false
+      }
+    ],
+    "review": "南岸向东合理，原13:45到Núpar低估停留。维克午餐与Kjarr正餐择一；冰川仅可选岸边观景。"
+  },
+  {
+    "n": 7,
+    "date": "9/30",
+    "grp": "全员",
+    "route": "卡尔法费 → 赫本",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Skyjaborg Apartments",
+      "addr": "Víkurbraut 2, 780 Höfn",
+      "phone": "+354 647 1205"
+    },
+    "items": [
+      {
+        "time": "07:30",
+        "text": "出发（今天10点冰洞团固定时段，别拖）",
+        "note": "直接前往 Jökulsárlón，建议 09:15–09:30 抵达以停车、上厕所和找导游；最终集合位置/提前量按 Blue Iceland 订单。",
+        "navMain": false
+      },
+      {
+        "time": "建议跳过",
+        "text": "斯卡夫塔山冰川区域",
+        "note": "Núpar → Skaftafell 不可能仅 15 分钟；停车后往返步道另需时间。当天优先 10:00 已订团，不将此站加入主线。",
+        "q": "Skaftafell Visitor Centre parking, Iceland",
+        "desc": "如一定要徒步，需单独腾出足够时段。不能把大型国家公园当作下车 30 分钟即可完成的冰川徒步。",
+        "tag": "optional",
+        "tagText": "冰洞日前不安排",
+        "parking": {
+          "q": "Skaftafell Visitor Centre parking, Iceland",
+          "detail": "5座及以下1,110 ISK，当日有效。与冰河湖是不同收费区；同日另一收费区官方有50%优惠规则，不是一个票全免。当天主线跳过。",
+          "source": "https://www.vatnajokulsthjodgardur.is/en/communities--businesses/payment-of-camping-and-regional-fees"
+        },
+        "navMain": false
+      },
+      {
+        "time": "10:00",
+        "text": "冰川洞穴探索",
+        "note": "10:00 已订时段保留。官网可确认 Jökulsárlón 集合区域；订单具体团型、精确集合点、时长及当天洞况仍需确认。",
+        "tag": "ok",
+        "tagText": "已预订·4人",
+        "q": "Jökulsárlón main parking, Iceland",
+        "desc": "冰洞形态和可进入区域由当日情况决定；不保证看到某张宣传照中的洞。原 3 小时仅作占位，结束后再安排湖边和午餐。",
+        "source": "https://blueiceland.is/",
+        "parking": {
+          "q": "Jökulsárlón main parking, Iceland",
+          "detail": "先停冰河湖主停车区，再按Blue Iceland订单找车/导游。国家公园价目表5座及以下1,110 ISK；不要因参加团就假定免停车费。原坐标仅代表区域，非已核对导游位置。",
+          "source": "https://www.vatnajokulsthjodgardur.is/en/communities--businesses/pricelist"
+        },
+        "navMain": true
+      },
+      {
+        "time": "团后",
+        "text": "钻石沙滩",
+        "note": "团结束、午餐后游览；冰河湖与沙滩往返、找停车场都要计时。",
+        "q": "Diamond Beach east parking, Iceland",
+        "desc": "紧挨着杰古沙龙，浮冰被海浪冲上黑沙滩，在阳光下像撒了一地的钻石，是全程拍照效果最好的地方之一。",
+        "parking": {
+          "q": "Diamond Beach east parking, Iceland",
+          "detail": "桥两侧都有沙滩停车区，按实际冰块和开放情况选择。湖区收费覆盖规则到场核对，不误付Skaftafell。停正式车位，不停1号路桥头。",
+          "source": "https://www.vatnajokulsthjodgardur.is/en/communities--businesses/payment-of-camping-and-regional-fees"
+        },
+        "navMain": true
+      },
+      {
+        "time": "可选",
+        "text": "杰古沙龙旁快餐",
+        "note": "原资料不足以识别具体商家。保留线索，不提供可能指错店的导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Jökulsárlón, Iceland",
+        "desc": "请补充原攻略截图、店名或商家地图链接后再核对。现有口味、价格、评分描述无法对应到唯一商家。",
+        "verified": "待确认：缺少唯一店名/商家地图",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "约16–17点",
+        "text": "抵达赫本，入住",
+        "note": "估算窗口；按实际团结束时间调整。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Pakkhús Restaurant",
+        "note": "地址正确；官网每日 12:00–21:30，不接受订位。作为 9/30 赫本晚餐。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Pakkhús, Krosseyjarvegur 3, 780 Höfn",
+        "desc": "藏在赫本海港边的一家餐厅，白色仓库外观，进门却是木质桌面、暖黄灯光的温馨氛围，好几位博主都独立推荐，称\"来冰岛只能推荐一家海鲜餐厅就选它\"。招牌龙虾尾蒜蓉黄油烤制，肉质紧实鲜甜爆汁；奶油白葡萄酒烤海螯虾奶香浓郁；开场送的春卷外皮酥脆馅料足。营业12:00-21:00，不接受预约，建议错峰前往。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://pakkhus.is/location/",
+        "navMain": false
+      }
+    ],
+    "review": "10:00冰洞团是硬约束。主线直接到冰河湖；不以Skaftafell短停挤占签到余量，Kjarr已移前一天。"
+  },
+  {
+    "n": 8,
+    "date": "10/1",
+    "grp": "全员",
+    "route": "赫本 → 埃伊尔斯塔济",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Lagarfell Studios",
+      "addr": "Lagarfell 3, 700 Egilsstaðir",
+      "phone": "+354-8934322"
+    },
+    "items": [
+      {
+        "time": "08:00",
+        "text": "从赫本出发",
+        "note": "⚠️ 今天驾驶+山口路况都要留意，别压太紧",
+        "navMain": false
+      },
+      {
+        "time": "约08:30",
+        "text": "蝙蝠山",
+        "note": "先到 Viking Café / Stokksnes 入口，买票、进闸与拍摄建议共留60–90分钟，不导航到山顶。",
+        "q": "Viking Café, Stokksnes, Iceland",
+        "desc": "尖锐的黑色山峰倒映在海边潮汐滩涂里，是冰岛摄影圈最有名的取景地之一，退潮或清晨光线下倒影效果最好。",
+        "parking": {
+          "q": "Viking Café, Stokksnes, Iceland",
+          "detail": "先到Viking Café入口买Stokksnes区域票，通常按人，不是只收一辆车停车费；2026票价待确认。买票后按现场指引通过闸口。",
+          "source": "https://www.vestrahorn.is/"
+        },
+        "navMain": true
+      },
+      {
+        "time": "约11:00",
+        "text": "彩色房子村",
+        "note": "含前段停留的估算；午餐可在途中解决。",
+        "q": "Djúpivogur harbour, Iceland",
+        "desc": "安静的东部小渔村，几栋色彩鲜艳的老房子沿港口排开，适合下车走走、喝杯咖啡，感受峡湾小镇的慢生活。",
+        "parking": {
+          "q": "Djúpivogur harbour, Iceland",
+          "detail": "以港口为到达区域，在标示公共车位停放后步行。具体车位、费率与厕所开放现场确认，不把村名当停车场坐标。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "行车途经",
+        "text": "沿1号公路经Reyðarfjörður",
+        "note": "此点用于约束沿东峡湾的主线路径，不另加游览时长；仍须核对地图是否沿1号路，避开939和95捷径。",
+        "q": "Reyðarfjörður, Iceland",
+        "navMain": true,
+        "source": "https://www.east.is/en/blog/driving-the-ring-road-through-east-iceland"
+      },
+      {
+        "time": "约14–15点",
+        "text": "抵达埃伊尔斯塔济，午餐",
+        "note": "按1号公路沿东峡湾规划并留休息。不为追赶11:45而走939 Öxi山路捷径。",
+        "navMain": false
+      },
+      {
+        "time": "下午可选",
+        "text": "塞济斯菲厄尔",
+        "note": "93号路需往返同一山口，没有方便的公路绕行替代；恶劣天气直接跳过。计划额外1.5–2小时。",
+        "tag": "optional",
+        "tagText": "天气/体力允许",
+        "q": "Seyðisfjarðarkirkja, Seyðisfjörður, Iceland",
+        "desc": "藏在山谷尽头的彩虹小镇，蓝色教堂门前那条彩虹街道是最出片的地方，四周被陡峭山壁和瀑布环绕，翻山进来的路本身也是一段风景。",
+        "parking": {
+          "q": "Seyðisfjarðarkirkja, Seyðisfjörður, Iceland",
+          "detail": "蓝教堂/彩虹街周边合法公共车位，步行到彩虹街；不将车开上拍照步行区。收费状态待确认。93号山口往返均需查路况。",
+          "source": ""
+        },
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "拉加尔湖",
+        "note": "湖很长，原名称不是具体停车点。当天已跨东峡湾，不再默认绕湖；选住宿附近合法湖岸入口后导航。",
+        "q": "Lagarfljót, Iceland",
+        "desc": "冰岛第三长的湖，传说湖底住着类似\"尼斯湖水怪\"的巨型生物，湖边的成片森林在冰岛也算难得一见的景观。",
+        "tag": "optional",
+        "tagText": "到达后再决定",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Bónus 补给（有厨房可做熟食）",
+        "note": "普通冷藏三文鱼不能仅凭新鲜或无腥味判断适合生食，按包装要求处理并做熟。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Bónus, Egilsstaðir, Iceland",
+        "desc": "提前买好早餐、饮水和路上午餐；住宿厨房设施需看订单。",
+        "navMain": false
+      }
+    ],
+    "review": "东峡湾与93号山口组合是偏重的一天。沿1号路行驶，不追求导航最短的939捷径；彩虹小镇和湖边散步看天气/体力决定。"
+  },
+  {
+    "n": 9,
+    "date": "10/2",
+    "grp": "全员",
+    "route": "埃伊尔斯塔济 → 米湖",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Vogar Travel Service",
+      "addr": "Vogar, Reykjahlíð, Norðurland Eystra 660",
+      "phone": ""
+    },
+    "items": [
+      {
+        "time": "08:00",
+        "text": "从埃伊尔斯塔济出发",
+        "note": "走862西侧路况好，别走864砂石路",
+        "navMain": false
+      },
+      {
+        "time": "约10:45",
+        "text": "黛提瀑布",
+        "note": "走1号路转862到西侧停车场，游览建议60–90分钟；不能只填瀑布名称让导航任意选岸。",
+        "q": "Dettifoss west side parking, Road 862, Iceland",
+        "desc": "欧洲流量最大的瀑布，水花和轰鸣声非常有冲击力，站在观景台能感觉到脚下都在震动。",
+        "parking": {
+          "q": "Dettifoss west side parking, Road 862, Iceland",
+          "detail": "必须核对路线为1号→862西岸停车场。步道往返与观景留60–90分钟；不将同名瀑布点替代西侧入口。当前收费状态待确认。",
+          "source": "https://www.northiceland.is/en/place/dettifoss-waterfall"
+        },
+        "navMain": true
+      },
+      {
+        "time": "约13:00",
+        "text": "克拉夫拉火山口",
+        "note": "停车点为 Krafla Víti，非 Askja 的同名 Víti；积雪/封路则跳过。",
+        "q": "Krafla Víti parking, Iceland",
+        "desc": "一个圆形火山口湖，湖水呈蓝绿色，周边是火山灰地貌，是克拉夫拉火山区最直观的一处景观。",
+        "parking": {
+          "q": "Krafla Víti parking, Iceland",
+          "detail": "Krafla火山区公路末端停车点，别选Askja的Víti。不把夏季可达视作10月保证；未核实当前费率。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "约14:00",
+        "text": "地热带",
+        "note": "建议30–45分钟；午餐单独预留。",
+        "q": "Hverir parking, Iceland",
+        "desc": "遍地冒着蒸汽的泥浆池和喷气孔，空气里有硫磺味，地表五颜六色，走在其中像置身另一个星球。",
+        "parking": {
+          "q": "Hverir parking, Iceland",
+          "detail": "1号路旁地热区停车场；使用现场所示支付平台，不假定Parka。金额本轮待确认。不要离开标记步道。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "约15:00",
+        "text": "抵达米湖住宿，午休",
+        "note": "入住视订单，留足17:00温泉前的换衣、接近场地和签到时间。",
+        "navMain": true,
+        "q": "Vogar Travel Service, Mývatn, Iceland"
+      },
+      {
+        "time": "17:00",
+        "text": "米湖地热温泉",
+        "note": "Earth Lagoon Mývatn · 已订，约2小时",
+        "tag": "ok",
+        "tagText": "已预订·4人",
+        "q": "Earth Lagoon Mývatn, Jarðbaðshólar, 660 Mývatn",
+        "desc": "米湖版的\"蓝湖\"，游客更少、更平价。泡在乳蓝色温泉水里，四周就是火山地貌，晚上运气好还能顺便等极光出现。",
+        "parking": {
+          "q": "Earth Lagoon Mývatn, Jarðbaðshólar, 660 Mývatn",
+          "detail": "停车在温泉接待建筑游客区；按订单确认设施/改名后的地图入口，建议16:30–16:45到。停车是否含在门票中待确认。",
+          "source": "https://www.northiceland.is/en/service/myvatn-nature-baths"
+        },
+        "navMain": true,
+        "verified": "地址与新名称已核对",
+        "source": "https://www.northiceland.is/en/service/myvatn-nature-baths"
+      }
+    ],
+    "review": "原30分钟Dettifoss不足以覆盖停车往返。明确西岸862，午餐和温泉前休整计入时间；天气差优先舍弃Víti。"
+  },
+  {
+    "n": 10,
+    "date": "10/3",
+    "grp": "全员",
+    "route": "米湖 → 胡萨维克",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Bjarnabúð",
+      "addr": "Garðarsbraut 12, Húsavík City Center, Norðurland Eystra 640",
+      "phone": ""
+    },
+    "items": [
+      {
+        "time": "09:00",
+        "text": "裂缝温泉",
+        "note": "Grjótagjá · 约20分钟，只能看不能泡",
+        "q": "Grjótagjá parking, Iceland",
+        "desc": "藏在熔岩裂缝里的地热洞穴温泉，水温太高已经不能下水，但从裂缝往下看那片蓝色水面很有电影感，是《权力的游戏》的取景地之一。",
+        "parking": {
+          "q": "Grjótagjá parking, Iceland",
+          "detail": "用洞穴入口正规停车区；只能观景，不能泡水。费用/入口开放状态现场确认。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "09:40",
+        "text": "熔岩地貌",
+        "note": "Dimmuborgir · 约40分钟徒步",
+        "q": "Dimmuborgir parking, Iceland",
+        "desc": "大片形状诡异的熔岩柱和天然拱门，传说是精灵和巨魔的家，有几条不同长度的步道可以穿行其中，很适合慢慢走。",
+        "parking": {
+          "q": "Dimmuborgir parking, Iceland",
+          "detail": "入口服务区停车后选短环线，记录回到同一停车场的路径。不要把40分钟套用到所有徒步路线。费率待确认。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "约12:00",
+        "text": "抵达胡萨维克，入住+午餐",
+        "note": "午餐、港口活动；能否提前入住看订单。如不观鲸也不加其他活动，今天很宽松。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Húsavík Viewing Point",
+        "note": "需具体地图点；港口散步可现场选择合法步道，不根据泛称导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Húsavík Viewing Point, Iceland",
+        "desc": "胡萨维克港口附近的观景台，能看到雪山和辽阔峡湾铺展在眼前，风比较大，就算不参加观鲸团，站在这里看看山海也很治愈。",
+        "verified": "待确认：名称不唯一",
+        "disabledNav": true,
+        "navMain": false
+      }
+    ],
+    "review": "米湖→胡萨维克本身较轻松；如果没有观鲸兴趣，这晚住宿的必要性值得重新考虑。但本次保留住宿，不擅自改订。众神瀑布移至次日。"
+  },
+  {
+    "n": 11,
+    "date": "10/4",
+    "grp": "全员",
+    "route": "胡萨维克 → 阿克雷里",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Acco Luxury Apartments",
+      "addr": "Skipagata 12, Akureyri City Center, Norðurland Eystra 600",
+      "phone": "+354 547 2226"
+    },
+    "items": [
+      {
+        "time": "09:30",
+        "text": "从胡萨维克出发",
+        "note": "",
+        "navMain": false
+      },
+      {
+        "time": "约10:20",
+        "text": "众神瀑布",
+        "note": "移至胡萨维克 → 阿克雷里途中，建议45–60分钟，减少前一天先向西再向北的折返。",
+        "q": "Goðafoss east parking, Iceland",
+        "desc": "半圆形的瀑布，传说是冰岛改信基督教时酋长把北欧诸神雕像扔进瀑布而得名，规模适中但角度非常好拍。",
+        "parking": {
+          "q": "Goðafoss east parking, Iceland",
+          "detail": "建议东侧服务区停车后走观景步道；两岸可步行比较，不必来回移车。费用和厕所现场确认。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "可选",
+        "text": "留意 Safnasafnið 民间艺术博物馆",
+        "note": "官网2026年展期至10/4，10:00–17:00；在阿克雷里东侧，移到10/4途中。是否走旧路需与隧道路线一起决定。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Safnasafnið, Svalbarðsströnd, 606 Akureyri",
+        "desc": "按兴趣决定是否入馆；原文关于“推门就强制买票”的游记故事不作为规则。",
+        "source": "https://safnasafnid.is/",
+        "verified": "地点与2026展期已核对",
+        "navMain": false
+      },
+      {
+        "time": "下午",
+        "text": "植物园",
+        "note": "完成众神瀑布及午餐后安排，户外开放情况现场确认。",
+        "q": "Akureyri Botanical Garden parking, Iceland",
+        "desc": "世界最北的植物园之一，收集了不少冰岛本地和北极圈植物，节奏很慢，适合饭后散步放松。",
+        "parking": {
+          "q": "Akureyri Botanical Garden parking, Iceland",
+          "detail": "植物园周边合法车位，市中心用餐可停车后步行；P1/P2分区时间和费率按路牌/市政说明，不能假定周末一律免费。",
+          "source": "https://parka.app/pay-for-parking"
+        },
+        "navMain": true
+      },
+      {
+        "time": "中午/下午",
+        "text": "阿克雷里市区漫步",
+        "note": "含午餐补给，与植物园按体力安排；原11:30不再锁定。",
+        "q": "Akureyri, Iceland",
+        "desc": "冰岛北部最大的城市，有教堂、港口和一些餐厅咖啡馆，节奏比雷克雅未克更慢，适合借这半天好好休整、补给。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Cafe Berlin",
+        "note": "官网每日 08:00–17:00；适合早午餐，不能当晚餐备选。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Berlín, Skipagata 4, 600 Akureyri",
+        "desc": "阿克雷里一家不用预约、直接走进去点的早餐店，招牌厚切吐司烤得外脆内软，麦香配一点焦糖香但不齁甜，有博主评为整趟北欧之行的早餐第一名。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://berlinakureyri.is/en",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Centrum Kitchen & Bar",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Centrum Kitchen & Bar, Hafnarstræti 102, 600 Akureyri",
+        "desc": "阿克雷里市区一家小众餐厅，奶油意面评价不错，有博主在阿克雷里专门二刷这家，值得一试。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://centrum-kitchen.is/en/frontpage/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Kristjáns Bakarí 百年面包房",
+        "note": "公开商家列表列出 108 号；当前门店营业需复核，不采用“从未换配方”的无来源说法。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Kristjáns Bakarí, Hafnarstræti 108, 600 Akureyri",
+        "desc": "阿克雷里市中心面包房备选，出发前确认是否仍在该门店经营。",
+        "verified": "公开列表地址；当前营业待确认",
+        "source": "https://www.tripadvisor.com/Restaurant_Review-g189954-d1103755-Reviews-Kristjans_Bakari_Bakery_and_Cafe-Akureyri_Northeast_Region.html",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "66°North 奥莱店",
+        "note": "Skipagata 9 · 跟住宿同一条街，卖往季款更便宜 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "66°North Outlet, Skipagata 9, Akureyri",
+        "desc": "66°North 在阿克雷里的奥莱店，跟今晚住宿就在同一条街上，走两步就到，价格比市区旗舰店便宜，主要是往季款式。",
+        "navMain": false
+      }
+    ],
+    "review": "把众神瀑布放在去阿克雷里的途中。Safnasafnið为可选；走Vaðlaheiði隧道要另查隧道费，进馆路线不能直接套用穿隧道时间。"
+  },
+  {
+    "n": 12,
+    "date": "10/5",
+    "grp": "全员",
+    "route": "阿克雷里 → 斯蒂基斯霍尔米",
+    "transport": "自驾",
+    "overnight": {
+      "name": "Hotel Karólína",
+      "addr": "Aðalgata 7, Stykkishólmur, Vesturland 340",
+      "phone": ""
+    },
+    "items": [
+      {
+        "time": "07:30",
+        "text": "出发（比平时早1-2小时）",
+        "note": "长途转场日。原12:40抵达过于理想化；按实际选路、砂石段、午餐与休息留足整段白天。",
+        "navMain": false
+      },
+      {
+        "time": "途中可选",
+        "text": "犀牛石",
+        "note": "经711砂石路，建议为往返支路和观景额外留1–1.5小时以上；天气差就跳过，不当作1号路旁停15分钟。",
+        "q": "Hvítserkur parking, Iceland",
+        "desc": "立在海边的一块奇特玄武岩柱，形状像一只探头喝水的犀牛或大象，退潮时可以走到沙滩近处细看。",
+        "tag": "optional",
+        "tagText": "额外绕行",
+        "parking": {
+          "q": "Hvítserkur parking, Iceland",
+          "detail": "711支路正式停车场，先走上方观景台；下沙滩受坡面和潮水影响。Parka目录已列收费，金额以页面车型为准。",
+          "source": "https://parka.app/pay-for-parking"
+        },
+        "navMain": false
+      },
+      {
+        "time": "约14–16点",
+        "text": "抵达斯蒂基斯霍尔米，午餐+入住",
+        "note": "规划估算，犀牛石绕行会推迟；到镇后散步休息，不再强加半岛大环线。",
+        "navMain": false
+      },
+      {
+        "time": "下午",
+        "text": "斯蒂基斯霍尔米市区漫步",
+        "note": "约60分钟",
+        "q": "Stykkishólmur, Iceland",
+        "desc": "斯奈山半岛北岸的小渔港，彩色小屋和红顶教堂很上镜，也是电影《白日梦想家》的取景地之一。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Narfeyrarstofa",
+        "note": "地址已核对；营业时间和菜单以商家当日公布为准。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Narfeyrarstofa, Aðalgata 3, 340 Stykkishólmur",
+        "desc": "白日梦想家小镇一家餐厅，海鲜(鳕鱼)带皮油煎调味，新鲜好吃；羊肉酱汁比较厚重、偏咸，评价不如海鲜。",
+        "verified": "地址已核对 · 2026-09-16",
+        "source": "https://narfeyrarstofa.is/contact/",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Fish & Chips 餐车",
+        "note": "原资料不足以识别具体商家。保留线索，不提供可能指错店的导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "fish and chips truck, Stykkishólmur, Iceland",
+        "desc": "请补充原攻略截图、店名或商家地图链接后再核对。现有口味、价格、评分描述无法对应到唯一商家。",
+        "verified": "待确认：缺少唯一店名/商家地图",
+        "disabledNav": true,
+        "navMain": false
+      }
+    ],
+    "review": "长途转场，犀牛石是额外砂石路绕行。12:40到达不应承诺；疲劳或路况差时删犀牛石，优先酒店和晚餐。"
+  },
+  {
+    "n": 13,
+    "date": "10/6",
+    "grp": "行程分岔",
+    "route": "斯蒂基斯霍尔米 → 雷克雅未克 → 凯夫拉维克(2人)",
+    "transport": "自驾 + Flybus（雷市→凯夫拉维克段）",
+    "overnight": {
+      "name": "Keflavík Micro Suites（我们2人）",
+      "addr": "Hafnargata 65, 230 Keflavík, Iceland",
+      "phone": ""
+    },
+    "items": [
+      {
+        "time": "08:00",
+        "text": "从斯蒂基斯霍尔米出发",
+        "note": "",
+        "navMain": false
+      },
+      {
+        "time": "约08:50",
+        "text": "草帽山",
+        "note": "导航至 Kirkjufellsfoss 停车场拍山与瀑布，建议45–60分钟；本行程不登山。",
+        "q": "Kirkjufellsfoss parking, Iceland",
+        "desc": "冰岛被拍得最多的山之一，尖锥形山体配上前面的小瀑布 Kirkjufellsfoss，是明信片级别的经典机位。",
+        "parking": {
+          "q": "Kirkjufellsfoss parking, Iceland",
+          "detail": "导航到瀑布游客停车场而非Kirkjufell山体。停车收费平台与金额本轮未确认，请现场支付后沿步道拍摄；不在54号路边停车。",
+          "source": "https://www.west.is/en/place/kirkjufellsfoss"
+        },
+        "navMain": true
+      },
+      {
+        "time": "可选支线",
+        "text": "红教堂",
+        "note": "位于 Hellissandur/Rif 附近的北岸。若坚持去，应草帽山→红教堂→绕西端→Arnarstapi，增加时间；不能从 Arnarstapi 再折返。",
+        "q": "Ingjaldshólskirkja, Hellissandur, Iceland",
+        "desc": "Ingjaldshólskirkja 是白墙红顶教堂。原“外观鲜红”不准确，且原先景点顺序不合理。",
+        "tag": "optional",
+        "tagText": "主线建议跳过",
+        "parking": {
+          "q": "Ingjaldshólskirkja, Hellissandur, Iceland",
+          "detail": "教堂附近标示停车处短停；不要把引道中间当拍照停车位。北岸可选支线，不在南岸Arnarstapi旁。",
+          "source": ""
+        },
+        "navMain": false
+      },
+      {
+        "time": "约10:30",
+        "text": "阿尔纳斯塔皮",
+        "note": "主线经54号路到南岸，建议60–75分钟，含海岸步道；按天气及路况调整。",
+        "q": "Arnarstapi parking, Bárðar Saga Snæfellsáss statue, Iceland",
+        "desc": "海岸边的玄武岩海蚀地貌，有天然拱门和沿崖步道，走在海边常能看到成群的海鸟。",
+        "parking": {
+          "q": "Arnarstapi parking, Bárðar Saga Snæfellsáss statue, Iceland",
+          "detail": "建议从Bárður雕像一带正规停车区开始沿海步行，Músagjá/Gatklettur合并为一站；停车/厕所收费现场确认。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "同一站",
+        "text": "老人崖",
+        "note": "Músagjá 属于 Arnarstapi 海岸步行范围，合并停车，不设独立驾车停靠。中文“老人崖”指代尚不明确。",
+        "q": "Músagjá, Arnarstapi, Iceland",
+        "desc": "斯奈山半岛上的一处嶙峋熔岩崖壁，游客不多，适合作为沿途一个安静的小停靠点。",
+        "tag": "optional",
+        "tagText": "随海岸步道",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "约12:00",
+        "text": "黑教堂",
+        "note": "约20–30分钟，之后预留午餐。",
+        "q": "Búðakirkja parking, Búðir, Iceland",
+        "desc": "一座孤零零立在熔岩原上的黑色小教堂，极简的黑白配色在阴天里格外有氛围感，很受摄影师喜欢。",
+        "parking": {
+          "q": "Búðakirkja parking, Búðir, Iceland",
+          "detail": "按教堂游客车位标识停车，区分酒店专用车位。短停20–30分钟，不堵教堂入口；费率未核实。",
+          "source": ""
+        },
+        "navMain": true
+      },
+      {
+        "time": "饭后可选",
+        "text": "海豹沙滩",
+        "note": "建议45分钟；与玄武岩壁二选一，时间不足直接回雷市。",
+        "q": "Ytri Tunga parking, Iceland",
+        "desc": "冰岛少数能稳定看到野生海豹的沙滩，退潮时海豹会爬上岸边礁石晒太阳，不过能不能遇到全看运气。",
+        "tag": "optional",
+        "tagText": "建议最多加一站",
+        "parking": {
+          "q": "Ytri Tunga parking, Iceland",
+          "detail": "官方指向Checkit缴费，金额按车型查询。看海豹至少保持50米；有幼崽建议100米。不是下车即保证看到海豹。",
+          "source": "https://lukkutangi.is/"
+        },
+        "navMain": false
+      },
+      {
+        "time": "返城可选",
+        "text": "玄武岩壁垒",
+        "note": "与海豹沙滩二选一。支路与步行都要计时，不把15分钟视作全部耗时。",
+        "q": "Gerðuberg parking, Iceland",
+        "desc": "一整排排列整齐的六角形玄武岩柱，像天然的石头城墙，规模比冰岛其他玄武岩景点更壮观完整。",
+        "tag": "optional",
+        "tagText": "建议最多加一站",
+        "parking": {
+          "q": "Gerðuberg parking, Iceland",
+          "detail": "走景点标示支路至合法停车区，支路路况现场判断；不驶上草地。2026收费状态待确认。",
+          "source": ""
+        },
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "Bjarnarhöfn Bistro",
+        "note": "官网写餐厅 6–8 月营业。10/6 不作为可依赖饭点，除非店家另行确认。位置在半岛北侧，不能在南岸行程后插入。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Bjarnarhöfn Bistro, Bjarnarhöfn, 340 Iceland",
+        "desc": "博物馆与 Bistro 的营业季不能混为一谈。官网确有 shark fin soup，但当前没有确认 10 月餐厅开放，不据旧游记价格安排行程。",
+        "verified": "地址已核对；10 月营业未确认",
+        "source": "https://bjarnarhofn.is/",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "约13:00",
+        "text": "从斯奈山半岛出发返回雷克雅未克",
+        "note": "这是返城目标窗口，非硬保证；主线只保留草帽山、Arnarstapi、黑教堂及午餐。如加北岸红教堂则不能沿用这套时刻。",
+        "navMain": false
+      },
+      {
+        "time": "约15–16点",
+        "text": "抵达雷克雅未克，交接车辆",
+        "note": "规划窗口。将早返2人及行李送至BSÍ，另外2人留车。赶不上预选巴士就用后班并相应推迟酒店入住。",
+        "navMain": false
+      },
+      {
+        "time": "按已订班次",
+        "text": "Flybus：雷克雅未克 → 凯夫拉维克",
+        "note": "BSÍ → KEF航站楼约45分钟；不是到 Keflavík Micro Suites。下车后另需出租车到镇上酒店。",
+        "tag": "book",
+        "tagText": "⚠ 建议提前订票",
+        "q": "BSÍ Bus Terminal, Reykjavik",
+        "desc": "官方时刻表的终点是 Keflavík International Airport。必须单独安排机场至 Hafnargata 65 的末段；最终以10/6购票显示的班次为准。",
+        "source": "https://flybus.is/",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "约17–18点",
+        "text": "抵达 Keflavík Micro Suites，入住",
+        "note": "仅为规划窗口；取决于巴士班次及机场→镇上酒店转乘。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "机场附近炸鱼薯条店",
+        "note": "原资料不足以识别具体商家。保留线索，不提供可能指错店的导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "fish and chips near Keflavik Airport, Iceland",
+        "desc": "请补充原攻略截图、店名或商家地图链接后再核对。现有口味、价格、评分描述无法对应到唯一商家。",
+        "verified": "待确认：缺少唯一店名/商家地图",
+        "disabledNav": true,
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "机场附近泰餐",
+        "note": "原资料不足以识别具体商家。保留线索，不提供可能指错店的导航。",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Thai restaurant near Keflavik Airport, Iceland",
+        "desc": "请补充原攻略截图、店名或商家地图链接后再核对。现有口味、价格、评分描述无法对应到唯一商家。",
+        "verified": "待确认：缺少唯一店名/商家地图",
+        "disabledNav": true,
+        "navMain": false
+      }
+    ],
+    "review": "主线建议只保留草帽山→Arnarstapi→黑教堂→午餐→雷市。红教堂北岸支线、海豹沙滩和玄武岩壁不全部塞入；机场巴士后还有镇上酒店接驳。",
+    "navEnd": "BSÍ Bus Terminal, Reykjavík, Iceland"
+  },
+  {
+    "n": 14,
+    "date": "10/7",
+    "grp": "分开返程",
+    "route": "凯夫拉维克 → 赫尔辛基 → 多哈",
+    "transport": "飞行",
+    "overnight": null,
+    "items": [
+      {
+        "time": "前一晚",
+        "text": "预约次日早班出租车",
+        "note": "冰岛没有Uber，可用本地打车App：Hopp（类Uber体验，主要覆盖雷市+机场）或 Flott（支持提前预约、覆盖凯夫拉维克等小镇、价格透明）；凯夫拉维克镇上凌晨App未必随叫随到，建议App预约的同时也请 Micro Suites 前台帮忙确认当地出租车公司 · ⚠ 需提前预约",
+        "tag": "book",
+        "tagText": "⚠ 需提前预约",
+        "navMain": false
+      },
+      {
+        "time": "06:00",
+        "text": "打车前往机场",
+        "note": "车已留在雷市，提前确认预约车辆；车程、费用按当地车行报价，删除未经核实的6–8分钟/2500–3500 ISK保证。按航司要求预留值机时间。",
+        "navMain": false
+      },
+      {
+        "time": "可选",
+        "text": "凯夫拉维克机场免税店",
+        "note": "BIOEFFECT 到达/出境两个店都有，价格常比市区还划算 · 仅供参考",
+        "tag": "optional",
+        "tagText": "仅供参考",
+        "q": "Keflavik Airport Duty Free",
+        "navMain": false
+      },
+      {
+        "time": "08:35",
+        "text": "起飞：凯夫拉维克 → 赫尔辛基",
+        "note": "AY992（芬兰航空实际承运）· 2人先行返程",
+        "navMain": false
+      },
+      {
+        "time": "17:00",
+        "text": "凯夫拉维克机场还车",
+        "note": "Zero Car · 留下的2人负责，随后自行安排返程",
+        "q": "Keflavik International Airport",
+        "navMain": false
+      },
+      {
+        "time": "17:05",
+        "text": "起飞：赫尔辛基 → 多哈",
+        "note": "QR302（卡塔尔航空实际承运）",
+        "navMain": false
+      }
+    ],
+    "review": "住宿在凯夫拉维克镇内，提前确认凌晨出租车和自助入住联络方式。返程机票、订单与出租车实际确认信息优先于本页估算。"
+  },
+  {
+    "n": 15,
+    "date": "10/8",
+    "grp": "早到2人",
+    "route": "多哈 → 上海",
+    "transport": "飞行",
+    "overnight": null,
+    "items": [
+      {
+        "time": "02:50",
+        "text": "起飞：多哈 → 上海",
+        "note": "AY6687（卡塔尔航空实际承运）· 16:20 抵达浦东 T2，行程结束",
+        "navMain": false
+      }
+    ],
+    "review": ""
+  }
+];
 
   /* ---------- 渲染：地图 ---------- */
   function renderMap(){
@@ -486,20 +1838,34 @@
     function link(text,q){ return '<a href="'+gmaps(q)+'" target="_blank" rel="noopener">'+text+'</a>'; }
   }
 
+
+  function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function sourceLink(url){return url ? '<a class="source-link" href="'+esc(url)+'" target="_blank" rel="noopener">核对来源 ↗</a>' : '';}
+  function auditDetails(it){
+    var h=it.verified?'<div class="note">'+esc(it.verified)+'</div>':'';
+    h+=sourceLink(it.source);
+    if(it.parking)h+='<div class="parking-card"><b>停车 / 到达入口</b><br>'+esc(it.parking.q)+'<br>'+esc(it.parking.detail)+'<br><a class="source-link" href="'+gmaps(it.parking.q)+'" target="_blank" rel="noopener">导航至停车入口 →</a>'+sourceLink(it.parking.source)+'</div>';
+    return h;
+  }
+  function renderAudit(){
+    document.getElementById('parkingIndex').innerHTML=DAYS.map(function(d){return d.items.filter(function(i){return i.parking;}).map(function(i){return '<div class="audit-row"><b>'+esc(d.date+' · '+i.text)+'</b>'+auditDetails(i)+'</div>';}).join('');}).join('');
+    document.getElementById('verificationIndex').innerHTML=DAYS.map(function(d){return d.items.filter(function(i){return i.verified;}).map(function(i){return '<div class="audit-row"><b>'+esc(d.date+' · '+i.text)+'</b><small>'+esc(i.verified)+'</small>'+esc(i.disabledNav?'导航已停用':i.q)+'<br>'+esc(i.note)+sourceLink(i.source)+'</div>';}).join('');}).join('');
+  }
+
   /* ---------- 渲染：逐日行程 ---------- */
   function renderItinerary(){
     var el = document.getElementById('itinerary');
     el.innerHTML = DAYS.map(function(d){
       var items = d.items.map(function(it){
         var tag = it.tag ? '<span class="tag '+it.tag+'">'+it.tagText+'</span>' : '';
-        if(it.desc){
-          var mapLink = it.q ? '<a class="desc-map" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">在地图中查看 →</a>' : '';
+        if(it.desc || it.parking || it.verified){
+          var mapLink = it.q && !it.disabledNav ? '<a class="desc-map" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">在地图中查看 →</a>' : '';
           return '<details class="item-details"><summary class="item-summary">'+
                    '<div class="time">'+(it.time||'')+'</div>'+
                    '<div class="content">'+it.text+tag+(it.note?'<div class="note">'+it.note+'</div>':'')+'</div>'+
                    '<div class="item-chev">›</div>'+
                  '</summary>'+
-                 '<div class="item-desc">'+it.desc+mapLink+'</div>'+
+                 '<div class="item-desc">'+esc(it.desc)+mapLink+auditDetails(it)+'</div>'+
                '</details>';
         }
         var text = it.q ? '<a class="place" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">'+it.text+'</a>' : it.text;
@@ -511,10 +1877,17 @@
         (d.overnight.phone?'<div class="note"><a href="tel:'+d.overnight.phone.replace(/\s/g,'')+'">'+d.overnight.phone+'</a></div>':'')+
         '</div>' : '';
       var navQueries = [];
-      d.items.forEach(function(it){ if(it.q) navQueries.push(it.q); });
-      if(d.overnight) navQueries.push(d.overnight.addr);
-      var navUrl = multiNav(navQueries, d.transport.indexOf('步行')>-1 && d.transport.indexOf('自驾')<0 ? 'walking' : 'driving');
-      var navBtn = navUrl ? '<a class="navbtn" href="'+navUrl+'" target="_blank" rel="noopener">在地图中打开全天导航</a>' : '';
+      var prev = DAYS[DAYS.indexOf(d)-1];
+      if(d.n>=5 && d.n<=13 && prev && prev.overnight) navQueries.push(prev.overnight.addr);
+      d.items.forEach(function(it){ if(it.navMain) navQueries.push(it.q); });
+      if(navQueries.length && (d.navEnd || d.overnight)) navQueries.push(d.navEnd || d.overnight.addr);
+      var navBtn = '';
+      // Split into segments of at most 3 waypoints for mobile Google Maps.
+      for(var k=0;k<navQueries.length-1;k+=4){
+        var chunk=navQueries.slice(k,k+5), url=multiNav(chunk,'driving');
+        if(url)navBtn+='<a class="navbtn" href="'+url+'" target="_blank" rel="noopener">主线导航 '+(Math.floor(k/4)+1)+' →</a>';
+      }
+      if(navBtn) navBtn='<div class="route-links">'+navBtn+'</div><div class="note">仅主线；出发前检查地图实际选路及封路。可选地点请单独导航。</div>';
       return '<div class="day" data-day="'+d.n+'">'+
         '<div class="day-head" onclick="this.parentNode.classList.toggle(\'open\')">'+
           '<div class="day-badge">Day '+d.n+'<b>'+d.date+'</b></div>'+
@@ -522,7 +1895,7 @@
           '<div class="day-chev">›</div>'+
         '</div>'+
         '<div class="day-body"><div class="day-body-inner" style="padding:0 0 16px 78px;">'+
-          items + stay + navBtn +
+          (d.review?'<div class="review-card"><b>动线判断</b><br>'+esc(d.review)+'</div>':'') + items + stay + navBtn +
         '</div></div>'+
       '</div>';
     }).join('');
@@ -559,6 +1932,7 @@
 
   renderMap();
   renderBookings();
+  renderAudit();
   renderItinerary();
   updateFocus();
   setInterval(updateFocus, 1000);
@@ -566,3 +1940,4 @@
 </script>
 </body>
 </html>
+
